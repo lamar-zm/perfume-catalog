@@ -1,0 +1,33 @@
+.card {
+  transition: transform 150ms ease, box-shadow 150ms ease;
+  cursor: pointer;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--mantine-shadow-lg);
+}
+
+.card:hover .imageWrapper img {
+  transform: scale(1.05);
+}
+
+.imageWrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.imageWrapper img {
+  transition: transform 300ms ease;
+}
+
+.content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--mantine-spacing-md);
+  z-index: 1;
+}

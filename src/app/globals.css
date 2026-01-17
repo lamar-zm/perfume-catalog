@@ -1,0 +1,49 @@
+/* Global styles for the perfume catalog */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-tajawal), 'Tajawal', Arial, sans-serif;
+  min-height: 100vh;
+  background-color: #fefefe;
+}
+
+/* RTL Support */
+html[dir='rtl'] {
+  direction: rtl;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fdf4f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dba1a9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c96b77;
+}
+
+/* Main layout container */
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem 0;
+}

@@ -1,0 +1,18 @@
+.header {
+  border-bottom: 2px solid #f4e4e6;
+  padding-bottom: var(--mantine-spacing-sm);
+}
+
+.title {
+  color: #7d3440;
+}
+
+.viewAll {
+  color: #9a404c;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.viewAll:hover {
+  color: #612833;
+}

@@ -1,0 +1,11 @@
+.footer {
+  background-color: #fdf4f5;
+  padding: var(--mantine-spacing-xl) 0;
+  margin-top: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  .footer {
+    background-color: var(--mantine-color-dark-6);
+  }
+}
