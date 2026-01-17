@@ -1,0 +1,24 @@
+/* [project]/apps/web/src/components/brand/BrandCard.module.css [app-client] (css) */
+.BrandCard-module__CzyuRa__card {
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+}
+
+.BrandCard-module__CzyuRa__card:hover {
+  box-shadow: var(--mantine-shadow-md);
+  transform: translateY(-4px);
+}
+
+.BrandCard-module__CzyuRa__imageSection {
+  overflow: hidden;
+}
+
+.BrandCard-module__CzyuRa__imageSection img {
+  transition: transform .3s;
+}
+
+.BrandCard-module__CzyuRa__card:hover .BrandCard-module__CzyuRa__imageSection img {
+  transform: scale(1.05);
+}
+
+/*# sourceMappingURL=apps_web_src_components_brand_BrandCard_module_css_bad6b30c._.single.css.map*/

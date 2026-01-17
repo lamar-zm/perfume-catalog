@@ -1,0 +1,47 @@
+/* [project]/apps/web/src/app/globals.css [app-client] (css) */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-tajawal), "Tajawal", Arial, sans-serif;
+  background-color: #fefefe;
+  min-height: 100vh;
+}
+
+html[dir="rtl"] {
+  direction: rtl;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fdf4f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dba1a9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c96b77;
+}
+
+.main-layout {
+  flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem 0;
+}
+
+/*# sourceMappingURL=apps_web_src_app_globals_css_bad6b30c._.single.css.map*/

@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/apps/web/src/components/layout/Header.module.css"],"sourcesContent":[".header {\n  background-color: var(--mantine-color-body);\n  border-bottom: 1px solid #f4e4e6;\n  height: 70px;\n  position: sticky;\n  top: 0;\n  z-index: 100;\n}\n\n@media (prefers-color-scheme: dark) {\n  .header {\n    border-bottom-color: var(--mantine-color-dark-4);\n  }\n}\n\n.logo {\n  text-decoration: none;\n  color: #7d3440;\n}\n\n.navLink {\n  text-decoration: none;\n  color: var(--mantine-color-text);\n  padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);\n  border-radius: var(--mantine-radius-md);\n  transition: background-color 150ms ease, color 150ms ease;\n  font-weight: 500;\n}\n\n.navLink:hover {\n  background-color: #fdf4f5;\n  color: #9a404c;\n}\n\n.navLinkActive {\n  background-color: #f4e4e6;\n  color: #7d3440;\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;;AASA;EACE;;;;;AAKF;;;;;AAKA;;;;;;;;;AASA;;;;;AAKA"}}]
+}

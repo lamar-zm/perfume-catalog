@@ -1,0 +1,36 @@
+/* [project]/apps/web/src/components/category/CategoryCard.module.css [app-client] (css) */
+.CategoryCard-module__sEN7Fa__card {
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform .15s, box-shadow .15s;
+  overflow: hidden;
+}
+
+.CategoryCard-module__sEN7Fa__card:hover {
+  box-shadow: var(--mantine-shadow-lg);
+  transform: translateY(-4px);
+}
+
+.CategoryCard-module__sEN7Fa__card:hover .CategoryCard-module__sEN7Fa__imageWrapper img {
+  transform: scale(1.05);
+}
+
+.CategoryCard-module__sEN7Fa__imageWrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.CategoryCard-module__sEN7Fa__imageWrapper img {
+  transition: transform .3s;
+}
+
+.CategoryCard-module__sEN7Fa__content {
+  padding: var(--mantine-spacing-md);
+  z-index: 1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/*# sourceMappingURL=apps_web_src_components_category_CategoryCard_module_css_bad6b30c._.single.css.map*/

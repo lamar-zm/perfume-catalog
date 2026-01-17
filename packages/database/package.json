@@ -1,0 +1,25 @@
+{
+  "name": "@perfume-catalog/database",
+  "version": "1.0.0",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "db:seed": "npx tsx src/seed.ts",
+    "db:reset": "rm -f data/perfume-catalog.db && npx tsx src/seed.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0",
+    "bcryptjs": "^2.4.3",
+    "@perfume-catalog/shared": "*"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.9",
+    "@types/bcryptjs": "^2.4.6",
+    "tsx": "^4.7.0",
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,21 @@
+/* [project]/apps/web/src/components/ui/SectionHeader.module.css [app-client] (css) */
+.SectionHeader-module__Z6v9tG__header {
+  padding-bottom: var(--mantine-spacing-sm);
+  border-bottom: 2px solid #f4e4e6;
+}
+
+.SectionHeader-module__Z6v9tG__title {
+  color: #7d3440;
+}
+
+.SectionHeader-module__Z6v9tG__viewAll {
+  color: #9a404c;
+  text-decoration: none;
+  transition: color .15s;
+}
+
+.SectionHeader-module__Z6v9tG__viewAll:hover {
+  color: #612833;
+}
+
+/*# sourceMappingURL=apps_web_src_components_ui_SectionHeader_module_css_bad6b30c._.single.css.map*/

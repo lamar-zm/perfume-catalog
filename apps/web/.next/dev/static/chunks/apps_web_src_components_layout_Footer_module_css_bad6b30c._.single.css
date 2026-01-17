@@ -1,0 +1,14 @@
+/* [project]/apps/web/src/components/layout/Footer.module.css [app-client] (css) */
+.Footer-module__oORJuq__footer {
+  padding: var(--mantine-spacing-xl) 0;
+  background-color: #fdf4f5;
+  margin-top: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  .Footer-module__oORJuq__footer {
+    background-color: var(--mantine-color-dark-6);
+  }
+}
+
+/*# sourceMappingURL=apps_web_src_components_layout_Footer_module_css_bad6b30c._.single.css.map*/

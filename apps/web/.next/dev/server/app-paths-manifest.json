@@ -1,0 +1,21 @@
+{
+  "/(public)/categories/page": "app/(public)/categories/page.js",
+  "/(public)/category/[slug]/page": "app/(public)/category/[slug]/page.js",
+  "/(public)/featured/page": "app/(public)/featured/page.js",
+  "/(public)/page": "app/(public)/page.js",
+  "/(public)/perfume/[id]/page": "app/(public)/perfume/[id]/page.js",
+  "/admin/brands/page": "app/admin/brands/page.js",
+  "/admin/categories/page": "app/admin/categories/page.js",
+  "/admin/discounts/page": "app/admin/discounts/page.js",
+  "/admin/featured/page": "app/admin/featured/page.js",
+  "/admin/login/page": "app/admin/login/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/admin/perfumes/page": "app/admin/perfumes/page.js",
+  "/api/auth/route": "app/api/auth/route.js",
+  "/api/brands/route": "app/api/brands/route.js",
+  "/api/categories/[id]/route": "app/api/categories/[id]/route.js",
+  "/api/categories/route": "app/api/categories/route.js",
+  "/api/perfumes/[id]/route": "app/api/perfumes/[id]/route.js",
+  "/api/perfumes/route": "app/api/perfumes/route.js",
+  "/api/upload/route": "app/api/upload/route.js"
+}

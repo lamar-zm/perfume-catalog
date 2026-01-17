@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/apps/web/src/components/ui/SectionHeader.module.css"],"sourcesContent":[".header {\n  border-bottom: 2px solid #f4e4e6;\n  padding-bottom: var(--mantine-spacing-sm);\n}\n\n.title {\n  color: #7d3440;\n}\n\n.viewAll {\n  color: #9a404c;\n  text-decoration: none;\n  transition: color 150ms ease;\n}\n\n.viewAll:hover {\n  color: #612833;\n}\n"],"names":[],"mappings":"AAAA;;;;;AAKA;;;;AAIA;;;;;;AAMA"}}]
+}

@@ -1,0 +1,12 @@
+{
+  "pages": {},
+  "app": {
+    "[project]/apps/web/src/app/admin/perfumes/page": [
+      "static/media/4b676bcffc00356a-s.p.c22aaca1.woff2",
+      "static/media/d54db18e8cd5f74f-s.p.0e8eb956.woff2",
+      "static/media/48e6fa8a5baca31f-s.p.33d01b36.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pagesUsingSizeAdjust": false
+}

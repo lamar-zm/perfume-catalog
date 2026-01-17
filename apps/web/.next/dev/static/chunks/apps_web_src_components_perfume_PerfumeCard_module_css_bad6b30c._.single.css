@@ -1,0 +1,42 @@
+/* [project]/apps/web/src/components/perfume/PerfumeCard.module.css [app-client] (css) */
+.PerfumeCard-module__S9QGZG__card {
+  cursor: pointer;
+  color: inherit;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  transition: transform .15s, box-shadow .15s;
+  display: flex;
+}
+
+.PerfumeCard-module__S9QGZG__card:hover {
+  box-shadow: var(--mantine-shadow-lg);
+  transform: translateY(-4px);
+}
+
+.PerfumeCard-module__S9QGZG__imageSection {
+  position: relative;
+  overflow: hidden;
+}
+
+.PerfumeCard-module__S9QGZG__discountBadge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.PerfumeCard-module__S9QGZG__featuredBadge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.PerfumeCard-module__S9QGZG__title {
+  min-height: 1.5em;
+}
+
+.PerfumeCard-module__S9QGZG__description {
+  min-height: 2.6em;
+}
+
+/*# sourceMappingURL=apps_web_src_components_perfume_PerfumeCard_module_css_bad6b30c._.single.css.map*/

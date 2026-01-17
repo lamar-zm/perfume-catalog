@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/apps/web/src/components/perfume/PerfumeCard.module.css"],"sourcesContent":[".card {\n  transition: transform 150ms ease, box-shadow 150ms ease;\n  cursor: pointer;\n  text-decoration: none;\n  color: inherit;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n}\n\n.card:hover {\n  transform: translateY(-4px);\n  box-shadow: var(--mantine-shadow-lg);\n}\n\n.imageSection {\n  position: relative;\n  overflow: hidden;\n}\n\n.discountBadge {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}\n\n.featuredBadge {\n  position: absolute;\n  top: 10px;\n  left: 10px;\n}\n\n.title {\n  min-height: 1.5em;\n}\n\n.description {\n  min-height: 2.6em;\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;;;AAUA;;;;;AAKA;;;;;AAKA;;;;;;AAMA;;;;;;AAMA;;;;AAIA"}}]
+}

@@ -1,0 +1,109 @@
+[00:00:00.569] Server  LOG     ✓ Ready in 419ms
+[00:03:16.007] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="featured/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/featured" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} ...>
+                <SegmentViewNode type="page" pagePath="/apps/web/...">
+                  <SegmentTrieNode>
+                  <FeaturedPage>
+                    <@mantine/core/Stack gap="xl">
+                      <@mantine/core/Box ref={null} className="m_6d731127..." style={{...}} variant={undefined}>
+                        <div ref={null} style={{...}} className="m_6d731127..." data-variant={undefined} ...>
+                          <SectionHeader>
+                          <PerfumeGrid perfumes={[...]} categories={[...]} showCategory={true}>
+                            <@mantine/core/SimpleGrid cols={{base:1,sm:2,md:3,lg:4}} spacing="lg">
+                              <SimpleGridMediaVariables cols={{base:1,sm:2,md:3,lg:4}} spacing="lg" type="media" ...>
+                                <InlineStyles styles={{...}} media={[...]} selector=".__m__-_R_...">
+                                  <style
+                                    data-mantine-styles="inline"
+                                    nonce={undefined}
+                                    dangerouslySetInnerHTML={{
++                                     __html: ".__m__-_R_2matpetmmbnelb_{--sg-spacing-x:var(--mantine-spacing-lg);--sg..."
+-                                     __html: ".__m__-_R_apbn5rmqqbnelb_{--sg-spacing-x:var(--mantine-spacing-lg);--sg..."
+                                    }}
+                                  >
+                              <@mantine/core/Box ref={null} className="m_2415a157..." style={{}}>
+                                <div
+                                  ref={null}
+                                  style={{}}
++                                 className="m_2415a157 mantine-SimpleGrid-root __m__-_R_2matpetmmbnelb_"
+-                                 className="m_2415a157 mantine-SimpleGrid-root __m__-_R_apbn5rmqqbnelb_"
+                                  data-variant={undefined}
+                                  data-size={undefined}
+                                  size={undefined}
+                                >
+                ...
+              ...
+
+[00:03:24.194] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="featured/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/featured" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} ...>
+                <SegmentViewNode type="page" pagePath="/apps/web/...">
+                  <SegmentTrieNode>
+                  <FeaturedPage>
+                    <@mantine/core/Stack gap="xl">
+                      <@mantine/core/Box ref={null} className="m_6d731127..." style={{...}} variant={undefined}>
+                        <div ref={null} style={{...}} className="m_6d731127..." data-variant={undefined} ...>
+                          <SectionHeader>
+                          <PerfumeGrid perfumes={[...]} categories={[...]} showCategory={true}>
+                            <@mantine/core/SimpleGrid cols={{base:1,sm:2,md:3,lg:4}} spacing="lg">
+                              <SimpleGridMediaVariables cols={{base:1,sm:2,md:3,lg:4}} spacing="lg" type="media" ...>
+                                <InlineStyles styles={{...}} media={[...]} selector=".__m__-_R_...">
+                                  <style
+                                    data-mantine-styles="inline"
+                                    nonce={undefined}
+                                    dangerouslySetInnerHTML={{
++                                     __html: ".__m__-_R_2matpetmmbnelb_{--sg-spacing-x:var(--mantine-spacing-lg);--sg..."
+-                                     __html: ".__m__-_R_apbn5rmqqbnelb_{--sg-spacing-x:var(--mantine-spacing-lg);--sg..."
+                                    }}
+                                  >
+                              <@mantine/core/Box ref={null} className="m_2415a157..." style={{}}>
+                                <div
+                                  ref={null}
+                                  style={{}}
++                                 className="m_2415a157 mantine-SimpleGrid-root __m__-_R_2matpetmmbnelb_"
+-                                 className="m_2415a157 mantine-SimpleGrid-root __m__-_R_apbn5rmqqbnelb_"
+                                  data-variant={undefined}
+                                  data-size={undefined}
+                                  size={undefined}
+                                >
+                ...
+              ...
+
+[00:03:37.559] Server  WARN    ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+[00:03:56.062] Server  LOG     ✓ Compiled in 54ms
+[00:04:10.442] Server  LOG     ✓ Compiled in 91ms
+[00:08:43.870] Server  LOG     ✓ Compiled in 90ms
+[00:08:43.917] Server  LOG     ✓ Compiled in 1ms
+[00:08:54.862] Server  LOG     ✓ Compiled in 5ms
