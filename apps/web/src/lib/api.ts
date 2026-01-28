@@ -32,6 +32,8 @@ async function fetchApi<T>(
   try {
     const response = await fetch(url, {
       ...options,
+      // Ensure cookies are sent from the browser so auth works on deployed sites
+      credentials: typeof window !== 'undefined' ? (options?.credentials ?? 'include') : options?.credentials,
       headers: {
         'Content-Type': 'application/json',
         ...options?.headers,

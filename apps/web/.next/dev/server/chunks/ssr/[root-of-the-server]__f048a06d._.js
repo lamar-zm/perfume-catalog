@@ -427,7 +427,7 @@ async function generateStaticParams() {
         page: 1,
         pageSize: 100
     });
-    if (!res.success) return [];
+    if (!res.success || !res.data) return [];
     return res.data.data.map((perfume)=>({
             id: perfume.id
         }));
@@ -478,9 +478,9 @@ async function PerfumePage({ params }) {
         __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["perfumeApi"].getRelated(perfume.id, perfume.categoryId || '', 4),
         __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["categoryApi"].getAll()
     ]);
-    const category = categoryRes.success ? categoryRes.data : null;
-    const relatedPerfumes = relatedRes.success ? relatedRes.data : [];
-    const categories = categoriesRes.success ? categoriesRes.data : [];
+    const category = categoryRes.success && categoryRes.data ? categoryRes.data : null;
+    const relatedPerfumes = relatedRes.success && relatedRes.data ? relatedRes.data : [];
+    const categories = categoriesRes.success && categoriesRes.data ? categoriesRes.data : [];
     const hasDiscount = perfume.discount && perfume.discount > 0;
     const finalPrice = hasDiscount ? perfume.price - perfume.discount : perfume.price;
     const mainImage = perfume.images?.[0] || '';

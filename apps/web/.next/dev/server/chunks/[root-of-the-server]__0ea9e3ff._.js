@@ -397,7 +397,7 @@ function rowToPerfume(row) {
         brandId: row.brand_id || '',
         images: getPerfumeImages(row.id),
         notes,
-        isFeatured: row.is_featured === 1,
+        // isFeatured: row.is_featured === 1, // Removed to match Perfume type
         salesCount: row.sales_count || 0,
         createdAt: row.created_at,
         updatedAt: row.updated_at
@@ -429,10 +429,10 @@ const perfumeService = {
             whereClause += ' AND brand_id = ?';
             queryParams.push(filters.brandId);
         }
-        if (filters?.isFeatured !== undefined) {
-            whereClause += ' AND is_featured = ?';
-            queryParams.push(filters.isFeatured ? 1 : 0);
-        }
+        // if (filters?.isFeatured !== undefined) {
+        //   whereClause += ' AND is_featured = ?';
+        //   queryParams.push(filters.isFeatured ? 1 : 0);
+        // }
         if (filters?.hasDiscount) {
             whereClause += ' AND discount > 0';
         }
@@ -542,16 +542,16 @@ const perfumeService = {
     `).run(discount, finalPrice, now, id);
         return this.getById(id);
     },
-    toggleFeatured (id) {
-        const existing = this.getById(id);
-        if (!existing) return null;
-        const now = new Date().toISOString();
-        const newFeatured = existing.isFeatured ? 0 : 1;
-        __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].prepare(`
-      UPDATE perfumes SET is_featured = ?, updated_at = ? WHERE id = ?
-    `).run(newFeatured, now, id);
-        return this.getById(id);
-    },
+    // toggleFeatured(id: string): Perfume | null {
+    //   const existing = this.getById(id);
+    //   if (!existing) return null;
+    //   const now = new Date().toISOString();
+    //   // const newFeatured = existing.isFeatured ? 0 : 1;
+    //   db.prepare(`
+    //     UPDATE perfumes SET is_featured = ?, updated_at = ? WHERE id = ?
+    //   `).run(newFeatured, now, id);
+    //   return this.getById(id);
+    // },
     delete (id) {
         // Images will be deleted by CASCADE
         const result = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].prepare('DELETE FROM perfumes WHERE id = ?').run(id);

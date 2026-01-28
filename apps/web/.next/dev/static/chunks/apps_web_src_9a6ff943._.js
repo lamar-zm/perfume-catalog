@@ -126,6 +126,8 @@ async function fetchApi(endpoint, options) {
     try {
         const response = await fetch(url, {
             ...options,
+            // Ensure cookies are sent from the browser so auth works on deployed sites
+            credentials: ("TURBOPACK compile-time truthy", 1) ? options?.credentials ?? 'include' : "TURBOPACK unreachable",
             headers: {
                 'Content-Type': 'application/json',
                 ...options?.headers
@@ -408,7 +410,11 @@ function AuthProvider({ children }) {
     const checkAuth = async ()=>{
         try {
             const currentUser = await __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["authApi"].getCurrentUser();
-            setUser(currentUser);
+            if (currentUser.success && currentUser.data) {
+                setUser(currentUser.data);
+            } else {
+                setUser(null);
+            }
         } catch  {
             setUser(null);
         } finally{
@@ -417,8 +423,8 @@ function AuthProvider({ children }) {
     };
     const signIn = async (email, password)=>{
         const result = await __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["authApi"].signIn(email, password);
-        if (result.user) {
-            setUser(result.user);
+        if (result.success && result.data && result.data.user) {
+            setUser(result.data.user);
         }
     };
     const signOut = async ()=>{
@@ -436,7 +442,7 @@ function AuthProvider({ children }) {
         children: children
     }, void 0, false, {
         fileName: "[project]/apps/web/src/contexts/AuthContext.tsx",
-        lineNumber: 50,
+        lineNumber: 54,
         columnNumber: 5
     }, this);
 }

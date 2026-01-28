@@ -1745,13 +1745,16 @@ function AdminDashboardPage() {
                 __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["perfumeApi"].getMostSold(5),
                 __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["perfumeApi"].getDiscounted()
             ]);
-            const allPerfumes = allPerfumesRes.success ? allPerfumesRes.data : {
+            const allPerfumes = allPerfumesRes.success && allPerfumesRes.data ? allPerfumesRes.data : {
                 data: [],
-                total: 0
+                total: 0,
+                page: 1,
+                pageSize: 100,
+                totalPages: 0
             };
-            const allCategories = allCategoriesRes.success ? allCategoriesRes.data : [];
-            const topSold = topSoldRes.success ? topSoldRes.data : [];
-            const discountedPerfumes = discountedRes.success ? discountedRes.data : [];
+            const allCategories = allCategoriesRes.success && allCategoriesRes.data ? allCategoriesRes.data : [];
+            const topSold = topSoldRes.success && topSoldRes.data ? topSoldRes.data : [];
+            const discountedPerfumes = discountedRes.success && discountedRes.data ? discountedRes.data : [];
             const totalSales = allPerfumes.data.reduce((sum, p)=>sum + p.salesCount, 0);
             setStats({
                 totalPerfumes: allPerfumes.total,

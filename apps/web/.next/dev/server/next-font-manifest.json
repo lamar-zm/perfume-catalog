@@ -1,61 +1,11 @@
 {
   "app": {
-    "[project]/apps/web/src/app/(public)/brand/[slug]/page": [
-      "static/media/4b676bcffc00356a-s.p.c22aaca1.woff2",
-      "static/media/d54db18e8cd5f74f-s.p.0e8eb956.woff2",
-      "static/media/48e6fa8a5baca31f-s.p.33d01b36.woff2"
-    ],
-    "[project]/apps/web/src/app/(public)/categories/page": [
-      "static/media/4b676bcffc00356a-s.p.c22aaca1.woff2",
-      "static/media/d54db18e8cd5f74f-s.p.0e8eb956.woff2",
-      "static/media/48e6fa8a5baca31f-s.p.33d01b36.woff2"
-    ],
-    "[project]/apps/web/src/app/(public)/category/[slug]/page": [
-      "static/media/4b676bcffc00356a-s.p.c22aaca1.woff2",
-      "static/media/d54db18e8cd5f74f-s.p.0e8eb956.woff2",
-      "static/media/48e6fa8a5baca31f-s.p.33d01b36.woff2"
-    ],
-    "[project]/apps/web/src/app/(public)/featured/page": [
-      "static/media/4b676bcffc00356a-s.p.c22aaca1.woff2",
-      "static/media/d54db18e8cd5f74f-s.p.0e8eb956.woff2",
-      "static/media/48e6fa8a5baca31f-s.p.33d01b36.woff2"
-    ],
-    "[project]/apps/web/src/app/(public)/most-sold/page": [
-      "static/media/4b676bcffc00356a-s.p.c22aaca1.woff2",
-      "static/media/d54db18e8cd5f74f-s.p.0e8eb956.woff2",
-      "static/media/48e6fa8a5baca31f-s.p.33d01b36.woff2"
-    ],
     "[project]/apps/web/src/app/(public)/page": [
       "static/media/4b676bcffc00356a-s.p.c22aaca1.woff2",
       "static/media/d54db18e8cd5f74f-s.p.0e8eb956.woff2",
       "static/media/48e6fa8a5baca31f-s.p.33d01b36.woff2"
     ],
-    "[project]/apps/web/src/app/(public)/perfume/[id]/page": [
-      "static/media/4b676bcffc00356a-s.p.c22aaca1.woff2",
-      "static/media/d54db18e8cd5f74f-s.p.0e8eb956.woff2",
-      "static/media/48e6fa8a5baca31f-s.p.33d01b36.woff2"
-    ],
     "[project]/apps/web/src/app/_not-found/page": [
-      "static/media/4b676bcffc00356a-s.p.c22aaca1.woff2",
-      "static/media/d54db18e8cd5f74f-s.p.0e8eb956.woff2",
-      "static/media/48e6fa8a5baca31f-s.p.33d01b36.woff2"
-    ],
-    "[project]/apps/web/src/app/admin/brands/page": [
-      "static/media/4b676bcffc00356a-s.p.c22aaca1.woff2",
-      "static/media/d54db18e8cd5f74f-s.p.0e8eb956.woff2",
-      "static/media/48e6fa8a5baca31f-s.p.33d01b36.woff2"
-    ],
-    "[project]/apps/web/src/app/admin/categories/page": [
-      "static/media/4b676bcffc00356a-s.p.c22aaca1.woff2",
-      "static/media/d54db18e8cd5f74f-s.p.0e8eb956.woff2",
-      "static/media/48e6fa8a5baca31f-s.p.33d01b36.woff2"
-    ],
-    "[project]/apps/web/src/app/admin/discounts/page": [
-      "static/media/4b676bcffc00356a-s.p.c22aaca1.woff2",
-      "static/media/d54db18e8cd5f74f-s.p.0e8eb956.woff2",
-      "static/media/48e6fa8a5baca31f-s.p.33d01b36.woff2"
-    ],
-    "[project]/apps/web/src/app/admin/login/page": [
       "static/media/4b676bcffc00356a-s.p.c22aaca1.woff2",
       "static/media/d54db18e8cd5f74f-s.p.0e8eb956.woff2",
       "static/media/48e6fa8a5baca31f-s.p.33d01b36.woff2"

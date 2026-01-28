@@ -2422,13 +2422,13 @@ function AdminPerfumesPage() {
     ]);
     const loadCategories = async ()=>{
         const res = await __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["categoryApi"].getAll();
-        if (res.success) {
+        if (res.success && res.data) {
             setCategories(res.data);
         }
     };
     const loadBrands = async ()=>{
         const res = await __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["brandApi"].getAll();
-        if (res.success) {
+        if (res.success && res.data) {
             setBrands(res.data);
         }
     };
@@ -2440,7 +2440,7 @@ function AdminPerfumesPage() {
                 pageSize: PAGE_SIZE,
                 categoryId: categoryFilter || undefined
             });
-            if (res.success) {
+            if (res.success && res.data) {
                 setPerfumes(res.data);
             }
         } catch (error) {
@@ -2461,7 +2461,7 @@ function AdminPerfumesPage() {
                 pageSize: PAGE_SIZE,
                 search: searchQuery
             });
-            if (res.success) {
+            if (res.success && res.data) {
                 setPerfumes(res.data);
                 setCurrentPage(1);
             }
