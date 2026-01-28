@@ -15,36 +15,36 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$core$2f$MantineProvider$2f$create$2d$theme$2f$create$2d$theme$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@mantine/core/esm/core/MantineProvider/create-theme/create-theme.mjs [app-ssr] (ecmascript)");
 'use client';
 ;
-// Elegant dark rose gold theme for luxury perfume brand
+// Cyan brand theme for app identity
 const brandColor = [
-    '#fdf4f5',
-    '#f4e4e6',
-    '#e8c4c9',
-    '#dba1a9',
-    '#d1848f',
-    '#c96b77',
-    '#b8525f',
-    '#9a404c',
-    '#7d3440',
-    '#612833'
+    '#f0fdff',
+    '#dff9fb',
+    '#c8f2f7',
+    '#aeeaf2',
+    '#84e0ea',
+    '#33cfe0',
+    '#19a6b0',
+    '#0b7b86',
+    '#07545f',
+    '#05383f'
 ];
-const goldAccent = [
-    '#fefbf3',
-    '#faf3e0',
-    '#f3e4ba',
-    '#ebd391',
-    '#e4c36d',
-    '#d4a84a',
-    '#c4943a',
-    '#a67c2e',
-    '#876424',
-    '#6b4f1c'
+const accentNeutral = [
+    '#ffffff',
+    '#fafafa',
+    '#f5f5f5',
+    '#eeeeee',
+    '#e0e0e0',
+    '#bdbdbd',
+    '#9e9e9e',
+    '#757575',
+    '#616161',
+    '#424242'
 ];
 const theme = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$core$2f$MantineProvider$2f$create$2d$theme$2f$create$2d$theme$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createTheme"])({
-    // Brand colors
+    // Brand colors (identity uses cyan)
     colors: {
         brand: brandColor,
-        gold: goldAccent
+        neutral: accentNeutral
     },
     primaryColor: 'brand',
     // Typography
@@ -151,7 +151,6 @@ const perfumeApi = {
         });
         if (params.categoryId) searchParams.set('categoryId', params.categoryId);
         if (params.brandId) searchParams.set('brandId', params.brandId);
-        if (params.isFeatured !== undefined) searchParams.set('isFeatured', params.isFeatured.toString());
         if (params.hasDiscount) searchParams.set('hasDiscount', 'true');
         if (params.search) searchParams.set('search', params.search);
         return fetchApi(`/perfumes?${searchParams}`);
@@ -161,9 +160,6 @@ const perfumeApi = {
     },
     async getMostSold (limit = 8) {
         return fetchApi(`/perfumes?endpoint=most-sold&limit=${limit}`);
-    },
-    async getFeatured (limit = 8) {
-        return fetchApi(`/perfumes?endpoint=featured&limit=${limit}`);
     },
     async getDiscounted (limit) {
         const url = limit ? `/perfumes?endpoint=discounted&limit=${limit}` : '/perfumes?endpoint=discounted';
@@ -187,14 +183,6 @@ const perfumeApi = {
     async delete (id) {
         return fetchApi(`/perfumes/${id}`, {
             method: 'DELETE'
-        });
-    },
-    async toggleFeatured (id) {
-        return fetchApi(`/perfumes/${id}`, {
-            method: 'PATCH',
-            body: JSON.stringify({
-                action: 'toggleFeatured'
-            })
         });
     },
     async updateDiscount (id, discount) {

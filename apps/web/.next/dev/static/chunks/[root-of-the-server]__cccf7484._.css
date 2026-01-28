@@ -8638,16 +8638,16 @@ html[dir="rtl"] {
 }
 
 ::-webkit-scrollbar-track {
-  background: #fdf4f5;
+  background: #f0fdff;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #dba1a9;
+  background: #33cfe0;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #c96b77;
+  background: #19a6b0;
 }
 
 .main-layout {

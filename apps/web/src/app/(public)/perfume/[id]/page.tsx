@@ -4,7 +4,6 @@ import {
   Stack,
   Grid,
   GridCol,
-  Image,
   Title,
   Text,
   Badge,
@@ -16,6 +15,7 @@ import {
 import { IconTag, IconCategory } from '@tabler/icons-react';
 import { perfumeApi, categoryApi, imageHelper } from '@/services';
 import { PerfumeGrid, SectionHeader } from '@/components';
+import PerfumeCarousel from '@/components/perfume/PerfumeCarousel';
 
 interface PerfumePageProps {
   params: Promise<{ id: string }>;
@@ -24,7 +24,7 @@ interface PerfumePageProps {
 // Generate static params for all perfumes
 export async function generateStaticParams() {
   const res = await perfumeApi.getAll({ page: 1, pageSize: 100 });
-  if (!res.success) return [];
+  if (!res.success || !res.data) return [];
   return res.data.data.map((perfume) => ({
     id: perfume.id,
   }));
@@ -80,9 +80,9 @@ export default async function PerfumePage({ params }: PerfumePageProps) {
     categoryApi.getAll(),
   ]);
 
-  const category = categoryRes.success ? categoryRes.data : null;
-  const relatedPerfumes = relatedRes.success ? relatedRes.data : [];
-  const categories = categoriesRes.success ? categoriesRes.data : [];
+  const category = categoryRes.success && categoryRes.data ? categoryRes.data : null;
+  const relatedPerfumes = relatedRes.success && relatedRes.data ? relatedRes.data : [];
+  const categories = categoriesRes.success && categoriesRes.data ? categoriesRes.data : [];
 
   const hasDiscount = perfume.discount && perfume.discount > 0;
   const finalPrice = hasDiscount ? perfume.price - perfume.discount! : perfume.price;
@@ -96,12 +96,7 @@ export default async function PerfumePage({ params }: PerfumePageProps) {
           {/* Product Image */}
           <GridCol span={{ base: 12, md: 5 }}>
             <Box pos="relative">
-              <Image
-                src={mainImage || imageHelper.getPlaceholder(500, 500)}
-                alt={perfume.title}
-                radius="lg"
-                fallbackSrc={imageHelper.getPlaceholder(500, 500)}
-              />
+              <PerfumeCarousel images={perfume.images || []} coverImage={perfume.coverImage} height={500} />
               {hasDiscount && (
                 <Badge
                   color="red"
@@ -112,18 +107,6 @@ export default async function PerfumePage({ params }: PerfumePageProps) {
                   right={16}
                 >
                   خصم {perfume.discount} دينار
-                </Badge>
-              )}
-              {perfume.isFeatured && (
-                <Badge
-                  color="gold"
-                  variant="filled"
-                  size="lg"
-                  pos="absolute"
-                  top={16}
-                  left={16}
-                >
-                  مميز
                 </Badge>
               )}
             </Box>
@@ -141,6 +124,13 @@ export default async function PerfumePage({ params }: PerfumePageProps) {
                   leftSection={<IconCategory size={14} />}
                 >
                   {category.name}
+                </Badge>
+              )}
+
+              {/* Gender Badge */}
+              {perfume.gender && (
+                <Badge variant="light" color="violet" size="lg">
+                  {perfume.gender === 'men' ? 'للرجال' : perfume.gender === 'women' ? 'للنساء' : 'مناسب للجنسين'}
                 </Badge>
               )}
 
@@ -205,7 +195,7 @@ export default async function PerfumePage({ params }: PerfumePageProps) {
                 <Group gap="xs">
                   <IconTag size={20} color="var(--mantine-color-brand-6)" />
                   <Text size="sm">
-                    متوفر في المخزون
+                    {perfume.outOfStock ? 'غير متوفر حالياً' : 'متوفر في المخزون'}
                   </Text>
                 </Group>
               </Group>

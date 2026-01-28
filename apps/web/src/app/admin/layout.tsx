@@ -33,7 +33,6 @@ const navLinks = [
   { href: '/admin/perfumes', label: 'العطور', icon: IconBottle },
   { href: '/admin/categories', label: 'التصنيفات', icon: IconCategory },
   { href: '/admin/brands', label: 'الماركات', icon: IconBuildingStore },
-  { href: '/admin/featured', label: 'المميزة', icon: IconSparkles },
   { href: '/admin/discounts', label: 'التخفيضات', icon: IconDiscount },
 ];
 
@@ -101,7 +100,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           </Group>
           <Group>
             <Text size="sm" c="dimmed">
-              {user.name}
+              {user.displayName || user.email}
             </Text>
             <Button
               variant="subtle"

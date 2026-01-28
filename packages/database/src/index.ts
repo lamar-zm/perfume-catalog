@@ -1,4 +1,6 @@
-export { default as db, initializeDatabase } from './db';
+import db, { initializeDatabase } from './db';
+initializeDatabase();
+export { db, initializeDatabase };
 export { categoryService } from './services/categoryService';
 export { brandService } from './services/brandService';
 export { perfumeService } from './services/perfumeService';

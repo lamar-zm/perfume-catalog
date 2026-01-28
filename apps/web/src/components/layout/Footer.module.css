@@ -1,11 +1,14 @@
 .footer {
-  background-color: #fdf4f5;
+  background-color: var(--mantine-color-cyan-6, #33cfe0);
+  color: #000;
   padding: var(--mantine-spacing-xl) 0;
   margin-top: auto;
 }
 
+/* In dark mode use a deeper cyan and white text for contrast */
 @media (prefers-color-scheme: dark) {
   .footer {
-    background-color: var(--mantine-color-dark-6);
+    background-color: var(--mantine-color-cyan-8, #0b7b86);
+    color: #fff;
   }
 }

@@ -136,12 +136,8 @@ export async function PATCH(
 
     let updated: Perfume | null = null;
 
-    // Toggle featured
-    if (body.action === 'toggleFeatured') {
-      updated = perfumeService.toggleFeatured(id);
-    }
     // Update discount
-    else if (body.action === 'updateDiscount' && body.discount !== undefined) {
+    if (body.action === 'updateDiscount' && body.discount !== undefined) {
       if (body.discount >= existing.price) {
         return NextResponse.json<ApiResponse<never>>(
           { success: false, error: 'الخصم يجب أن يكون أقل من السعر' },

@@ -2,38 +2,38 @@
 
 import { createTheme, MantineColorsTuple } from '@mantine/core';
 
-// Elegant dark rose gold theme for luxury perfume brand
+// Cyan brand theme for app identity
 const brandColor: MantineColorsTuple = [
-  '#fdf4f5',
-  '#f4e4e6',
-  '#e8c4c9',
-  '#dba1a9',
-  '#d1848f',
-  '#c96b77',
-  '#b8525f',
-  '#9a404c',
-  '#7d3440',
-  '#612833',
+  '#f0fdff',
+  '#dff9fb',
+  '#c8f2f7',
+  '#aeeaf2',
+  '#84e0ea',
+  '#33cfe0',
+  '#19a6b0',
+  '#0b7b86',
+  '#07545f',
+  '#05383f',
 ];
 
-const goldAccent: MantineColorsTuple = [
-  '#fefbf3',
-  '#faf3e0',
-  '#f3e4ba',
-  '#ebd391',
-  '#e4c36d',
-  '#d4a84a',
-  '#c4943a',
-  '#a67c2e',
-  '#876424',
-  '#6b4f1c',
+const accentNeutral: MantineColorsTuple = [
+  '#ffffff',
+  '#fafafa',
+  '#f5f5f5',
+  '#eeeeee',
+  '#e0e0e0',
+  '#bdbdbd',
+  '#9e9e9e',
+  '#757575',
+  '#616161',
+  '#424242',
 ];
 
 export const theme = createTheme({
-  // Brand colors
+  // Brand colors (identity uses cyan)
   colors: {
     brand: brandColor,
-    gold: goldAccent,
+    neutral: accentNeutral,
   },
   primaryColor: 'brand',
   

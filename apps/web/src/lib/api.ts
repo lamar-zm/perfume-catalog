@@ -59,7 +59,6 @@ export const perfumeApi = {
 
     if (params.categoryId) searchParams.set('categoryId', params.categoryId);
     if (params.brandId) searchParams.set('brandId', params.brandId);
-    if (params.isFeatured !== undefined) searchParams.set('isFeatured', params.isFeatured.toString());
     if (params.hasDiscount) searchParams.set('hasDiscount', 'true');
     if (params.search) searchParams.set('search', params.search);
 
@@ -72,10 +71,6 @@ export const perfumeApi = {
 
   async getMostSold(limit: number = 8): Promise<ApiResponse<Perfume[]>> {
     return fetchApi<Perfume[]>(`/perfumes?endpoint=most-sold&limit=${limit}`);
-  },
-
-  async getFeatured(limit: number = 8): Promise<ApiResponse<Perfume[]>> {
-    return fetchApi<Perfume[]>(`/perfumes?endpoint=featured&limit=${limit}`);
   },
 
   async getDiscounted(limit?: number): Promise<ApiResponse<Perfume[]>> {
@@ -103,13 +98,6 @@ export const perfumeApi = {
 
   async delete(id: string): Promise<ApiResponse<{ id: string }>> {
     return fetchApi<{ id: string }>(`/perfumes/${id}`, { method: 'DELETE' });
-  },
-
-  async toggleFeatured(id: string): Promise<ApiResponse<Perfume>> {
-    return fetchApi<Perfume>(`/perfumes/${id}`, {
-      method: 'PATCH',
-      body: JSON.stringify({ action: 'toggleFeatured' }),
-    });
   },
 
   async updateDiscount(id: string, discount: number): Promise<ApiResponse<Perfume>> {

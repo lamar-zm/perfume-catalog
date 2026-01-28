@@ -165,7 +165,6 @@ function initializeDatabase() {
     db.exec(`
     CREATE INDEX IF NOT EXISTS idx_perfumes_category ON perfumes(category_id);
     CREATE INDEX IF NOT EXISTS idx_perfumes_brand ON perfumes(brand_id);
-    CREATE INDEX IF NOT EXISTS idx_perfumes_featured ON perfumes(is_featured);
     CREATE INDEX IF NOT EXISTS idx_perfumes_sales ON perfumes(sales_count DESC);
     CREATE INDEX IF NOT EXISTS idx_perfume_images_perfume ON perfume_images(perfume_id);
   `);
@@ -173,6 +172,27 @@ function initializeDatabase() {
     try {
         db.exec(`ALTER TABLE perfumes ADD COLUMN notes TEXT DEFAULT '[]'`);
         console.log('✅ Added notes column to perfumes table');
+    } catch (e) {
+    // Column already exists, ignore
+    }
+    // Migration: Add gender column if it doesn't exist
+    try {
+        db.exec(`ALTER TABLE perfumes ADD COLUMN gender TEXT DEFAULT 'unisex'`);
+        console.log('✅ Added gender column to perfumes table');
+    } catch (e) {
+    // Column already exists, ignore
+    }
+    // Migration: Add cover_image column if it doesn't exist
+    try {
+        db.exec(`ALTER TABLE perfumes ADD COLUMN cover_image TEXT DEFAULT ''`);
+        console.log('✅ Added cover_image column to perfumes table');
+    } catch (e) {
+    // Column already exists, ignore
+    }
+    // Migration: Add out_of_stock column if it doesn't exist
+    try {
+        db.exec(`ALTER TABLE perfumes ADD COLUMN out_of_stock INTEGER DEFAULT 0`);
+        console.log('✅ Added out_of_stock column to perfumes table');
     } catch (e) {
     // Column already exists, ignore
     }
@@ -369,6 +389,9 @@ function rowToPerfume(row) {
         description: row.description || '',
         price: row.price,
         discount: row.discount || 0,
+        gender: row.gender || 'unisex',
+        coverImage: row.cover_image || '',
+        outOfStock: row.out_of_stock === 1,
         finalPrice: row.final_price,
         categoryId: row.category_id || '',
         brandId: row.brand_id || '',
@@ -480,9 +503,9 @@ const perfumeService = {
         const finalPrice = data.price - (data.discount || 0);
         const notesJson = JSON.stringify(data.notes || []);
         __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].prepare(`
-      INSERT INTO perfumes (id, title, description, price, discount, final_price, category_id, brand_id, notes, is_featured, sales_count, created_at, updated_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `).run(id, data.title, data.description, data.price, data.discount || 0, finalPrice, data.categoryId || null, data.brandId || null, notesJson, data.isFeatured ? 1 : 0, data.salesCount || 0, now, now);
+      INSERT INTO perfumes (id, title, description, price, discount, final_price, category_id, brand_id, gender, cover_image, notes, out_of_stock, sales_count, created_at, updated_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `).run(id, data.title, data.description, data.price, data.discount || 0, finalPrice, data.categoryId || null, data.brandId || null, data.gender || 'unisex', data.coverImage || '', notesJson, data.outOfStock ? 1 : 0, data.salesCount || 0, now, now);
         // Save images
         if (data.images && data.images.length > 0) {
             savePerfumeImages(id, data.images);
@@ -500,9 +523,9 @@ const perfumeService = {
         __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].prepare(`
       UPDATE perfumes 
       SET title = ?, description = ?, price = ?, discount = ?, final_price = ?, 
-          category_id = ?, brand_id = ?, notes = ?, is_featured = ?, sales_count = ?, updated_at = ?
+          category_id = ?, brand_id = ?, gender = ?, cover_image = ?, notes = ?, out_of_stock = ?, sales_count = ?, updated_at = ?
       WHERE id = ?
-    `).run(data.title ?? existing.title, data.description ?? existing.description, price, discount, finalPrice, (data.categoryId ?? existing.categoryId) || null, (data.brandId ?? existing.brandId) || null, notesJson, data.isFeatured ?? existing.isFeatured ? 1 : 0, data.salesCount ?? existing.salesCount, now, id);
+    `).run(data.title ?? existing.title, data.description ?? existing.description, price, discount, finalPrice, (data.categoryId ?? existing.categoryId) || null, (data.brandId ?? existing.brandId) || null, data.gender ?? existing.gender ?? 'unisex', data.coverImage ?? existing.coverImage ?? '', notesJson, data.outOfStock ? 1 : 0, data.salesCount ?? existing.salesCount, now, id);
         // Update images if provided
         if (data.images) {
             savePerfumeImages(id, data.images);
@@ -627,6 +650,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$services$2f$brandService$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/database/src/services/brandService.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$services$2f$perfumeService$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/database/src/services/perfumeService.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$services$2f$authService$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/packages/database/src/services/authService.ts [app-route] (ecmascript)");
+;
+(0, __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["initializeDatabase"])();
 ;
 ;
 ;

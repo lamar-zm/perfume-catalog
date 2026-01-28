@@ -78,7 +78,6 @@ const perfumeApi = {
         });
         if (params.categoryId) searchParams.set('categoryId', params.categoryId);
         if (params.brandId) searchParams.set('brandId', params.brandId);
-        if (params.isFeatured !== undefined) searchParams.set('isFeatured', params.isFeatured.toString());
         if (params.hasDiscount) searchParams.set('hasDiscount', 'true');
         if (params.search) searchParams.set('search', params.search);
         return fetchApi(`/perfumes?${searchParams}`);
@@ -88,9 +87,6 @@ const perfumeApi = {
     },
     async getMostSold (limit = 8) {
         return fetchApi(`/perfumes?endpoint=most-sold&limit=${limit}`);
-    },
-    async getFeatured (limit = 8) {
-        return fetchApi(`/perfumes?endpoint=featured&limit=${limit}`);
     },
     async getDiscounted (limit) {
         const url = limit ? `/perfumes?endpoint=discounted&limit=${limit}` : '/perfumes?endpoint=discounted';
@@ -114,14 +110,6 @@ const perfumeApi = {
     async delete (id) {
         return fetchApi(`/perfumes/${id}`, {
             method: 'DELETE'
-        });
-    },
-    async toggleFeatured (id) {
-        return fetchApi(`/perfumes/${id}`, {
-            method: 'PATCH',
-            body: JSON.stringify({
-                action: 'toggleFeatured'
-            })
         });
     },
     async updateDiscount (id, discount) {
@@ -455,7 +443,7 @@ async function generateMetadata({ params }) {
 const PAGE_SIZE = 12;
 async function CategoryPage({ params, searchParams }) {
     const { slug } = await params;
-    const { page: pageParam } = await searchParams;
+    const { page: pageParam, brand: brandParam } = await searchParams;
     const categoryRes = await __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["categoryApi"].getBySlug(slug);
     if (!categoryRes.success || !categoryRes.data) {
         (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$components$2f$navigation$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["notFound"])();
@@ -465,7 +453,8 @@ async function CategoryPage({ params, searchParams }) {
     const perfumesRes = await __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["perfumeApi"].getAll({
         page: currentPage,
         pageSize: PAGE_SIZE,
-        categoryId: category.id
+        categoryId: category.id,
+        brandId: brandParam || undefined
     });
     const result = perfumesRes.success ? perfumesRes.data : {
         data: [],
@@ -482,7 +471,7 @@ async function CategoryPage({ params, searchParams }) {
                 subtitle: category.description || `عرض جميع العطور في تصنيف ${category.name}`
             }, void 0, false, {
                 fileName: "[project]/apps/web/src/app/(public)/category/[slug]/page.tsx",
-                lineNumber: 75,
+                lineNumber: 77,
                 columnNumber: 7
             }, this),
             result.data.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$components$2f$ui$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["EmptyState"], {
@@ -490,7 +479,7 @@ async function CategoryPage({ params, searchParams }) {
                 message: `لا توجد عطور متاحة في تصنيف ${category.name} حالياً`
             }, void 0, false, {
                 fileName: "[project]/apps/web/src/app/(public)/category/[slug]/page.tsx",
-                lineNumber: 81,
+                lineNumber: 83,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Fragment"], {
                 children: [
@@ -498,7 +487,7 @@ async function CategoryPage({ params, searchParams }) {
                         perfumes: result.data
                     }, void 0, false, {
                         fileName: "[project]/apps/web/src/app/(public)/category/[slug]/page.tsx",
-                        lineNumber: 87,
+                        lineNumber: 89,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$app$2f28$public$292f$category$2f5b$slug$5d2f$CategoryPagination$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["CategoryPagination"], {
@@ -507,7 +496,7 @@ async function CategoryPage({ params, searchParams }) {
                         slug: slug
                     }, void 0, false, {
                         fileName: "[project]/apps/web/src/app/(public)/category/[slug]/page.tsx",
-                        lineNumber: 88,
+                        lineNumber: 90,
                         columnNumber: 11
                     }, this)
                 ]
@@ -515,9 +504,10 @@ async function CategoryPage({ params, searchParams }) {
         ]
     }, void 0, true, {
         fileName: "[project]/apps/web/src/app/(public)/category/[slug]/page.tsx",
-        lineNumber: 74,
+        lineNumber: 76,
         columnNumber: 5
     }, this);
+// end of CategoryPage
 }
 }),
 "[project]/apps/web/src/app/(public)/category/[slug]/page.tsx [app-rsc] (ecmascript, Next.js Server Component)", ((__turbopack_context__) => {

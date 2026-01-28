@@ -1,0 +1,3 @@
+module.exports=[2047,a=>{"use strict";var b=a.i(87924),c=a.i(52466),d=a.i(81577),e=a.i(75949),f=a.i(1839),g=a.i(28407),h=a.i(38246);function i(){return(0,b.jsx)(g.Center,{style:{minHeight:"60vh"},children:(0,b.jsxs)(f.Stack,{align:"center",gap:"lg",children:[(0,b.jsx)(c.Title,{order:1,size:"6rem",c:"brand.2",children:"404"}),(0,b.jsx)(c.Title,{order:2,children:"الصفحة غير موجودة"}),(0,b.jsx)(d.Text,{c:"dimmed",ta:"center",maw:400,children:"عذراً، الصفحة التي تبحث عنها غير موجودة أو تم نقلها إلى مكان آخر."}),(0,b.jsx)(e.Button,{component:h.default,href:"/",size:"lg",radius:"xl",children:"العودة للرئيسية"})]})})}a.s(["default",()=>i])}];
+
+//# sourceMappingURL=apps_web_src_app_%28public%29_not-found_tsx_7961574a._.js.map

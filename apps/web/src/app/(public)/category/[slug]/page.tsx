@@ -3,17 +3,18 @@ import { notFound } from 'next/navigation';
 import { Stack } from '@mantine/core';
 import { categoryApi, perfumeApi } from '@/services';
 import { PerfumeGrid, SectionHeader, Pagination, EmptyState } from '@/components';
+import { BrandFilter } from '@/components/filters/BrandFilter';
 import { CategoryPagination } from './CategoryPagination';
 
 interface CategoryPageProps {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ page?: string }>;
+  searchParams: Promise<{ page?: string; brand?: string }>;
 }
 
 // Generate static params for all categories
 export async function generateStaticParams() {
   const res = await categoryApi.getAll();
-  if (!res.success) return [];
+  if (!res.success || !res.data) return [];
   return res.data.map((category) => ({
     slug: category.slug,
   }));
@@ -52,7 +53,7 @@ export default async function CategoryPage({
   searchParams,
 }: CategoryPageProps) {
   const { slug } = await params;
-  const { page: pageParam } = await searchParams;
+  const { page: pageParam, brand: brandParam } = await searchParams;
   
   const categoryRes = await categoryApi.getBySlug(slug);
 
@@ -66,9 +67,12 @@ export default async function CategoryPage({
     page: currentPage,
     pageSize: PAGE_SIZE,
     categoryId: category.id,
+    brandId: brandParam || undefined,
   });
 
-  const result = perfumesRes.success ? perfumesRes.data : { data: [], total: 0, page: 1, pageSize: PAGE_SIZE, totalPages: 0 };
+  const result = perfumesRes.success && perfumesRes.data
+    ? perfumesRes.data
+    : { data: [], total: 0, page: 1, pageSize: PAGE_SIZE, totalPages: 0 };
 
   return (
     <Stack gap="xl">
@@ -94,4 +98,6 @@ export default async function CategoryPage({
       )}
     </Stack>
   );
+// end of CategoryPage
+
 }

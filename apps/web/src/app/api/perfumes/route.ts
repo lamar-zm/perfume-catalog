@@ -11,7 +11,6 @@ export async function GET(request: NextRequest) {
     const pageSize = parseInt(searchParams.get('pageSize') || '12');
     const categoryId = searchParams.get('categoryId') || undefined;
     const brandId = searchParams.get('brandId') || undefined;
-    const isFeatured = searchParams.get('isFeatured');
     const hasDiscount = searchParams.get('hasDiscount') === 'true';
     const search = searchParams.get('search') || undefined;
     const sortField = searchParams.get('sortField') as keyof Perfume | undefined;
@@ -29,14 +28,7 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    if (endpoint === 'featured') {
-      const limit = parseInt(searchParams.get('limit') || '8');
-      const data = perfumeService.getFeatured(limit);
-      return NextResponse.json<ApiResponse<Perfume[]>>({
-        success: true,
-        data,
-      });
-    }
+    // remove featured endpoint - most-sold handled separately
 
     if (endpoint === 'discounted') {
       const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : undefined;
@@ -50,7 +42,6 @@ export async function GET(request: NextRequest) {
     const filters = {
       categoryId,
       brandId,
-      isFeatured: isFeatured !== null ? isFeatured === 'true' : undefined,
       hasDiscount,
       search,
     };
@@ -98,11 +89,14 @@ export async function POST(request: NextRequest) {
       description: body.description || '',
       price: body.price,
       discount: body.discount || 0,
+      gender: body.gender || 'unisex',
+      coverImage: body.coverImage || '',
+      outOfStock: body.outOfStock || false,
       categoryId: body.categoryId || '',
       brandId: body.brandId || '',
-      isFeatured: body.isFeatured || false,
       salesCount: body.salesCount || 0,
       images: body.images || [],
+      notes: body.notes || [],
     });
 
     return NextResponse.json<ApiResponse<Perfume>>({

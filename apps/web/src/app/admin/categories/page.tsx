@@ -44,7 +44,7 @@ export default function AdminCategoriesPage() {
     setLoading(true);
     try {
       const res = await categoryApi.getAll();
-      if (res.success) {
+      if (res.success && res.data) {
         setCategories(res.data);
       }
     } catch (error) {

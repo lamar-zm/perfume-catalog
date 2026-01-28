@@ -78,7 +78,6 @@ const perfumeApi = {
         });
         if (params.categoryId) searchParams.set('categoryId', params.categoryId);
         if (params.brandId) searchParams.set('brandId', params.brandId);
-        if (params.isFeatured !== undefined) searchParams.set('isFeatured', params.isFeatured.toString());
         if (params.hasDiscount) searchParams.set('hasDiscount', 'true');
         if (params.search) searchParams.set('search', params.search);
         return fetchApi(`/perfumes?${searchParams}`);
@@ -88,9 +87,6 @@ const perfumeApi = {
     },
     async getMostSold (limit = 8) {
         return fetchApi(`/perfumes?endpoint=most-sold&limit=${limit}`);
-    },
-    async getFeatured (limit = 8) {
-        return fetchApi(`/perfumes?endpoint=featured&limit=${limit}`);
     },
     async getDiscounted (limit) {
         const url = limit ? `/perfumes?endpoint=discounted&limit=${limit}` : '/perfumes?endpoint=discounted';
@@ -114,14 +110,6 @@ const perfumeApi = {
     async delete (id) {
         return fetchApi(`/perfumes/${id}`, {
             method: 'DELETE'
-        });
-    },
-    async toggleFeatured (id) {
-        return fetchApi(`/perfumes/${id}`, {
-            method: 'PATCH',
-            body: JSON.stringify({
-                action: 'toggleFeatured'
-            })
         });
     },
     async updateDiscount (id, discount) {

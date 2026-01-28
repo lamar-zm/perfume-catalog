@@ -14,7 +14,7 @@ if (!fs.existsSync(dataDir)) {
 }
 
 const dbPath = path.join(dataDir, 'perfume-catalog.db');
-const db = new Database(dbPath);
+const db: any = new Database(dbPath);
 
 // Enable foreign keys
 db.pragma('foreign_keys = ON');
@@ -95,7 +95,6 @@ export function initializeDatabase() {
   db.exec(`
     CREATE INDEX IF NOT EXISTS idx_perfumes_category ON perfumes(category_id);
     CREATE INDEX IF NOT EXISTS idx_perfumes_brand ON perfumes(brand_id);
-    CREATE INDEX IF NOT EXISTS idx_perfumes_featured ON perfumes(is_featured);
     CREATE INDEX IF NOT EXISTS idx_perfumes_sales ON perfumes(sales_count DESC);
     CREATE INDEX IF NOT EXISTS idx_perfume_images_perfume ON perfume_images(perfume_id);
   `);
@@ -104,6 +103,30 @@ export function initializeDatabase() {
   try {
     db.exec(`ALTER TABLE perfumes ADD COLUMN notes TEXT DEFAULT '[]'`);
     console.log('✅ Added notes column to perfumes table');
+  } catch (e) {
+    // Column already exists, ignore
+  }
+
+  // Migration: Add gender column if it doesn't exist
+  try {
+    db.exec(`ALTER TABLE perfumes ADD COLUMN gender TEXT DEFAULT 'unisex'`);
+    console.log('✅ Added gender column to perfumes table');
+  } catch (e) {
+    // Column already exists, ignore
+  }
+
+  // Migration: Add cover_image column if it doesn't exist
+  try {
+    db.exec(`ALTER TABLE perfumes ADD COLUMN cover_image TEXT DEFAULT ''`);
+    console.log('✅ Added cover_image column to perfumes table');
+  } catch (e) {
+    // Column already exists, ignore
+  }
+
+  // Migration: Add out_of_stock column if it doesn't exist
+  try {
+    db.exec(`ALTER TABLE perfumes ADD COLUMN out_of_stock INTEGER DEFAULT 0`);
+    console.log('✅ Added out_of_stock column to perfumes table');
   } catch (e) {
     // Column already exists, ignore
   }

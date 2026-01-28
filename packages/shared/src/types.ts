@@ -7,13 +7,15 @@ export interface Perfume {
   title: string;
   description: string;
   price: number;
+  gender?: 'men' | 'women' | 'unisex';
   discount: number;
   finalPrice: number;
   categoryId: string;
   brandId: string;
   images: string[];
   notes: string[]; // نوع العطر - e.g., ["oud", "wood", "vanilla"]
-  isFeatured: boolean;
+  coverImage?: string;
+  outOfStock?: boolean;
   salesCount: number;
   createdAt: string;
   updatedAt: string;
@@ -67,7 +69,6 @@ export interface PaginationParams {
 export interface PerfumeFilters {
   categoryId?: string;
   brandId?: string;
-  isFeatured?: boolean;
   hasDiscount?: boolean;
   search?: string;
 }
@@ -91,11 +92,13 @@ export interface ApiResponse<T> {
 export interface PerfumeFormData {
   title: string;
   description: string;
+  gender?: 'men' | 'women' | 'unisex';
   price: number;
   discount?: number;
   categoryId: string;
   brandId: string;
-  isFeatured: boolean;
+  outOfStock?: boolean;
+  coverImage?: string;
   images: string[];
   notes?: string[]; // نوع العطر - e.g., ["oud", "wood", "vanilla"]
 }

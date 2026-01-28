@@ -42,9 +42,9 @@ export default function AdminDiscountsPage() {
         perfumeApi.getAll({ page: 1, pageSize: 100 }),
         categoryApi.getAll(),
       ]);
-      setDiscounted(discountedRes.success ? discountedRes.data : []);
-      setAllPerfumes(allRes.success ? allRes.data.data : []);
-      setCategories(catsRes.success ? catsRes.data : []);
+      setDiscounted(discountedRes.success && discountedRes.data ? discountedRes.data : []);
+      setAllPerfumes(allRes.success && allRes.data && allRes.data.data ? allRes.data.data : []);
+      setCategories(catsRes.success && catsRes.data ? catsRes.data : []);
     } catch (error) {
       console.error('Error loading data:', error);
     } finally {
@@ -125,7 +125,7 @@ export default function AdminDiscountsPage() {
                 <Table.Tr key={perfume.id}>
                   <Table.Td>
                     <Image
-                      src={(perfume.images?.[0]?.url || perfume.image) || imageHelper.getPlaceholder(50, 50)}
+                      src={(perfume.coverImage || perfume.images?.[0]) || imageHelper.getPlaceholder(50, 50)}
                       alt={perfume.title}
                       width={50}
                       height={50}
@@ -240,7 +240,7 @@ export default function AdminDiscountsPage() {
                 <Table.Tr key={perfume.id}>
                   <Table.Td>
                     <Image
-                      src={(perfume.images?.[0]?.url || perfume.image) || imageHelper.getPlaceholder(50, 50)}
+                      src={(perfume.coverImage || perfume.images?.[0]) || imageHelper.getPlaceholder(50, 50)}
                       alt={perfume.title}
                       width={50}
                       height={50}

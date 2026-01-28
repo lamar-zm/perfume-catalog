@@ -26,7 +26,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const checkAuth = async () => {
     try {
       const currentUser = await authApi.getCurrentUser();
-      setUser(currentUser);
+      if (currentUser.success && currentUser.data) {
+        setUser(currentUser.data);
+      } else {
+        setUser(null);
+      }
     } catch {
       setUser(null);
     } finally {
@@ -36,8 +40,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signIn = async (email: string, password: string) => {
     const result = await authApi.signIn(email, password);
-    if (result.user) {
-      setUser(result.user);
+    if (result.success && result.data && result.data.user) {
+      setUser(result.data.user);
     }
   };
 

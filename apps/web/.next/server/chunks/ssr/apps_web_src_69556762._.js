@@ -1,0 +1,3 @@
+module.exports=[29110,3877,a=>{"use strict";a.i(75736),a.i(15117),a.i(28619),a.i(23537),a.i(34291),a.i(104);var b=a.i(63589),c=a.i(94537),d=a.i(27912);a.i(30943),a.s([],58645),a.i(11634),a.i(35761),a.s([],29110),a.i(58645),a.s(["EmptyState",()=>c.EmptyState,"LoadingState",()=>d.LoadingState,"Pagination",()=>b.Pagination],3877)},19741,a=>{"use strict";var b=a.i(87924),c=a.i(50944);a.i(29110);var d=a.i(3877);function e({currentPage:a,totalPages:e,slug:f}){let g=(0,c.useRouter)();return(0,b.jsx)(d.Pagination,{currentPage:a,totalPages:e,onPageChange:a=>{g.push(`/brand/${f}?page=${a}`)}})}a.s(["BrandPagination",()=>e])}];
+
+//# sourceMappingURL=apps_web_src_69556762._.js.map

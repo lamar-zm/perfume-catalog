@@ -25,12 +25,15 @@ function rowToPerfume(row: any): Perfume {
     description: row.description || '',
     price: row.price,
     discount: row.discount || 0,
+    gender: row.gender || 'unisex',
+    coverImage: row.cover_image || '',
+    outOfStock: row.out_of_stock === 1,
     finalPrice: row.final_price,
     categoryId: row.category_id || '',
     brandId: row.brand_id || '',
     images: getPerfumeImages(row.id),
     notes,
-    isFeatured: row.is_featured === 1,
+    // isFeatured: row.is_featured === 1, // Removed to match Perfume type
     salesCount: row.sales_count || 0,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
@@ -74,10 +77,10 @@ export const perfumeService = {
       queryParams.push(filters.brandId);
     }
 
-    if (filters?.isFeatured !== undefined) {
-      whereClause += ' AND is_featured = ?';
-      queryParams.push(filters.isFeatured ? 1 : 0);
-    }
+    // if (filters?.isFeatured !== undefined) {
+    //   whereClause += ' AND is_featured = ?';
+    //   queryParams.push(filters.isFeatured ? 1 : 0);
+    // }
 
     if (filters?.hasDiscount) {
       whereClause += ' AND discount > 0';
@@ -169,8 +172,8 @@ export const perfumeService = {
     const notesJson = JSON.stringify(data.notes || []);
 
     db.prepare(`
-      INSERT INTO perfumes (id, title, description, price, discount, final_price, category_id, brand_id, notes, is_featured, sales_count, created_at, updated_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO perfumes (id, title, description, price, discount, final_price, category_id, brand_id, gender, cover_image, notes, out_of_stock, sales_count, created_at, updated_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       id, 
       data.title, 
@@ -180,8 +183,10 @@ export const perfumeService = {
       finalPrice,
       data.categoryId || null, 
       data.brandId || null, 
+      (data as any).gender || 'unisex',
+      (data as any).coverImage || '',
       notesJson,
-      data.isFeatured ? 1 : 0, 
+      (data as any).outOfStock ? 1 : 0,
       data.salesCount || 0,
       now, 
       now
@@ -208,7 +213,7 @@ export const perfumeService = {
     db.prepare(`
       UPDATE perfumes 
       SET title = ?, description = ?, price = ?, discount = ?, final_price = ?, 
-          category_id = ?, brand_id = ?, notes = ?, is_featured = ?, sales_count = ?, updated_at = ?
+          category_id = ?, brand_id = ?, gender = ?, cover_image = ?, notes = ?, out_of_stock = ?, sales_count = ?, updated_at = ?
       WHERE id = ?
     `).run(
       data.title ?? existing.title,
@@ -218,8 +223,10 @@ export const perfumeService = {
       finalPrice,
       (data.categoryId ?? existing.categoryId) || null,
       (data.brandId ?? existing.brandId) || null,
+      (data as any).gender ?? (existing as any).gender ?? 'unisex',
+      (data as any).coverImage ?? (existing as any).coverImage ?? '',
       notesJson,
-      (data.isFeatured ?? existing.isFeatured) ? 1 : 0,
+      (data as any).outOfStock ? 1 : 0,
       data.salesCount ?? existing.salesCount,
       now,
       id
@@ -247,19 +254,19 @@ export const perfumeService = {
     return this.getById(id);
   },
 
-  toggleFeatured(id: string): Perfume | null {
-    const existing = this.getById(id);
-    if (!existing) return null;
+  // toggleFeatured(id: string): Perfume | null {
+  //   const existing = this.getById(id);
+  //   if (!existing) return null;
 
-    const now = new Date().toISOString();
-    const newFeatured = existing.isFeatured ? 0 : 1;
+  //   const now = new Date().toISOString();
+  //   // const newFeatured = existing.isFeatured ? 0 : 1;
 
-    db.prepare(`
-      UPDATE perfumes SET is_featured = ?, updated_at = ? WHERE id = ?
-    `).run(newFeatured, now, id);
+  //   db.prepare(`
+  //     UPDATE perfumes SET is_featured = ?, updated_at = ? WHERE id = ?
+  //   `).run(newFeatured, now, id);
 
-    return this.getById(id);
-  },
+  //   return this.getById(id);
+  // },
 
   delete(id: string): boolean {
     // Images will be deleted by CASCADE

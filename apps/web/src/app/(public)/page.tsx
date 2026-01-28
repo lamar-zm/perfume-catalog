@@ -2,25 +2,23 @@ import { Stack, Box, SimpleGrid } from '@mantine/core';
 import { perfumeApi, categoryApi, brandApi } from '@/services';
 import { PerfumeGrid, CategoryGrid, SectionHeader, BrandCard } from '@/components';
 import { HeroSection } from './HeroSection';
-import { FeaturedSection } from './FeaturedSection';
 
 export default async function HomePage() {
   // Fetch data from API
-  const [mostSoldRes, featuredRes, categoriesRes, allPerfumesRes, brandsRes, discountedRes] = await Promise.all([
+  const [mostSoldRes, categoriesRes, allPerfumesRes, brandsRes, discountedRes] = await Promise.all([
     perfumeApi.getMostSold(8),
-    perfumeApi.getFeatured(4),
     categoryApi.getAll(),
     perfumeApi.getAll({ page: 1, pageSize: 8 }),
     brandApi.getAll(),
     perfumeApi.getDiscounted(8),
   ]);
 
-  const mostSold = mostSoldRes.success ? mostSoldRes.data : [];
-  const featured = featuredRes.success ? featuredRes.data : [];
-  const categories = categoriesRes.success ? categoriesRes.data : [];
-  const allPerfumes = allPerfumesRes.success ? allPerfumesRes.data : { data: [], total: 0, page: 1, pageSize: 8, totalPages: 0 };
-  const brands = brandsRes.success ? brandsRes.data : [];
-  const discounted = discountedRes.success ? discountedRes.data : [];
+  const mostSold = mostSoldRes.success && mostSoldRes.data ? mostSoldRes.data : [];
+  const categories = categoriesRes.success && categoriesRes.data ? categoriesRes.data : [];
+  const allPerfumes = allPerfumesRes.success && allPerfumesRes.data ? allPerfumesRes.data : { data: [], total: 0, page: 1, pageSize: 8, totalPages: 0 };
+  const brands = brandsRes.success && brandsRes.data ? brandsRes.data : [];
+  const discounted = discountedRes.success && discountedRes.data ? discountedRes.data : [];
+  
 
   return (
     <Stack gap={60}>
@@ -85,7 +83,7 @@ export default async function HomePage() {
       {/* 4. Brands Section */}
       <Box>
         <SectionHeader
-          title="الماركات العالمية"
+          title="البراندات"
           subtitle="أشهر دور العطور العالمية والعربية"
         />
         <SimpleGrid cols={{ base: 2, sm: 3, md: 4, lg: 6 }} spacing="lg">
@@ -95,10 +93,7 @@ export default async function HomePage() {
         </SimpleGrid>
       </Box>
 
-      {/* 5. Featured Products Section */}
-      {featured.length > 0 && (
-        <FeaturedSection perfumes={featured} categories={categories} />
-      )}
+      {/* 5. Featured Products Section removed - replaced by Most Sold above */}
 
       {/* 6. All Products Preview */}
       <Box>

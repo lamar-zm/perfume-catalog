@@ -4,22 +4,22 @@ import { perfumeApi, categoryApi } from '@/services';
 import { PerfumeGrid, SectionHeader, EmptyState } from '@/components';
 
 export const metadata: Metadata = {
-  title: 'العطور المميزة',
-  description: 'اكتشف مجموعتنا من العطور المميزة - اختيارات حصرية من أفخم العطور العربية والعالمية',
+  title: 'الأكثر مبيعاً',
+  description: 'اكتشف العطور الأكثر مبيعاً استناداً إلى بيانات المبيعات الفعلية',
   openGraph: {
-    title: 'العطور المميزة | عطور فاخرة',
-    description: 'اكتشف مجموعتنا من العطور المميزة - اختيارات حصرية من أفخم العطور',
+    title: 'الأكثر مبيعاً | عطور فاخرة',
+    description: 'اكتشف العطور الأكثر مبيعاً استناداً إلى بيانات المبيعات',
   },
 };
 
 export default async function FeaturedPage() {
-  const [featuredRes, categoriesRes] = await Promise.all([
-    perfumeApi.getFeatured(20),
+  const [mostSoldRes, categoriesRes] = await Promise.all([
+    perfumeApi.getMostSold(20),
     categoryApi.getAll(),
   ]);
 
-  const featured = featuredRes.success ? featuredRes.data : [];
-  const categories = categoriesRes.success ? categoriesRes.data : [];
+  const featured = mostSoldRes.success && mostSoldRes.data ? mostSoldRes.data : [];
+  const categories = categoriesRes.success && categoriesRes.data ? categoriesRes.data : [];
 
   return (
     <Stack gap="xl">

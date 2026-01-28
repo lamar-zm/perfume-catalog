@@ -24,12 +24,6 @@
   right: 10px;
 }
 
-.featuredBadge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-}
-
 .title {
   min-height: 1.5em;
 }

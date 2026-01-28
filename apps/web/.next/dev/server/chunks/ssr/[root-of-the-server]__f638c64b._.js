@@ -78,7 +78,6 @@ const perfumeApi = {
         });
         if (params.categoryId) searchParams.set('categoryId', params.categoryId);
         if (params.brandId) searchParams.set('brandId', params.brandId);
-        if (params.isFeatured !== undefined) searchParams.set('isFeatured', params.isFeatured.toString());
         if (params.hasDiscount) searchParams.set('hasDiscount', 'true');
         if (params.search) searchParams.set('search', params.search);
         return fetchApi(`/perfumes?${searchParams}`);
@@ -88,9 +87,6 @@ const perfumeApi = {
     },
     async getMostSold (limit = 8) {
         return fetchApi(`/perfumes?endpoint=most-sold&limit=${limit}`);
-    },
-    async getFeatured (limit = 8) {
-        return fetchApi(`/perfumes?endpoint=featured&limit=${limit}`);
     },
     async getDiscounted (limit) {
         const url = limit ? `/perfumes?endpoint=discounted&limit=${limit}` : '/perfumes?endpoint=discounted';
@@ -114,14 +110,6 @@ const perfumeApi = {
     async delete (id) {
         return fetchApi(`/perfumes/${id}`, {
             method: 'DELETE'
-        });
-    },
-    async toggleFeatured (id) {
-        return fetchApi(`/perfumes/${id}`, {
-            method: 'PATCH',
-            body: JSON.stringify({
-                action: 'toggleFeatured'
-            })
         });
     },
     async updateDiscount (id, discount) {
@@ -380,19 +368,19 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$compon
 ;
 ;
 const metadata = {
-    title: 'العطور المميزة',
-    description: 'اكتشف مجموعتنا من العطور المميزة - اختيارات حصرية من أفخم العطور العربية والعالمية',
+    title: 'الأكثر مبيعاً',
+    description: 'اكتشف العطور الأكثر مبيعاً استناداً إلى بيانات المبيعات الفعلية',
     openGraph: {
-        title: 'العطور المميزة | عطور فاخرة',
-        description: 'اكتشف مجموعتنا من العطور المميزة - اختيارات حصرية من أفخم العطور'
+        title: 'الأكثر مبيعاً | عطور فاخرة',
+        description: 'اكتشف العطور الأكثر مبيعاً استناداً إلى بيانات المبيعات'
     }
 };
 async function FeaturedPage() {
-    const [featuredRes, categoriesRes] = await Promise.all([
-        __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["perfumeApi"].getFeatured(20),
+    const [mostSoldRes, categoriesRes] = await Promise.all([
+        __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["perfumeApi"].getMostSold(20),
         __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["categoryApi"].getAll()
     ]);
-    const featured = featuredRes.success ? featuredRes.data : [];
+    const featured = mostSoldRes.success ? mostSoldRes.data : [];
     const categories = categoriesRes.success ? categoriesRes.data : [];
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Stack$2f$Stack$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Stack"], {
         gap: "xl",

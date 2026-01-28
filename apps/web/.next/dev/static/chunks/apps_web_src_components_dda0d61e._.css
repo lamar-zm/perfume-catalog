@@ -25,12 +25,6 @@
   right: 10px;
 }
 
-.PerfumeCard-module__S9QGZG__featuredBadge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-}
-
 .PerfumeCard-module__S9QGZG__title {
   min-height: 1.5em;
 }
@@ -159,14 +153,16 @@
 
 /* [project]/apps/web/src/components/layout/Footer.module.css [app-client] (css) */
 .Footer-module__oORJuq__footer {
+  background-color: var(--mantine-color-cyan-6, #33cfe0);
+  color: #000;
   padding: var(--mantine-spacing-xl) 0;
-  background-color: #fdf4f5;
   margin-top: auto;
 }
 
 @media (prefers-color-scheme: dark) {
   .Footer-module__oORJuq__footer {
-    background-color: var(--mantine-color-dark-6);
+    background-color: var(--mantine-color-cyan-8, #0b7b86);
+    color: #fff;
   }
 }
 

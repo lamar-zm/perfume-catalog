@@ -25,8 +25,6 @@ import {
   IconTrash,
   IconDotsVertical,
   IconSearch,
-  IconStar,
-  IconStarOff,
 } from '@tabler/icons-react';
 import { perfumeApi, categoryApi, brandApi, imageHelper } from '@/services';
 import { Perfume, Category, Brand, PaginatedResult } from '@/types';
@@ -61,14 +59,14 @@ export default function AdminPerfumesPage() {
 
   const loadCategories = async () => {
     const res = await categoryApi.getAll();
-    if (res.success) {
+    if (res.success && res.data) {
       setCategories(res.data);
     }
   };
 
   const loadBrands = async () => {
     const res = await brandApi.getAll();
-    if (res.success) {
+    if (res.success && res.data) {
       setBrands(res.data);
     }
   };
@@ -81,7 +79,7 @@ export default function AdminPerfumesPage() {
         pageSize: PAGE_SIZE,
         categoryId: categoryFilter || undefined,
       });
-      if (res.success) {
+      if (res.success && res.data) {
         setPerfumes(res.data);
       }
     } catch (error) {
@@ -103,7 +101,7 @@ export default function AdminPerfumesPage() {
         pageSize: PAGE_SIZE,
         search: searchQuery,
       });
-      if (res.success) {
+      if (res.success && res.data) {
         setPerfumes(res.data);
         setCurrentPage(1);
       }
@@ -166,29 +164,7 @@ export default function AdminPerfumesPage() {
     });
   };
 
-  const handleToggleFeatured = async (perfume: Perfume) => {
-    try {
-      const res = await perfumeApi.toggleFeatured(perfume.id);
-      if (res.success) {
-        loadPerfumes();
-        notifications.show({
-          title: 'تم التحديث',
-          message: perfume.isFeatured
-            ? 'تم إزالة العطر من المميزة'
-            : 'تم إضافة العطر للمميزة',
-          color: 'green',
-        });
-      } else {
-        throw new Error(res.error);
-      }
-    } catch (error) {
-      notifications.show({
-        title: 'خطأ',
-        message: 'حدث خطأ أثناء تحديث حالة العطر',
-        color: 'red',
-      });
-    }
-  };
+  // featured concept removed
 
   const getCategoryName = (categoryId: string) => {
     return categories.find((c) => c.id === categoryId)?.name || '-';
@@ -290,25 +266,11 @@ export default function AdminPerfumesPage() {
                         )}
                       </Table.Td>
                       <Table.Td>
-                        <Tooltip
-                          label={
-                            perfume.isFeatured
-                              ? 'إزالة من المميزة'
-                              : 'إضافة للمميزة'
-                          }
-                        >
-                          <ActionIcon
-                            variant={perfume.isFeatured ? 'filled' : 'light'}
-                            color={perfume.isFeatured ? 'yellow' : 'gray'}
-                            onClick={() => handleToggleFeatured(perfume)}
-                          >
-                            {perfume.isFeatured ? (
-                              <IconStar size={16} />
-                            ) : (
-                              <IconStarOff size={16} />
-                            )}
-                          </ActionIcon>
-                        </Tooltip>
+                        {perfume.outOfStock ? (
+                          <Badge color="red" variant="filled">نفد من المخزون</Badge>
+                        ) : (
+                          <Badge color="green" variant="light">متوفر</Badge>
+                        )}
                       </Table.Td>
                       <Table.Td>
                         <Menu position="bottom-end" withArrow>

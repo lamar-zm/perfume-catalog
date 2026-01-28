@@ -13,7 +13,7 @@ interface BrandPageProps {
 // Generate static params for all brands
 export async function generateStaticParams() {
   const res = await brandApi.getAll();
-  if (!res.success) return [];
+  if (!res.success || !res.data) return [];
   return res.data.map((brand) => ({
     slug: brand.slug,
   }));
@@ -74,7 +74,9 @@ export default async function BrandPage({
   const categoriesRes = await categoryApi.getAll();
   const categories = categoriesRes.success ? categoriesRes.data : [];
 
-  const result = perfumesRes.success ? perfumesRes.data : { data: [], total: 0, page: 1, pageSize: PAGE_SIZE, totalPages: 0 };
+  const result = perfumesRes.success && perfumesRes.data
+    ? perfumesRes.data
+    : { data: [], total: 0, page: 1, pageSize: PAGE_SIZE, totalPages: 0 };
 
   return (
     <Stack gap="xl">

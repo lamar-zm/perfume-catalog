@@ -24,8 +24,8 @@ export function HeroSection() {
               fontWeight: 800,
             }}
           >
-            عطور فاخرة
-          </Title>
+رشوش         
+ </Title>
           <Text size="xl" c="dimmed" maw={600} lh={1.8}>
             اكتشف مجموعتنا الحصرية من أفخم العطور العربية والعالمية.
             جودة استثنائية وروائح تأسر الحواس وتدوم طويلاً.
@@ -52,7 +52,7 @@ export function HeroSection() {
               color="dark"
               leftSection={<IconSparkles size={18} />}
             >
-              العطور المميزة
+              الاكثر مبيعاً
             </Button>
           </Group>
         </Stack>

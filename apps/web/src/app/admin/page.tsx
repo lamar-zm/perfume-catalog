@@ -19,8 +19,7 @@ import {
   IconCategory,
   IconTrendingUp,
   IconDiscount,
-  IconStar,
-  IconStarOff,
+  
 } from '@tabler/icons-react';
 import { notifications } from '@mantine/notifications';
 import { perfumeApi, categoryApi } from '@/services';
@@ -61,10 +60,10 @@ export default function AdminDashboardPage() {
           perfumeApi.getDiscounted(),
         ]);
 
-      const allPerfumes = allPerfumesRes.success ? allPerfumesRes.data : { data: [], total: 0 };
-      const allCategories = allCategoriesRes.success ? allCategoriesRes.data : [];
-      const topSold = topSoldRes.success ? topSoldRes.data : [];
-      const discountedPerfumes = discountedRes.success ? discountedRes.data : [];
+      const allPerfumes = allPerfumesRes.success && allPerfumesRes.data ? allPerfumesRes.data : { data: [], total: 0, page: 1, pageSize: 100, totalPages: 0 };
+      const allCategories = allCategoriesRes.success && allCategoriesRes.data ? allCategoriesRes.data : [];
+      const topSold = topSoldRes.success && topSoldRes.data ? topSoldRes.data : [];
+      const discountedPerfumes = discountedRes.success && discountedRes.data ? discountedRes.data : [];
 
       const totalSales = allPerfumes.data.reduce(
         (sum, p) => sum + p.salesCount,
@@ -87,30 +86,7 @@ export default function AdminDashboardPage() {
     }
   };
 
-  const handleToggleFeatured = async (perfume: Perfume) => {
-    try {
-      const res = await perfumeApi.toggleFeatured(perfume.id);
-      if (res.success) {
-        // Refresh data
-        loadDashboardData();
-        notifications.show({
-          title: 'تم التحديث',
-          message: perfume.isFeatured
-            ? 'تم إزالة العطر من المميزة'
-            : 'تم إضافة العطر للمميزة',
-          color: 'green',
-        });
-      } else {
-        throw new Error(res.error);
-      }
-    } catch (error) {
-      notifications.show({
-        title: 'خطأ',
-        message: 'حدث خطأ أثناء تحديث حالة العطر',
-        color: 'red',
-      });
-    }
-  };
+  // featured concept removed
 
   const getCategoryName = (categoryId: string) => {
     return categories.find((c) => c.id === categoryId)?.name || '-';
@@ -203,7 +179,7 @@ export default function AdminDashboardPage() {
               <Table.Th>التصنيف</Table.Th>
               <Table.Th>السعر</Table.Th>
               <Table.Th>المبيعات</Table.Th>
-              <Table.Th>مميز</Table.Th>
+              {/* featured removed */}
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>
@@ -230,25 +206,7 @@ export default function AdminDashboardPage() {
                     {perfume.salesCount}
                   </Badge>
                 </Table.Td>
-                <Table.Td>
-                  <Tooltip
-                    label={
-                      perfume.isFeatured ? 'إزالة من المميزة' : 'إضافة للمميزة'
-                    }
-                  >
-                    <ActionIcon
-                      variant={perfume.isFeatured ? 'filled' : 'light'}
-                      color={perfume.isFeatured ? 'yellow' : 'gray'}
-                      onClick={() => handleToggleFeatured(perfume)}
-                    >
-                      {perfume.isFeatured ? (
-                        <IconStar size={16} />
-                      ) : (
-                        <IconStarOff size={16} />
-                      )}
-                    </ActionIcon>
-                  </Tooltip>
-                </Table.Td>
+                {/* featured actions removed */}
               </Table.Tr>
             ))}
           </Table.Tbody>

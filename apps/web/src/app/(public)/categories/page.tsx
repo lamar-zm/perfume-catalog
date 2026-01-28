@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default async function CategoriesPage() {
   const res = await categoryApi.getAll();
-  const categories = res.success ? res.data : [];
+  const categories = res.success && res.data ? res.data : [];
 
   return (
     <Stack gap="xl">

@@ -27,7 +27,7 @@ export function PerfumeCard({
 }: PerfumeCardProps) {
   const hasDiscount = perfume.discount && perfume.discount > 0;
   const finalPrice = hasDiscount ? perfume.price - perfume.discount! : perfume.price;
-  const mainImage = perfume.images?.[0] || '';
+  const mainImage = perfume.coverImage || perfume.images?.[0] || '';
 
   return (
     <Card
@@ -49,9 +49,9 @@ export function PerfumeCard({
             خصم {perfume.discount} دينار
           </Badge>
         )}
-        {perfume.isFeatured && (
-          <Badge className={classes.featuredBadge} color="gold" variant="filled">
-            مميز
+        {perfume.outOfStock && (
+          <Badge color="red" variant="filled">
+            نفد من المخزون
           </Badge>
         )}
       </Card.Section>
