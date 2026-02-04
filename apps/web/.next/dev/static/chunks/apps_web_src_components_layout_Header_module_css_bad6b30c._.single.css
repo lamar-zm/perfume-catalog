@@ -38,4 +38,11 @@
   background-color: #f4e4e6;
 }
 
+.Header-module__5Cu8Tq__socialLink {
+  padding: var(--mantine-spacing-xs);
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+}
+
 /*# sourceMappingURL=apps_web_src_components_layout_Header_module_css_bad6b30c._.single.css.map*/

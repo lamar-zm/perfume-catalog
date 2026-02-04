@@ -55,6 +55,8 @@ async function fetchApi(endpoint, options) {
     try {
         const response = await fetch(url, {
             ...options,
+            // Ensure cookies are sent from the browser so auth works on deployed sites
+            credentials: ("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : options?.credentials,
             headers: {
                 'Content-Type': 'application/json',
                 ...options?.headers
@@ -120,6 +122,17 @@ const perfumeApi = {
                 discount
             })
         });
+    },
+    async toggleMostSold (id) {
+        return fetchApi(`/perfumes/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                action: 'toggleMostSold'
+            })
+        });
+    },
+    async getAllForMostSoldAdmin () {
+        return fetchApi('/perfumes?endpoint=all-for-most-sold-admin');
     }
 };
 const categoryApi = {
@@ -412,7 +425,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$app$2f
 ;
 async function generateStaticParams() {
     const res = await __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["categoryApi"].getAll();
-    if (!res.success) return [];
+    if (!res.success || !res.data) return [];
     return res.data.map((category)=>({
             slug: category.slug
         }));
@@ -456,7 +469,7 @@ async function CategoryPage({ params, searchParams }) {
         categoryId: category.id,
         brandId: brandParam || undefined
     });
-    const result = perfumesRes.success ? perfumesRes.data : {
+    const result = perfumesRes.success && perfumesRes.data ? perfumesRes.data : {
         data: [],
         total: 0,
         page: 1,
@@ -471,7 +484,7 @@ async function CategoryPage({ params, searchParams }) {
                 subtitle: category.description || `عرض جميع العطور في تصنيف ${category.name}`
             }, void 0, false, {
                 fileName: "[project]/apps/web/src/app/(public)/category/[slug]/page.tsx",
-                lineNumber: 77,
+                lineNumber: 79,
                 columnNumber: 7
             }, this),
             result.data.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$components$2f$ui$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["EmptyState"], {
@@ -479,7 +492,7 @@ async function CategoryPage({ params, searchParams }) {
                 message: `لا توجد عطور متاحة في تصنيف ${category.name} حالياً`
             }, void 0, false, {
                 fileName: "[project]/apps/web/src/app/(public)/category/[slug]/page.tsx",
-                lineNumber: 83,
+                lineNumber: 85,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Fragment"], {
                 children: [
@@ -487,7 +500,7 @@ async function CategoryPage({ params, searchParams }) {
                         perfumes: result.data
                     }, void 0, false, {
                         fileName: "[project]/apps/web/src/app/(public)/category/[slug]/page.tsx",
-                        lineNumber: 89,
+                        lineNumber: 91,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$app$2f28$public$292f$category$2f5b$slug$5d2f$CategoryPagination$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["CategoryPagination"], {
@@ -496,7 +509,7 @@ async function CategoryPage({ params, searchParams }) {
                         slug: slug
                     }, void 0, false, {
                         fileName: "[project]/apps/web/src/app/(public)/category/[slug]/page.tsx",
-                        lineNumber: 90,
+                        lineNumber: 92,
                         columnNumber: 11
                     }, this)
                 ]
@@ -504,7 +517,7 @@ async function CategoryPage({ params, searchParams }) {
         ]
     }, void 0, true, {
         fileName: "[project]/apps/web/src/app/(public)/category/[slug]/page.tsx",
-        lineNumber: 76,
+        lineNumber: 78,
         columnNumber: 5
     }, this);
 // end of CategoryPage

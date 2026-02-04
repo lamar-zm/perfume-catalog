@@ -8,41 +8,25 @@ import {
   Stack,
   NavLink,
   Box,
-  Menu,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { IconHome, IconCategory, IconSparkles } from '@tabler/icons-react';
+import { IconHome, IconCategory, IconSparkles, IconDiscount, IconBuildingStore } from '@tabler/icons-react';
 import classes from './Header.module.css';
-import { useEffect, useState } from 'react';
-import { brandApi } from '@/services';
-import type { Brand } from '@perfume-catalog/shared';
 
 const navLinks = [
   { href: '/', label: 'الرئيسية', icon: IconHome },
   { href: '/categories', label: 'التصنيفات', icon: IconCategory },
+  { href: '/brands', label: 'الماركات', icon: IconBuildingStore },
   { href: '/most-sold', label: 'الأكثر مبيعاً', icon: IconSparkles },
+  { href: '/discounts', label: 'العروض و التخفيضات', icon: IconDiscount },
 ];
 
 export function Header() {
   const [opened, { toggle, close }] = useDisclosure(false);
   const pathname = usePathname();
-  const [brands, setBrands] = useState<Brand[]>([]);
-
-  useEffect(() => {
-    let mounted = true;
-    const fetchBrands = async () => {
-      try {
-        const res = await brandApi.getAll();
-        if (mounted && res.success && res.data) setBrands(res.data);
-      } catch (e) {
-      }
-    };
-    fetchBrands();
-    return () => { mounted = false; };
-  }, []);
 
   return (
     <Box component="header" className={classes.header} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -69,27 +53,6 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-
-            {/* Brands menu */}
-            <Menu withinPortal>
-              <Menu.Target>
-                <a className={classes.navLink}>البراندات</a>
-              </Menu.Target>
-              <Menu.Dropdown>
-                {brands.length === 0 ? (
-                  <Menu.Item disabled>تحميل...</Menu.Item>
-                ) : (
-                  brands.slice(0, 10).map((b) => (
-                    <Menu.Item key={b.id} component={Link} href={`/brand/${b.slug}`}>
-                      {b.name}
-                    </Menu.Item>
-                  ))
-                )}
-                {brands.length > 10 && (
-                  <Menu.Item component={Link} href="/brands">المزيد...</Menu.Item>
-                )}
-              </Menu.Dropdown>
-            </Menu>
           </Group>
 
           {/* Mobile Menu Button */}
@@ -110,11 +73,6 @@ export function Header() {
               active={pathname === link.href}
               onClick={close}
             />
-          ))}
-
-          <NavLink label=" البراندات" />
-          {brands.map((b) => (
-            <NavLink key={b.id} component={Link} href={`/brand/${b.slug}`} label={b.name} onClick={close} />
           ))}
         </Stack>
       </Drawer>

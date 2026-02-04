@@ -108,6 +108,17 @@ export const perfumeApi = {
       body: JSON.stringify({ action: 'updateDiscount', discount }),
     });
   },
+
+  async toggleMostSold(id: string): Promise<ApiResponse<Perfume>> {
+    return fetchApi<Perfume>(`/perfumes/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ action: 'toggleMostSold' }),
+    });
+  },
+
+  async getAllForMostSoldAdmin(): Promise<ApiResponse<Perfume[]>> {
+    return fetchApi<Perfume[]>('/perfumes?endpoint=all-for-most-sold-admin');
+  },
 };
 
 // ============================================

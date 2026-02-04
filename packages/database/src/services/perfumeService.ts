@@ -33,7 +33,7 @@ function rowToPerfume(row: any): Perfume {
     brandId: row.brand_id || '',
     images: getPerfumeImages(row.id),
     notes,
-    // isFeatured: row.is_featured === 1, // Removed to match Perfume type
+    isMostSold: row.is_featured === 1,
     salesCount: row.sales_count || 0,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
@@ -76,11 +76,6 @@ export const perfumeService = {
       whereClause += ' AND brand_id = ?';
       queryParams.push(filters.brandId);
     }
-
-    // if (filters?.isFeatured !== undefined) {
-    //   whereClause += ' AND is_featured = ?';
-    //   queryParams.push(filters.isFeatured ? 1 : 0);
-    // }
 
     if (filters?.hasDiscount) {
       whereClause += ' AND discount > 0';
@@ -129,16 +124,18 @@ export const perfumeService = {
   },
 
   getMostSold(limit: number = 8): Perfume[] {
+    // Get perfumes marked as "most sold" first, then by sales count
     const rows = db.prepare(
-      'SELECT * FROM perfumes ORDER BY sales_count DESC LIMIT ?'
+      'SELECT * FROM perfumes WHERE is_featured = 1 ORDER BY sales_count DESC LIMIT ?'
     ).all(limit);
     return rows.map(rowToPerfume);
   },
 
-  getFeatured(limit: number = 8): Perfume[] {
+  getAllForMostSoldAdmin(): Perfume[] {
+    // Get all perfumes for admin to toggle most sold status
     const rows = db.prepare(
-      'SELECT * FROM perfumes WHERE is_featured = 1 LIMIT ?'
-    ).all(limit);
+      'SELECT * FROM perfumes ORDER BY is_featured DESC, sales_count DESC'
+    ).all();
     return rows.map(rowToPerfume);
   },
 
@@ -254,19 +251,19 @@ export const perfumeService = {
     return this.getById(id);
   },
 
-  // toggleFeatured(id: string): Perfume | null {
-  //   const existing = this.getById(id);
-  //   if (!existing) return null;
+  toggleMostSold(id: string): Perfume | null {
+    const existing = this.getById(id);
+    if (!existing) return null;
 
-  //   const now = new Date().toISOString();
-  //   // const newFeatured = existing.isFeatured ? 0 : 1;
+    const now = new Date().toISOString();
+    const newValue = existing.isMostSold ? 0 : 1;
 
-  //   db.prepare(`
-  //     UPDATE perfumes SET is_featured = ?, updated_at = ? WHERE id = ?
-  //   `).run(newFeatured, now, id);
+    db.prepare(`
+      UPDATE perfumes SET is_featured = ?, updated_at = ? WHERE id = ?
+    `).run(newValue, now, id);
 
-  //   return this.getById(id);
-  // },
+    return this.getById(id);
+  },
 
   delete(id: string): boolean {
     // Images will be deleted by CASCADE

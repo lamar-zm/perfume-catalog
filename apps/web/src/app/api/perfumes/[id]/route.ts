@@ -116,7 +116,7 @@ export async function DELETE(
   }
 }
 
-// PATCH /api/perfumes/[id] - Partial update (toggle featured, update discount)
+// PATCH /api/perfumes/[id] - Partial update (toggle most sold, update discount)
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -145,6 +145,10 @@ export async function PATCH(
         );
       }
       updated = perfumeService.updateDiscount(id, body.discount);
+    }
+    // Toggle most sold
+    else if (body.action === 'toggleMostSold') {
+      updated = perfumeService.toggleMostSold(id);
     }
     // Regular partial update
     else {

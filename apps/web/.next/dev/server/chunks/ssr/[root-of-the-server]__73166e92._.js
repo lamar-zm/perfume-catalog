@@ -55,6 +55,8 @@ async function fetchApi(endpoint, options) {
     try {
         const response = await fetch(url, {
             ...options,
+            // Ensure cookies are sent from the browser so auth works on deployed sites
+            credentials: ("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : options?.credentials,
             headers: {
                 'Content-Type': 'application/json',
                 ...options?.headers
@@ -120,6 +122,17 @@ const perfumeApi = {
                 discount
             })
         });
+    },
+    async toggleMostSold (id) {
+        return fetchApi(`/perfumes/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                action: 'toggleMostSold'
+            })
+        });
+    },
+    async getAllForMostSoldAdmin () {
+        return fetchApi('/perfumes?endpoint=all-for-most-sold-admin');
     }
 };
 const categoryApi = {
@@ -376,8 +389,8 @@ async function MostSoldPage() {
         __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["perfumeApi"].getMostSold(100),
         __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["categoryApi"].getAll()
     ]);
-    const mostSold = mostSoldRes.success ? mostSoldRes.data : [];
-    const categories = categoriesRes.success ? categoriesRes.data : [];
+    const mostSold = mostSoldRes.success && mostSoldRes.data ? mostSoldRes.data : [];
+    const categories = categoriesRes.success && categoriesRes.data ? categoriesRes.data : [];
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$components$2f$ui$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["SectionHeader"], {

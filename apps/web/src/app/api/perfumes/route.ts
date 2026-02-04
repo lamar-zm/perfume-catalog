@@ -28,7 +28,13 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    // remove featured endpoint - most-sold handled separately
+    if (endpoint === 'all-for-most-sold-admin') {
+      const data = perfumeService.getAllForMostSoldAdmin();
+      return NextResponse.json<ApiResponse<Perfume[]>>({
+        success: true,
+        data,
+      });
+    }
 
     if (endpoint === 'discounted') {
       const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : undefined;

@@ -193,6 +193,17 @@ const perfumeApi = {
                 discount
             })
         });
+    },
+    async toggleMostSold (id) {
+        return fetchApi(`/perfumes/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                action: 'toggleMostSold'
+            })
+        });
+    },
+    async getAllForMostSoldAdmin () {
+        return fetchApi('/perfumes?endpoint=all-for-most-sold-admin');
     }
 };
 const categoryApi = {

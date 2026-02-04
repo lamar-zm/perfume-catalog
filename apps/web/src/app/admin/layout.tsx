@@ -33,6 +33,7 @@ const navLinks = [
   { href: '/admin/perfumes', label: 'العطور', icon: IconBottle },
   { href: '/admin/categories', label: 'التصنيفات', icon: IconCategory },
   { href: '/admin/brands', label: 'الماركات', icon: IconBuildingStore },
+  { href: '/admin/featured', label: 'الأكثر مبيعاً', icon: IconSparkles },
   { href: '/admin/discounts', label: 'التخفيضات', icon: IconDiscount },
 ];
 

@@ -151,6 +151,13 @@
   background-color: #f4e4e6;
 }
 
+.Header-module__5Cu8Tq__socialLink {
+  padding: var(--mantine-spacing-xs);
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+}
+
 /* [project]/apps/web/src/components/layout/Footer.module.css [app-client] (css) */
 .Footer-module__oORJuq__footer {
   background-color: var(--mantine-color-cyan-6, #33cfe0);

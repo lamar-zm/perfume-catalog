@@ -122,6 +122,17 @@ const perfumeApi = {
                 discount
             })
         });
+    },
+    async toggleMostSold (id) {
+        return fetchApi(`/perfumes/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                action: 'toggleMostSold'
+            })
+        });
+    },
+    async getAllForMostSoldAdmin () {
+        return fetchApi('/perfumes?endpoint=all-for-most-sold-admin');
     }
 };
 const categoryApi = {
@@ -367,10 +378,13 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$compon
 
 __turbopack_context__.s([
     "BrandCard",
-    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$components$2f$brand$2f$BrandCard$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["BrandCard"]
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$components$2f$brand$2f$BrandCard$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["BrandCard"],
+    "BrandGrid",
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$components$2f$brand$2f$BrandGrid$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["BrandGrid"]
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$components$2f$brand$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/apps/web/src/components/brand/index.ts [app-rsc] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$components$2f$brand$2f$BrandCard$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/apps/web/src/components/brand/BrandCard.tsx [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$components$2f$brand$2f$BrandGrid$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/apps/web/src/components/brand/BrandGrid.tsx [app-rsc] (ecmascript)");
 }),
 "[project]/apps/web/src/app/(public)/HeroSection.tsx [app-rsc] (client reference proxy) <module evaluation>", ((__turbopack_context__) => {
 "use strict";
@@ -531,7 +545,9 @@ async function HomePage() {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$components$2f$ui$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["SectionHeader"], {
                         title: "🔥 عروض وتخفيضات",
-                        subtitle: "لا تفوت فرصة الحصول على أفضل العطور بأسعار مميزة"
+                        subtitle: "لا تفوت فرصة الحصول على أفضل العطور بأسعار مميزة",
+                        viewAllLink: "/discounts",
+                        viewAllText: "عرض المزيد"
                     }, void 0, false, {
                         fileName: "[project]/apps/web/src/app/(public)/page.tsx",
                         lineNumber: 71,
@@ -543,7 +559,7 @@ async function HomePage() {
                         showCategory: true
                     }, void 0, false, {
                         fileName: "[project]/apps/web/src/app/(public)/page.tsx",
-                        lineNumber: 75,
+                        lineNumber: 77,
                         columnNumber: 11
                     }, this)
                 ]
@@ -559,7 +575,7 @@ async function HomePage() {
                         subtitle: "أشهر دور العطور العالمية والعربية"
                     }, void 0, false, {
                         fileName: "[project]/apps/web/src/app/(public)/page.tsx",
-                        lineNumber: 85,
+                        lineNumber: 87,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$SimpleGrid$2f$SimpleGrid$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["SimpleGrid"], {
@@ -574,18 +590,18 @@ async function HomePage() {
                                 brand: brand
                             }, brand.id, false, {
                                 fileName: "[project]/apps/web/src/app/(public)/page.tsx",
-                                lineNumber: 91,
+                                lineNumber: 93,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/apps/web/src/app/(public)/page.tsx",
-                        lineNumber: 89,
+                        lineNumber: 91,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/web/src/app/(public)/page.tsx",
-                lineNumber: 84,
+                lineNumber: 86,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$core$2f$Box$2f$Box$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Box"], {
@@ -597,7 +613,7 @@ async function HomePage() {
                         viewAllText: "تصفح جميع العطور"
                     }, void 0, false, {
                         fileName: "[project]/apps/web/src/app/(public)/page.tsx",
-                        lineNumber: 100,
+                        lineNumber: 102,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$components$2f$perfume$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["PerfumeGrid"], {
@@ -606,13 +622,13 @@ async function HomePage() {
                         showCategory: true
                     }, void 0, false, {
                         fileName: "[project]/apps/web/src/app/(public)/page.tsx",
-                        lineNumber: 106,
+                        lineNumber: 108,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/web/src/app/(public)/page.tsx",
-                lineNumber: 99,
+                lineNumber: 101,
                 columnNumber: 7
             }, this)
         ]

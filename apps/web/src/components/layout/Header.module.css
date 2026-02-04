@@ -36,3 +36,10 @@
   background-color: #f4e4e6;
   color: #7d3440;
 }
+
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mantine-spacing-xs);
+}

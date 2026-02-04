@@ -71,6 +71,8 @@ export default async function HomePage() {
           <SectionHeader
             title="🔥 عروض وتخفيضات"
             subtitle="لا تفوت فرصة الحصول على أفضل العطور بأسعار مميزة"
+            viewAllLink="/discounts"
+            viewAllText="عرض المزيد"
           />
           <PerfumeGrid
             perfumes={discounted}

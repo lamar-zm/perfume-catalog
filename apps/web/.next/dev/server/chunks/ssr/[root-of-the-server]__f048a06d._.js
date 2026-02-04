@@ -55,6 +55,8 @@ async function fetchApi(endpoint, options) {
     try {
         const response = await fetch(url, {
             ...options,
+            // Ensure cookies are sent from the browser so auth works on deployed sites
+            credentials: ("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : options?.credentials,
             headers: {
                 'Content-Type': 'application/json',
                 ...options?.headers
@@ -120,6 +122,17 @@ const perfumeApi = {
                 discount
             })
         });
+    },
+    async toggleMostSold (id) {
+        return fetchApi(`/perfumes/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                action: 'toggleMostSold'
+            })
+        });
+    },
+    async getAllForMostSoldAdmin () {
+        return fetchApi('/perfumes?endpoint=all-for-most-sold-admin');
     }
 };
 const categoryApi = {

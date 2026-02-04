@@ -13,15 +13,18 @@ import {
   Badge,
   ActionIcon,
   Tooltip,
+  Button,
 } from '@mantine/core';
 import {
   IconBottle,
   IconCategory,
   IconTrendingUp,
   IconDiscount,
-  
+  IconSparkles,
+  IconSettings,
 } from '@tabler/icons-react';
 import { notifications } from '@mantine/notifications';
+import Link from 'next/link';
 import { perfumeApi, categoryApi } from '@/services';
 import { Perfume, Category } from '@/types';
 import { LoadingState } from '@/components';
@@ -31,6 +34,7 @@ interface DashboardStats {
   totalCategories: number;
   totalSales: number;
   discountedCount: number;
+  mostSoldCount: number;
 }
 
 export default function AdminDashboardPage() {
@@ -40,6 +44,7 @@ export default function AdminDashboardPage() {
     totalCategories: 0,
     totalSales: 0,
     discountedCount: 0,
+    mostSoldCount: 0,
   });
   const [mostSold, setMostSold] = useState<Perfume[]>([]);
   const [discounted, setDiscounted] = useState<Perfume[]>([]);
@@ -70,11 +75,15 @@ export default function AdminDashboardPage() {
         0
       );
 
+      // Count perfumes marked as most sold
+      const mostSoldCount = allPerfumes.data.filter(p => p.isMostSold).length;
+
       setStats({
         totalPerfumes: allPerfumes.total,
         totalCategories: allCategories.length,
         totalSales,
         discountedCount: discountedPerfumes.length,
+        mostSoldCount,
       });
       setMostSold(topSold);
       setDiscounted(discountedPerfumes.slice(0, 5));
@@ -165,13 +174,38 @@ export default function AdminDashboardPage() {
             </div>
           </Group>
         </Paper>
+
+        <Paper p="md" radius="md" withBorder>
+          <Group>
+            <ThemeIcon size="xl" radius="md" variant="light" color="grape">
+              <IconSparkles size={24} />
+            </ThemeIcon>
+            <div>
+              <Text size="xs" c="dimmed">
+                الأكثر مبيعاً
+              </Text>
+              <Text fw={700} size="xl">
+                {stats.mostSoldCount}
+              </Text>
+            </div>
+          </Group>
+        </Paper>
       </SimpleGrid>
 
       {/* Most Sold Perfumes */}
       <Paper p="md" radius="md" withBorder>
-        <Title order={4} mb="md">
-          الأكثر مبيعاً
-        </Title>
+        <Group justify="space-between" mb="md">
+          <Title order={4}>الأكثر مبيعاً</Title>
+          <Button
+            component={Link}
+            href="/admin/featured"
+            variant="light"
+            size="sm"
+            leftSection={<IconSettings size={16} />}
+          >
+            إدارة الأكثر مبيعاً
+          </Button>
+        </Group>
         <Table striped highlightOnHover>
           <Table.Thead>
             <Table.Tr>

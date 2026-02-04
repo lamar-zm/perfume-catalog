@@ -397,7 +397,7 @@ function rowToPerfume(row) {
         brandId: row.brand_id || '',
         images: getPerfumeImages(row.id),
         notes,
-        // isFeatured: row.is_featured === 1, // Removed to match Perfume type
+        isMostSold: row.is_featured === 1,
         salesCount: row.sales_count || 0,
         createdAt: row.created_at,
         updatedAt: row.updated_at
@@ -429,10 +429,6 @@ const perfumeService = {
             whereClause += ' AND brand_id = ?';
             queryParams.push(filters.brandId);
         }
-        // if (filters?.isFeatured !== undefined) {
-        //   whereClause += ' AND is_featured = ?';
-        //   queryParams.push(filters.isFeatured ? 1 : 0);
-        // }
         if (filters?.hasDiscount) {
             whereClause += ' AND discount > 0';
         }
@@ -471,11 +467,13 @@ const perfumeService = {
         return row ? rowToPerfume(row) : null;
     },
     getMostSold (limit = 8) {
-        const rows = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].prepare('SELECT * FROM perfumes ORDER BY sales_count DESC LIMIT ?').all(limit);
+        // Get perfumes marked as "most sold" first, then by sales count
+        const rows = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].prepare('SELECT * FROM perfumes WHERE is_featured = 1 ORDER BY sales_count DESC LIMIT ?').all(limit);
         return rows.map(rowToPerfume);
     },
-    getFeatured (limit = 8) {
-        const rows = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].prepare('SELECT * FROM perfumes WHERE is_featured = 1 LIMIT ?').all(limit);
+    getAllForMostSoldAdmin () {
+        // Get all perfumes for admin to toggle most sold status
+        const rows = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].prepare('SELECT * FROM perfumes ORDER BY is_featured DESC, sales_count DESC').all();
         return rows.map(rowToPerfume);
     },
     getDiscounted (limit) {
@@ -542,16 +540,16 @@ const perfumeService = {
     `).run(discount, finalPrice, now, id);
         return this.getById(id);
     },
-    // toggleFeatured(id: string): Perfume | null {
-    //   const existing = this.getById(id);
-    //   if (!existing) return null;
-    //   const now = new Date().toISOString();
-    //   // const newFeatured = existing.isFeatured ? 0 : 1;
-    //   db.prepare(`
-    //     UPDATE perfumes SET is_featured = ?, updated_at = ? WHERE id = ?
-    //   `).run(newFeatured, now, id);
-    //   return this.getById(id);
-    // },
+    toggleMostSold (id) {
+        const existing = this.getById(id);
+        if (!existing) return null;
+        const now = new Date().toISOString();
+        const newValue = existing.isMostSold ? 0 : 1;
+        __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].prepare(`
+      UPDATE perfumes SET is_featured = ?, updated_at = ? WHERE id = ?
+    `).run(newValue, now, id);
+        return this.getById(id);
+    },
     delete (id) {
         // Images will be deleted by CASCADE
         const result = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].prepare('DELETE FROM perfumes WHERE id = ?').run(id);
@@ -693,7 +691,13 @@ async function GET(request) {
                 data
             });
         }
-        // remove featured endpoint - most-sold handled separately
+        if (endpoint === 'all-for-most-sold-admin') {
+            const data = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$services$2f$perfumeService$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["perfumeService"].getAllForMostSoldAdmin();
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                success: true,
+                data
+            });
+        }
         if (endpoint === 'discounted') {
             const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')) : undefined;
             const data = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$services$2f$perfumeService$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["perfumeService"].getDiscounted(limit);

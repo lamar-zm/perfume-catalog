@@ -16,6 +16,7 @@ export interface Perfume {
   notes: string[]; // نوع العطر - e.g., ["oud", "wood", "vanilla"]
   coverImage?: string;
   outOfStock?: boolean;
+  isMostSold?: boolean;
   salesCount: number;
   createdAt: string;
   updatedAt: string;

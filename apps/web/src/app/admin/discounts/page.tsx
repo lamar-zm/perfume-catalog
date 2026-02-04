@@ -52,7 +52,7 @@ export default function AdminDiscountsPage() {
     }
   };
 
-  const handleUpdateDiscount = async (perfumeId: string, discount: number | undefined) => {
+  const handleUpdateDiscount = async (perfumeId: string, discount: number) => {
     try {
       const res = await perfumeApi.update(perfumeId, { discount });
       if (res.success) {
@@ -60,7 +60,7 @@ export default function AdminDiscountsPage() {
         setEditingDiscount(null);
         notifications.show({
           title: 'تم التحديث',
-          message: discount ? 'تم تحديث الخصم بنجاح' : 'تم إزالة الخصم',
+          message: discount > 0 ? 'تم تحديث الخصم بنجاح' : 'تم إزالة الخصم',
           color: 'green',
         });
       } else {
@@ -76,7 +76,7 @@ export default function AdminDiscountsPage() {
   };
 
   const handleRemoveDiscount = async (perfumeId: string) => {
-    await handleUpdateDiscount(perfumeId, undefined);
+    await handleUpdateDiscount(perfumeId, 0);
   };
 
   const getCategoryName = (categoryId: string | null | undefined) => {

@@ -2,7 +2,7 @@
 
 import { Container, Text, Group, Stack, Anchor, Divider, Box } from '@mantine/core';
 import Link from 'next/link';
-import { IconBrandInstagram, IconBrandTiktok, IconBrandWhatsapp } from '@tabler/icons-react';
+import { IconBrandInstagram, IconBrandTiktok, IconBrandWhatsapp, IconBrandFacebook } from '@tabler/icons-react';
 import classes from './Footer.module.css';
 
 const footerLinks = [
@@ -44,11 +44,14 @@ export function Footer() {
                 <Anchor href="https://www.instagram.com/roshoosh.iq?igsh=MTdkOTdkajdvOWFwYg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>
                   <IconBrandInstagram size={24} />
                 </Anchor>
-                <Anchor href="https://www.tiktok.com/@roshoosh.iq" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>
+                <Anchor href="https://www.tiktok.com/@roshoosh.perfume?_r=1&_t=ZS-93X4w2lxZLR" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>
                   <IconBrandTiktok size={24} />
                 </Anchor>
                 <Anchor href="https://api.whatsapp.com/send?phone=07801454148" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>
                   <IconBrandWhatsapp size={24} />
+                </Anchor>
+                <Anchor href="https://www.facebook.com/share/1TmFKxNSKu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>
+                  <IconBrandFacebook size={24} />
                 </Anchor>
               </Group>
             </Stack>

@@ -188,9 +188,6 @@ async function seed() {
     // Random sales count
     const salesCount = Math.floor(Math.random() * 500);
     
-    // Random featured (20% chance)
-    const isFeatured = Math.random() < 0.2;
-    
     // Random number of images (1-5)
     const imageCount = Math.floor(Math.random() * 5) + 1;
     
@@ -201,7 +198,6 @@ async function seed() {
       discount,
       categoryId: category.id,
       brandId: brand.id,
-      isFeatured,
       salesCount,
       images: generateImageUrls(`perf-${i}`, imageCount),
       notes: generateNotes(),
