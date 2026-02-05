@@ -1,6 +1,2 @@
-[00:00:00.668] Server  LOG     ✓ Ready in 487ms
-[00:03:16.055] Server  LOG     ✅ Added gender column to perfumes table
-[00:03:16.055] Server  LOG     ✅ Added cover_image column to perfumes table
-[00:03:16.056] Server  LOG     ✅ Added out_of_stock column to perfumes table
-[00:03:16.056] Server  LOG     ✅ Database initialized successfully
-[00:03:28.128] Server  LOG     ✅ Database initialized successfully
+[00:00:00.922] Server  LOG     ✓ Ready in 701ms
+[00:00:02.770] Server  LOG     ✅ Database initialized successfully
