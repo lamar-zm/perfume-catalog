@@ -110,14 +110,6 @@ export default function AdminLoginPage() {
                 </Button>
               </Stack>
             </form>
-
-            <Text size="xs" c="dimmed" ta="center">
-              بيانات الدخول التجريبية:
-              <br />
-              البريد: admin@email.com
-              <br />
-              كلمة المرور: 123456
-            </Text>
           </Stack>
         </Paper>
       </Box>

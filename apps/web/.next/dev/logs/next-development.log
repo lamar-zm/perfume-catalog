@@ -1,14 +1,6 @@
-[00:00:00.940] Server  LOG     ✓ Ready in 710ms
-[00:00:04.078] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
-[00:00:04.100] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
-[00:00:04.123] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
-[00:00:04.137] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
-[00:00:04.148] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
-[00:00:04.274] Server  ERROR   ⨯ SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
-[00:00:04.340] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
-[00:00:04.351] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
-[00:00:04.367] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
-[00:00:04.376] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
-[00:00:04.385] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
-[00:00:04.410] Server  ERROR   ⨯ SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
-[00:00:04.689] Browser ERROR   uncaughtError: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+[00:00:00.668] Server  LOG     ✓ Ready in 487ms
+[00:03:16.055] Server  LOG     ✅ Added gender column to perfumes table
+[00:03:16.055] Server  LOG     ✅ Added cover_image column to perfumes table
+[00:03:16.056] Server  LOG     ✅ Added out_of_stock column to perfumes table
+[00:03:16.056] Server  LOG     ✅ Database initialized successfully
+[00:03:28.128] Server  LOG     ✅ Database initialized successfully

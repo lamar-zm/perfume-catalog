@@ -1,6 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { authService } from '@perfume-catalog/database';
 import type { ApiResponse, AuthResponse } from '@perfume-catalog/shared';
+
+// Static admin credentials
+const ADMIN_EMAIL = 'admin@email.com';
+const ADMIN_PASSWORD = '123456';
+const ADMIN_USER = {
+  id: 'admin-1',
+  email: ADMIN_EMAIL,
+  displayName: 'مدير النظام',
+  role: 'superadmin' as const,
+  createdAt: new Date().toISOString(),
+};
 
 // POST /api/auth - Login
 export async function POST(request: NextRequest) {
@@ -14,17 +24,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const result = await authService.signIn({
-      email: body.email,
-      password: body.password,
-    });
-
-    if (!result.success) {
+    // Static credential check
+    if (body.email !== ADMIN_EMAIL || body.password !== ADMIN_PASSWORD) {
       return NextResponse.json<ApiResponse<never>>(
-        { success: false, error: result.error },
+        { success: false, error: 'البريد الإلكتروني أو كلمة المرور غير صحيحة' },
         { status: 401 }
       );
     }
+
+    // Generate a simple token
+    const token = Buffer.from(`${ADMIN_USER.id}:${Date.now()}`).toString('base64');
+
+    const result: AuthResponse = {
+      success: true,
+      user: ADMIN_USER,
+      token,
+    };
 
     // Set auth token in cookie
     const response = NextResponse.json<ApiResponse<AuthResponse>>({
@@ -34,7 +49,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Set HTTP-only cookie with token
-    response.cookies.set('auth_token', result.token!, {
+    response.cookies.set('auth_token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
@@ -64,18 +79,26 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const admin = authService.validateToken(token);
-
-    if (!admin) {
+    // Validate token (simple check - token should contain admin-1)
+    try {
+      const decoded = Buffer.from(token, 'base64').toString('utf-8');
+      const [adminId] = decoded.split(':');
+      if (adminId !== 'admin-1') {
+        return NextResponse.json<ApiResponse<never>>(
+          { success: false, error: 'جلسة غير صالحة' },
+          { status: 401 }
+        );
+      }
+    } catch {
       return NextResponse.json<ApiResponse<never>>(
         { success: false, error: 'جلسة غير صالحة' },
         { status: 401 }
       );
     }
 
-    return NextResponse.json<ApiResponse<typeof admin>>({
+    return NextResponse.json<ApiResponse<typeof ADMIN_USER>>({
       success: true,
-      data: admin,
+      data: ADMIN_USER,
     });
   } catch (error) {
     console.error('Error getting current user:', error);

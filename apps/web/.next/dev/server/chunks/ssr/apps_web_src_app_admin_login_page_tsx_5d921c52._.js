@@ -173,30 +173,6 @@ function AdminLoginPage() {
                             fileName: "[project]/apps/web/src/app/admin/login/page.tsx",
                             lineNumber: 88,
                             columnNumber: 13
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Text"], {
-                            size: "xs",
-                            c: "dimmed",
-                            ta: "center",
-                            children: [
-                                "بيانات الدخول التجريبية:",
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
-                                    fileName: "[project]/apps/web/src/app/admin/login/page.tsx",
-                                    lineNumber: 116,
-                                    columnNumber: 15
-                                }, this),
-                                "البريد: admin@email.com",
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
-                                    fileName: "[project]/apps/web/src/app/admin/login/page.tsx",
-                                    lineNumber: 118,
-                                    columnNumber: 15
-                                }, this),
-                                "كلمة المرور: 123456"
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/apps/web/src/app/admin/login/page.tsx",
-                            lineNumber: 114,
-                            columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
