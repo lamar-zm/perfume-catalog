@@ -1,10 +1,12 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Stack, Box, Image, Text, Group, Badge } from '@mantine/core';
-import { brandApi, perfumeApi, categoryApi } from '@/services';
 import { PerfumeGrid, SectionHeader, EmptyState } from '@/components';
 import { BrandPagination } from './BrandPagination';
-import { brandService } from '@perfume-catalog/database';
+import { brandService, perfumeService, categoryService } from '@perfume-catalog/database';
+
+// Force dynamic rendering for pages with pagination
+export const dynamic = 'force-dynamic';
 
 interface BrandPageProps {
   params: Promise<{ slug: string }>;
@@ -26,19 +28,18 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for each brand
+// Using direct database access for static generation
 export async function generateMetadata({
   params,
 }: BrandPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const res = await brandApi.getBySlug(slug);
+  const brand = brandService.getBySlug(slug);
 
-  if (!res.success || !res.data) {
+  if (!brand) {
     return {
       title: 'الماركة غير موجودة',
     };
   }
-
-  const brand = res.data;
 
   return {
     title: brand.name,
@@ -60,29 +61,23 @@ export default async function BrandPage({
   const { slug } = await params;
   const { page: pageParam } = await searchParams;
   
-  const brandRes = await brandApi.getBySlug(slug);
+  // Using direct database access for static generation
+  const brand = brandService.getBySlug(slug);
 
-  if (!brandRes.success || !brandRes.data) {
+  if (!brand) {
     notFound();
   }
 
-  const brand = brandRes.data;
   const currentPage = parseInt(pageParam || '1', 10);
   
-  // Fetch perfumes for this brand
-  const perfumesRes = await perfumeApi.getAll({
-    page: currentPage,
-    pageSize: PAGE_SIZE,
-    brandId: brand.id,
-  });
+  // Fetch perfumes for this brand using direct database access
+  const result = perfumeService.getAll(
+    { page: currentPage, pageSize: PAGE_SIZE },
+    { brandId: brand.id }
+  );
 
-  // Fetch categories for display
-  const categoriesRes = await categoryApi.getAll();
-  const categories = categoriesRes.success ? categoriesRes.data : [];
-
-  const result = perfumesRes.success && perfumesRes.data
-    ? perfumesRes.data
-    : { data: [], total: 0, page: 1, pageSize: PAGE_SIZE, totalPages: 0 };
+  // Fetch categories for display using direct database access
+  const categories = categoryService.getAll();
 
   return (
     <Stack gap="xl">

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { Stack } from '@mantine/core';
-import { categoryApi } from '@/services';
 import { CategoryGrid, SectionHeader } from '@/components';
+import { categoryService } from '@perfume-catalog/database';
 
 export const metadata: Metadata = {
   title: 'التصنيفات',
@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default async function CategoriesPage() {
-  const res = await categoryApi.getAll();
-  const categories = res.success && res.data ? res.data : [];
+  // Using direct database access for static generation
+  const categories = categoryService.getAll();
 
   return (
     <Stack gap="xl">

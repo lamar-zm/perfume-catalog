@@ -1,4 +1,14 @@
-[00:00:00.449] Server  LOG     ✓ Ready in 331ms
-[00:00:01.597] Server  LOG     ✅ Database initialized successfully
-[00:00:05.489] Server  WARN    ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
-[00:00:51.877] Server  LOG     ✓ Compiled in 103ms
+[00:00:00.940] Server  LOG     ✓ Ready in 710ms
+[00:00:04.078] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
+[00:00:04.100] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
+[00:00:04.123] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
+[00:00:04.137] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
+[00:00:04.148] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
+[00:00:04.274] Server  ERROR   ⨯ SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+[00:00:04.340] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
+[00:00:04.351] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
+[00:00:04.367] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
+[00:00:04.376] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
+[00:00:04.385] Server  ERROR   ⨯ Error: EACCES: permission denied, mkdir '/var/www/perfume-catalog/data'
+[00:00:04.410] Server  ERROR   ⨯ SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+[00:00:04.689] Browser ERROR   uncaughtError: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-import { perfumeApi, categoryApi } from '@/services';
 import { PerfumeGrid, SectionHeader } from '@/components';
+import { perfumeService, categoryService } from '@perfume-catalog/database';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -10,13 +10,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function MostSoldPage() {
-  const [mostSoldRes, categoriesRes] = await Promise.all([
-    perfumeApi.getMostSold(100),
-    categoryApi.getAll(),
-  ]);
-
-  const mostSold = mostSoldRes.success && mostSoldRes.data ? mostSoldRes.data : [];
-  const categories = categoriesRes.success && categoriesRes.data ? categoriesRes.data : [];
+  // Using direct database access for static generation
+  const mostSold = perfumeService.getMostSold(100);
+  const categories = categoryService.getAll();
 
   return (
     <div>

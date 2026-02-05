@@ -1,11 +1,13 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Stack } from '@mantine/core';
-import { categoryApi, perfumeApi } from '@/services';
 import { PerfumeGrid, SectionHeader, Pagination, EmptyState } from '@/components';
 import { BrandFilter } from '@/components/filters/BrandFilter';
 import { CategoryPagination } from './CategoryPagination';
-import { categoryService } from '@perfume-catalog/database';
+import { categoryService, perfumeService } from '@perfume-catalog/database';
+
+// Force dynamic rendering for pages with pagination/filters
+export const dynamic = 'force-dynamic';
 
 interface CategoryPageProps {
   params: Promise<{ slug: string }>;
@@ -27,19 +29,18 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for each category
+// Using direct database access for static generation
 export async function generateMetadata({
   params,
 }: CategoryPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const res = await categoryApi.getBySlug(slug);
+  const category = categoryService.getBySlug(slug);
 
-  if (!res.success || !res.data) {
+  if (!category) {
     return {
       title: 'التصنيف غير موجود',
     };
   }
-
-  const category = res.data;
 
   return {
     title: category.name,
@@ -61,24 +62,20 @@ export default async function CategoryPage({
   const { slug } = await params;
   const { page: pageParam, brand: brandParam } = await searchParams;
   
-  const categoryRes = await categoryApi.getBySlug(slug);
+  // Using direct database access for static generation
+  const category = categoryService.getBySlug(slug);
 
-  if (!categoryRes.success || !categoryRes.data) {
+  if (!category) {
     notFound();
   }
 
-  const category = categoryRes.data;
   const currentPage = parseInt(pageParam || '1', 10);
-  const perfumesRes = await perfumeApi.getAll({
-    page: currentPage,
-    pageSize: PAGE_SIZE,
-    categoryId: category.id,
-    brandId: brandParam || undefined,
-  });
-
-  const result = perfumesRes.success && perfumesRes.data
-    ? perfumesRes.data
-    : { data: [], total: 0, page: 1, pageSize: PAGE_SIZE, totalPages: 0 };
+  
+  // Fetch perfumes using direct database access
+  const result = perfumeService.getAll(
+    { page: currentPage, pageSize: PAGE_SIZE },
+    { categoryId: category.id, brandId: brandParam || undefined }
+  );
 
   return (
     <Stack gap="xl">

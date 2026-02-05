@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-import { perfumeApi, categoryApi } from '@/services';
 import { PerfumeGrid, SectionHeader } from '@/components';
+import { perfumeService, categoryService } from '@perfume-catalog/database';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -10,13 +10,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function DiscountsPage() {
-  const [discountRes, categoriesRes] = await Promise.all([
-    perfumeApi.getDiscounted(100),
-    categoryApi.getAll(),
-  ]);
-
-  const discounted = discountRes.success && discountRes.data ? discountRes.data : [];
-  const categories = categoriesRes.success && categoriesRes.data ? categoriesRes.data : [];
+  // Using direct database access for static generation
+  const discounted = perfumeService.getDiscounted(100);
+  const categories = categoryService.getAll();
 
   return (
     <div>

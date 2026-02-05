@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/(public)/layout,_N_T_/(public)/featured/layout,_N_T_/(public)/featured/page,_N_T_/featured"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/!KHB1YmxpYyk/featured/__PAGE__",
+    "/!KHB1YmxpYyk/featured",
+    "/!KHB1YmxpYyk",
+    "/_index",
+    "/_head"
+  ]
+}

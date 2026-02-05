@@ -1,1 +1,11 @@
-{"version":4,"routes":{"/perfume/perf-1769868123924-m7dt7rw":{},"/perfume/perf-1769577408056-80l43ou":{},"/perfume/perf-1768669028405-ttfd205":{},"/perfume/perf-1768669028404-vvnhg51":{},"/perfume/perf-1768669028404-alfozq5":{},"/perfume/perf-1768669028403-ekeuf21":{},"/perfume/perf-1768669028402-uqndm60":{},"/perfume/perf-1768669028401-kzb07m1":{},"/perfume/perf-1768669028400-pydt0z0":{},"/perfume/perf-1768669028399-7h60yca":{},"/perfume/perf-1768669028398-5l9q1t7":{},"/perfume/perf-1768669028397-pq9tapg":{},"/perfume/perf-1768669028396-a8isx8i":{},"/perfume/perf-1768669028395-nlspb16":{},"/perfume/perf-1768669028394-ppewmxm":{},"/perfume/perf-1768669028394-o9ko10x":{},"/perfume/perf-1768669028393-s22thj2":{},"/perfume/perf-1768669028392-se4moza":{},"/perfume/perf-1768669028391-5ebskcn":{},"/perfume/perf-1768669028390-178zek6":{},"/perfume/perf-1768669028389-ftknh9q":{},"/perfume/perf-1768669028388-vkhgirk":{},"/perfume/perf-1768669028388-2rczp7a":{},"/perfume/perf-1768669028387-srfh3mi":{},"/perfume/perf-1768669028386-zqigl0m":{},"/perfume/perf-1768669028385-ijoeiph":{},"/perfume/perf-1768669028384-q9bbr8d":{},"/perfume/perf-1768669028383-wx4p0wi":{},"/perfume/perf-1768669028383-n7neeht":{},"/perfume/perf-1768669028382-xryom17":{},"/perfume/perf-1768669028381-v8xji6f":{},"/perfume/perf-1768669028380-aujzam2":{}},"dynamicRoutes":{"/perfume/[id]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/perfume/[id]","routeRegex":"^\\/perfume\\/([^/]+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"180b46cbf8473f8ab22aa474e64d2cbb","previewModeSigningKey":"51adf52d0efc3e68a6e8de6712b54931ea5afdb0aea40610c7366241dac3094f","previewModeEncryptionKey":"ac88e0781f163e33871cea2a579db5e93bccfdfceb6812e53c424a90f8c119af"}}
+{
+  "version": 4,
+  "routes": {},
+  "dynamicRoutes": {},
+  "notFoundRoutes": [],
+  "preview": {
+    "previewModeId": "da2ced755cf514a2a61236ed3fca5b9f",
+    "previewModeSigningKey": "9d34c276225bd58da54a7ab942fa51c32c3ca941703fff9b875dd315a7af9559",
+    "previewModeEncryptionKey": "b63995bfe6c12830572d70ac59939c92646e63fbde4b8fdc9502ee839314794b"
+  }
+}

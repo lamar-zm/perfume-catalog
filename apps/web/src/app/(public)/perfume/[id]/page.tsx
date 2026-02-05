@@ -13,10 +13,9 @@ import {
   Divider,
 } from '@mantine/core';
 import { IconTag, IconCategory } from '@tabler/icons-react';
-import { perfumeApi, categoryApi, imageHelper } from '@/services';
 import { PerfumeGrid, SectionHeader } from '@/components';
 import PerfumeCarousel from '@/components/perfume/PerfumeCarousel';
-import { perfumeService } from '@perfume-catalog/database';
+import { perfumeService, categoryService } from '@perfume-catalog/database';
 
 interface PerfumePageProps {
   params: Promise<{ id: string }>;
@@ -37,19 +36,18 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for each perfume
+// Using direct database access for static generation
 export async function generateMetadata({
   params,
 }: PerfumePageProps): Promise<Metadata> {
   const { id } = await params;
-  const res = await perfumeApi.getById(id);
+  const perfume = perfumeService.getById(id);
 
-  if (!res.success || !res.data) {
+  if (!perfume) {
     return {
       title: 'العطر غير موجود',
     };
   }
-
-  const perfume = res.data;
   const hasDiscount = perfume.discount && perfume.discount > 0;
   const finalPrice = hasDiscount ? perfume.price - perfume.discount! : perfume.price;
   const mainImage = perfume.images?.[0] || '';
@@ -72,23 +70,18 @@ export async function generateMetadata({
 
 export default async function PerfumePage({ params }: PerfumePageProps) {
   const { id } = await params;
-  const perfumeRes = await perfumeApi.getById(id);
+  
+  // Using direct database access for static generation
+  const perfume = perfumeService.getById(id);
 
-  if (!perfumeRes.success || !perfumeRes.data) {
+  if (!perfume) {
     notFound();
   }
 
-  const perfume = perfumeRes.data;
-
-  const [categoryRes, relatedRes, categoriesRes] = await Promise.all([
-    perfume.categoryId ? categoryApi.getById(perfume.categoryId) : Promise.resolve({ success: false, data: null }),
-    perfumeApi.getRelated(perfume.id, perfume.categoryId || '', 4),
-    categoryApi.getAll(),
-  ]);
-
-  const category = categoryRes.success && categoryRes.data ? categoryRes.data : null;
-  const relatedPerfumes = relatedRes.success && relatedRes.data ? relatedRes.data : [];
-  const categories = categoriesRes.success && categoriesRes.data ? categoriesRes.data : [];
+  // Fetch related data using direct database access
+  const category = perfume.categoryId ? categoryService.getById(perfume.categoryId) : null;
+  const relatedPerfumes = perfumeService.getRelated(perfume.id, perfume.categoryId || '', 4);
+  const categories = categoryService.getAll();
 
   const hasDiscount = perfume.discount && perfume.discount > 0;
   const finalPrice = hasDiscount ? perfume.price - perfume.discount! : perfume.price;

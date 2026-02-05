@@ -1,23 +1,15 @@
 import { Stack, Box, SimpleGrid } from '@mantine/core';
-import { perfumeApi, categoryApi, brandApi } from '@/services';
 import { PerfumeGrid, CategoryGrid, SectionHeader, BrandCard } from '@/components';
 import { HeroSection } from './HeroSection';
+import { perfumeService, categoryService, brandService } from '@perfume-catalog/database';
 
 export default async function HomePage() {
-  // Fetch data from API
-  const [mostSoldRes, categoriesRes, allPerfumesRes, brandsRes, discountedRes] = await Promise.all([
-    perfumeApi.getMostSold(8),
-    categoryApi.getAll(),
-    perfumeApi.getAll({ page: 1, pageSize: 8 }),
-    brandApi.getAll(),
-    perfumeApi.getDiscounted(8),
-  ]);
-
-  const mostSold = mostSoldRes.success && mostSoldRes.data ? mostSoldRes.data : [];
-  const categories = categoriesRes.success && categoriesRes.data ? categoriesRes.data : [];
-  const allPerfumes = allPerfumesRes.success && allPerfumesRes.data ? allPerfumesRes.data : { data: [], total: 0, page: 1, pageSize: 8, totalPages: 0 };
-  const brands = brandsRes.success && brandsRes.data ? brandsRes.data : [];
-  const discounted = discountedRes.success && discountedRes.data ? discountedRes.data : [];
+  // Fetch data using direct database access for static generation
+  const mostSold = perfumeService.getMostSold(8);
+  const categories = categoryService.getAll();
+  const allPerfumes = perfumeService.getAll({ page: 1, pageSize: 8 });
+  const brands = brandService.getAll();
+  const discounted = perfumeService.getDiscounted(8);
   
 
   return (

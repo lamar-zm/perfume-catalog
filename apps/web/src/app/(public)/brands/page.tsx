@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { Stack } from '@mantine/core';
-import { brandApi } from '@/services';
 import { BrandGrid, SectionHeader } from '@/components';
+import { brandService } from '@perfume-catalog/database';
 
 export const metadata: Metadata = {
   title: 'الماركات',
@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default async function BrandsPage() {
-  const res = await brandApi.getAll();
-  const brands = res.success && res.data ? res.data : [];
+  // Using direct database access for static generation
+  const brands = brandService.getAll();
 
   return (
     <Stack gap="xl">

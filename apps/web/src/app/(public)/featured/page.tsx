@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { Stack } from '@mantine/core';
-import { perfumeApi, categoryApi } from '@/services';
 import { PerfumeGrid, SectionHeader, EmptyState } from '@/components';
+import { perfumeService, categoryService } from '@perfume-catalog/database';
 
 export const metadata: Metadata = {
   title: 'الأكثر مبيعاً',
@@ -13,13 +13,9 @@ export const metadata: Metadata = {
 };
 
 export default async function FeaturedPage() {
-  const [mostSoldRes, categoriesRes] = await Promise.all([
-    perfumeApi.getMostSold(20),
-    categoryApi.getAll(),
-  ]);
-
-  const featured = mostSoldRes.success && mostSoldRes.data ? mostSoldRes.data : [];
-  const categories = categoriesRes.success && categoriesRes.data ? categoriesRes.data : [];
+  // Using direct database access for static generation
+  const featured = perfumeService.getMostSold(20);
+  const categories = categoryService.getAll();
 
   return (
     <Stack gap="xl">
