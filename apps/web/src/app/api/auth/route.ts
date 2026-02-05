@@ -33,6 +33,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Generate a simple token
+
     const token = Buffer.from(`${ADMIN_USER.id}:${Date.now()}`).toString('base64');
 
     const result: AuthResponse = {
@@ -71,6 +72,10 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     const token = request.cookies.get('auth_token')?.value;
+    
+    // Debug: log all cookies
+    console.log('All cookies:', request.cookies.getAll());
+    console.log('Auth token:', token);
 
     if (!token) {
       return NextResponse.json<ApiResponse<never>>(
