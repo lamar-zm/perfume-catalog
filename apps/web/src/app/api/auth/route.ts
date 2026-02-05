@@ -49,11 +49,10 @@ export async function POST(request: NextRequest) {
     });
 
     // Set HTTP-only cookie with token
-    const isProduction = process.env.NODE_ENV === 'production';
     response.cookies.set('auth_token', token, {
       httpOnly: true,
-      secure: isProduction,
-      sameSite: isProduction ? 'none' : 'lax',
+      secure: false,
+      sameSite: 'lax',
       maxAge: 60 * 60 * 24 * 7, // 7 days
       path: '/',
     });
@@ -120,11 +119,10 @@ export async function DELETE() {
     });
 
     // Clear auth cookie
-    const isProduction = process.env.NODE_ENV === 'production';
     response.cookies.set('auth_token', '', {
       httpOnly: true,
-      secure: isProduction,
-      sameSite: isProduction ? 'none' : 'lax',
+      secure: false,
+      sameSite: 'lax',
       maxAge: 0,
       path: '/',
     });
