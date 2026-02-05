@@ -5,6 +5,7 @@ import { categoryApi, perfumeApi } from '@/services';
 import { PerfumeGrid, SectionHeader, Pagination, EmptyState } from '@/components';
 import { BrandFilter } from '@/components/filters/BrandFilter';
 import { CategoryPagination } from './CategoryPagination';
+import { categoryService } from '@perfume-catalog/database';
 
 interface CategoryPageProps {
   params: Promise<{ slug: string }>;
@@ -12,12 +13,17 @@ interface CategoryPageProps {
 }
 
 // Generate static params for all categories
+// Using direct database access to avoid API calls during build
 export async function generateStaticParams() {
-  const res = await categoryApi.getAll();
-  if (!res.success || !res.data) return [];
-  return res.data.map((category) => ({
-    slug: category.slug,
-  }));
+  try {
+    const categories = categoryService.getAll();
+    return categories.map((category) => ({
+      slug: category.slug,
+    }));
+  } catch (error) {
+    console.error('Error generating category params:', error);
+    return [];
+  }
 }
 
 // Generate metadata for each category

@@ -4,6 +4,7 @@ import { Stack, Box, Image, Text, Group, Badge } from '@mantine/core';
 import { brandApi, perfumeApi, categoryApi } from '@/services';
 import { PerfumeGrid, SectionHeader, EmptyState } from '@/components';
 import { BrandPagination } from './BrandPagination';
+import { brandService } from '@perfume-catalog/database';
 
 interface BrandPageProps {
   params: Promise<{ slug: string }>;
@@ -11,12 +12,17 @@ interface BrandPageProps {
 }
 
 // Generate static params for all brands
+// Using direct database access to avoid API calls during build
 export async function generateStaticParams() {
-  const res = await brandApi.getAll();
-  if (!res.success || !res.data) return [];
-  return res.data.map((brand) => ({
-    slug: brand.slug,
-  }));
+  try {
+    const brands = brandService.getAll();
+    return brands.map((brand) => ({
+      slug: brand.slug,
+    }));
+  } catch (error) {
+    console.error('Error generating brand params:', error);
+    return [];
+  }
 }
 
 // Generate metadata for each brand

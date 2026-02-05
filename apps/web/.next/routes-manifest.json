@@ -168,10 +168,22 @@
       "namedRegex": "^/api/upload(?:/)?$"
     },
     {
+      "page": "/brands",
+      "regex": "^/brands(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/brands(?:/)?$"
+    },
+    {
       "page": "/categories",
       "regex": "^/categories(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/categories(?:/)?$"
+    },
+    {
+      "page": "/discounts",
+      "regex": "^/discounts(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/discounts(?:/)?$"
     },
     {
       "page": "/favicon.ico",

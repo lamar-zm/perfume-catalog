@@ -16,18 +16,24 @@ import { IconTag, IconCategory } from '@tabler/icons-react';
 import { perfumeApi, categoryApi, imageHelper } from '@/services';
 import { PerfumeGrid, SectionHeader } from '@/components';
 import PerfumeCarousel from '@/components/perfume/PerfumeCarousel';
+import { perfumeService } from '@perfume-catalog/database';
 
 interface PerfumePageProps {
   params: Promise<{ id: string }>;
 }
 
 // Generate static params for all perfumes
+// Using direct database access to avoid API calls during build
 export async function generateStaticParams() {
-  const res = await perfumeApi.getAll({ page: 1, pageSize: 100 });
-  if (!res.success || !res.data) return [];
-  return res.data.data.map((perfume) => ({
-    id: perfume.id,
-  }));
+  try {
+    const result = perfumeService.getAll({ page: 1, pageSize: 100 });
+    return result.data.map((perfume) => ({
+      id: perfume.id,
+    }));
+  } catch (error) {
+    console.error('Error generating perfume params:', error);
+    return [];
+  }
 }
 
 // Generate metadata for each perfume

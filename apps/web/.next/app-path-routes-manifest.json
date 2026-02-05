@@ -1,7 +1,9 @@
 {
   "/(public)/brand/[slug]/page": "/brand/[slug]",
+  "/(public)/brands/page": "/brands",
   "/(public)/categories/page": "/categories",
   "/(public)/category/[slug]/page": "/category/[slug]",
+  "/(public)/discounts/page": "/discounts",
   "/(public)/featured/page": "/featured",
   "/(public)/most-sold/page": "/most-sold",
   "/(public)/page": "/",

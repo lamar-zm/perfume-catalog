@@ -1,7 +1,9 @@
 {
   "/(public)/brand/[slug]/page": "app/(public)/brand/[slug]/page.js",
+  "/(public)/brands/page": "app/(public)/brands/page.js",
   "/(public)/categories/page": "app/(public)/categories/page.js",
   "/(public)/category/[slug]/page": "app/(public)/category/[slug]/page.js",
+  "/(public)/discounts/page": "app/(public)/discounts/page.js",
   "/(public)/featured/page": "app/(public)/featured/page.js",
   "/(public)/most-sold/page": "app/(public)/most-sold/page.js",
   "/(public)/page": "app/(public)/page.js",
