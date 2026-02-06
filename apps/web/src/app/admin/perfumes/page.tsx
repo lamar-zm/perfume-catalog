@@ -239,7 +239,7 @@ export default function AdminPerfumesPage() {
                     <Table.Tr key={perfume.id}>
                       <Table.Td>
                         <Image
-                          src={perfume.images?.[0] || imageHelper.getPlaceholder(50, 50)}
+                          src={perfume.coverImage || perfume.images?.[0] || imageHelper.getPlaceholder(50, 50)}
                           alt={perfume.title}
                           width={50}
                           height={50}

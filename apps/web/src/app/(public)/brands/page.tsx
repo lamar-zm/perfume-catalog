@@ -3,6 +3,9 @@ import { Stack } from '@mantine/core';
 import { BrandGrid, SectionHeader } from '@/components';
 import { brandService } from '@perfume-catalog/database';
 
+// Always fetch fresh data on every request
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'الماركات',
   description: 'تصفح جميع ماركات العطور العالمية - ديور، شانيل، توم فورد، والمزيد من أفخم الماركات',

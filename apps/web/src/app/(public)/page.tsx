@@ -3,6 +3,9 @@ import { PerfumeGrid, CategoryGrid, SectionHeader, BrandCard } from '@/component
 import { HeroSection } from './HeroSection';
 import { perfumeService, categoryService, brandService } from '@perfume-catalog/database';
 
+// Always fetch fresh data on every request so admin changes appear immediately
+export const dynamic = 'force-dynamic';
+
 export default async function HomePage() {
   // Fetch data using direct database access for static generation
   const mostSold = perfumeService.getMostSold(8);

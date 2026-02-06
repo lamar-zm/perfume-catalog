@@ -3,6 +3,9 @@ import { Stack } from '@mantine/core';
 import { CategoryGrid, SectionHeader } from '@/components';
 import { categoryService } from '@perfume-catalog/database';
 
+// Always fetch fresh data on every request
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'التصنيفات',
   description: 'تصفح جميع تصنيفات العطور - عطور رجالية، عطور نسائية، عطور عربية، عطور فرنسية، ومجموعات الهدايا',

@@ -3,6 +3,9 @@ import { Stack } from '@mantine/core';
 import { PerfumeGrid, SectionHeader, EmptyState } from '@/components';
 import { perfumeService, categoryService } from '@perfume-catalog/database';
 
+// Always fetch fresh data on every request
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'الأكثر مبيعاً',
   description: 'اكتشف العطور الأكثر مبيعاً استناداً إلى بيانات المبيعات الفعلية',

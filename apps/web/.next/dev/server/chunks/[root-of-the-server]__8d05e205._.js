@@ -100,7 +100,7 @@ async function POST(request) {
         // Set HTTP-only cookie with token
         response.cookies.set('auth_token', token, {
             httpOnly: true,
-            secure: ("TURBOPACK compile-time value", "development") === 'production',
+            secure: false,
             sameSite: 'lax',
             maxAge: 60 * 60 * 24 * 7,
             path: '/'
@@ -119,6 +119,9 @@ async function POST(request) {
 async function GET(request) {
     try {
         const token = request.cookies.get('auth_token')?.value;
+        // Debug: log all cookies
+        console.log('All cookies:', request.cookies.getAll());
+        console.log('Auth token:', token);
         if (!token) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 success: false,
@@ -171,7 +174,7 @@ async function DELETE() {
         // Clear auth cookie
         response.cookies.set('auth_token', '', {
             httpOnly: true,
-            secure: ("TURBOPACK compile-time value", "development") === 'production',
+            secure: false,
             sameSite: 'lax',
             maxAge: 0,
             path: '/'

@@ -17,22 +17,11 @@ import { PerfumeGrid, SectionHeader } from '@/components';
 import PerfumeCarousel from '@/components/perfume/PerfumeCarousel';
 import { perfumeService, categoryService } from '@perfume-catalog/database';
 
+// Always fetch fresh data on every request
+export const dynamic = 'force-dynamic';
+
 interface PerfumePageProps {
   params: Promise<{ id: string }>;
-}
-
-// Generate static params for all perfumes
-// Using direct database access to avoid API calls during build
-export async function generateStaticParams() {
-  try {
-    const result = perfumeService.getAll({ page: 1, pageSize: 100 });
-    return result.data.map((perfume) => ({
-      id: perfume.id,
-    }));
-  } catch (error) {
-    console.error('Error generating perfume params:', error);
-    return [];
-  }
 }
 
 // Generate metadata for each perfume

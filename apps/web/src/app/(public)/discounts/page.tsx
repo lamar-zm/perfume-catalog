@@ -2,6 +2,9 @@ import { Metadata } from 'next';
 import { PerfumeGrid, SectionHeader } from '@/components';
 import { perfumeService, categoryService } from '@perfume-catalog/database';
 
+// Always fetch fresh data on every request
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: 'العروض والتخفيضات | عطور فاخرة',

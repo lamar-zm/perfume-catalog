@@ -5,26 +5,12 @@ import { PerfumeGrid, SectionHeader, EmptyState } from '@/components';
 import { BrandPagination } from './BrandPagination';
 import { brandService, perfumeService, categoryService } from '@perfume-catalog/database';
 
-// Force dynamic rendering for pages with pagination
+// Always fetch fresh data on every request
 export const dynamic = 'force-dynamic';
 
 interface BrandPageProps {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ page?: string }>;
-}
-
-// Generate static params for all brands
-// Using direct database access to avoid API calls during build
-export async function generateStaticParams() {
-  try {
-    const brands = brandService.getAll();
-    return brands.map((brand) => ({
-      slug: brand.slug,
-    }));
-  } catch (error) {
-    console.error('Error generating brand params:', error);
-    return [];
-  }
 }
 
 // Generate metadata for each brand

@@ -1,2 +1,11 @@
-[00:00:00.922] Server  LOG     ✓ Ready in 701ms
-[00:00:02.770] Server  LOG     ✅ Database initialized successfully
+[00:00:00.433] Server  LOG     ✓ Ready in 314ms
+[00:00:01.638] Server  LOG     ✅ Database initialized successfully
+[00:00:02.003] Server  LOG     All cookies: [{...},{...}]
+[00:00:02.003] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
+[00:00:02.009] Server  LOG     All cookies: [{...},{...}]
+[00:00:02.009] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
+[00:00:02.028] Server  LOG     All cookies: [{...},{...}]
+[00:00:02.028] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
+[00:00:02.073] Server  LOG     ✅ Database initialized successfully
+[00:01:09.919] Server  LOG     ✓ Compiled in 63ms
+[00:04:16.704] Server  LOG     ✅ Database initialized successfully

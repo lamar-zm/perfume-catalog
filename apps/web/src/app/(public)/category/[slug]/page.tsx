@@ -6,26 +6,12 @@ import { BrandFilter } from '@/components/filters/BrandFilter';
 import { CategoryPagination } from './CategoryPagination';
 import { categoryService, perfumeService } from '@perfume-catalog/database';
 
-// Force dynamic rendering for pages with pagination/filters
+// Always fetch fresh data on every request
 export const dynamic = 'force-dynamic';
 
 interface CategoryPageProps {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ page?: string; brand?: string }>;
-}
-
-// Generate static params for all categories
-// Using direct database access to avoid API calls during build
-export async function generateStaticParams() {
-  try {
-    const categories = categoryService.getAll();
-    return categories.map((category) => ({
-      slug: category.slug,
-    }));
-  } catch (error) {
-    console.error('Error generating category params:', error);
-    return [];
-  }
 }
 
 // Generate metadata for each category
