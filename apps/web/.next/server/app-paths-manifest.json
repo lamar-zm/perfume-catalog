@@ -26,5 +26,6 @@
   "/api/perfumes/[id]/route": "app/api/perfumes/[id]/route.js",
   "/api/perfumes/route": "app/api/perfumes/route.js",
   "/api/upload/route": "app/api/upload/route.js",
+  "/api/uploads/[...path]/route": "app/api/uploads/[...path]/route.js",
   "/favicon.ico/route": "app/favicon.ico/route.js"
 }
