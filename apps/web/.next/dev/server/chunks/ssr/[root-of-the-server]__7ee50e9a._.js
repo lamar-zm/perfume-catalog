@@ -671,6 +671,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$
 __turbopack_context__.s([
     "default",
     ()=>CategoriesPage,
+    "dynamic",
+    ()=>dynamic,
     "metadata",
     ()=>metadata
 ]);
@@ -685,6 +687,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$
 ;
 ;
 ;
+const dynamic = 'force-dynamic';
 const metadata = {
     title: 'التصنيفات',
     description: 'تصفح جميع تصنيفات العطور - عطور رجالية، عطور نسائية، عطور عربية، عطور فرنسية، ومجموعات الهدايا',
@@ -704,7 +707,7 @@ async function CategoriesPage() {
                 subtitle: "تصفح عطورنا حسب الفئة"
             }, void 0, false, {
                 fileName: "[project]/apps/web/src/app/(public)/categories/page.tsx",
-                lineNumber: 21,
+                lineNumber: 24,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$components$2f$category$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["CategoryGrid"], {
@@ -712,13 +715,13 @@ async function CategoriesPage() {
                 emptyMessage: "لا توجد تصنيفات متاحة حالياً"
             }, void 0, false, {
                 fileName: "[project]/apps/web/src/app/(public)/categories/page.tsx",
-                lineNumber: 25,
+                lineNumber: 28,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/apps/web/src/app/(public)/categories/page.tsx",
-        lineNumber: 20,
+        lineNumber: 23,
         columnNumber: 5
     }, this);
 }

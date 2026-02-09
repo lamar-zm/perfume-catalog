@@ -707,10 +707,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$
 __turbopack_context__.s([
     "default",
     ()=>PerfumePage,
+    "dynamic",
+    ()=>dynamic,
     "generateMetadata",
-    ()=>generateMetadata,
-    "generateStaticParams",
-    ()=>generateStaticParams
+    ()=>generateMetadata
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.js [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$api$2f$navigation$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/next/dist/api/navigation.react-server.js [app-rsc] (ecmascript) <locals>");
@@ -741,20 +741,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$
 ;
 ;
 ;
-async function generateStaticParams() {
-    try {
-        const result = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$services$2f$perfumeService$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["perfumeService"].getAll({
-            page: 1,
-            pageSize: 100
-        });
-        return result.data.map((perfume)=>({
-                id: perfume.id
-            }));
-    } catch (error) {
-        console.error('Error generating perfume params:', error);
-        return [];
-    }
-}
+const dynamic = 'force-dynamic';
 async function generateMetadata({ params }) {
     const { id } = await params;
     const perfume = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$services$2f$perfumeService$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["perfumeService"].getById(id);
@@ -823,7 +810,7 @@ async function PerfumePage({ params }) {
                                         height: 500
                                     }, void 0, false, {
                                         fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                        lineNumber: 98,
+                                        lineNumber: 87,
                                         columnNumber: 15
                                     }, this),
                                     hasDiscount && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Badge$2f$Badge$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Badge"], {
@@ -840,18 +827,18 @@ async function PerfumePage({ params }) {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                        lineNumber: 100,
+                                        lineNumber: 89,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                lineNumber: 97,
+                                lineNumber: 86,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                            lineNumber: 96,
+                            lineNumber: 85,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Grid$2f$GridCol$2f$GridCol$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["GridCol"], {
@@ -870,13 +857,13 @@ async function PerfumePage({ params }) {
                                             size: 14
                                         }, void 0, false, {
                                             fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                            lineNumber: 123,
+                                            lineNumber: 112,
                                             columnNumber: 32
                                         }, void 0),
                                         children: category.name
                                     }, void 0, false, {
                                         fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                        lineNumber: 119,
+                                        lineNumber: 108,
                                         columnNumber: 17
                                     }, this),
                                     perfume.gender && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Badge$2f$Badge$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Badge"], {
@@ -886,7 +873,7 @@ async function PerfumePage({ params }) {
                                         children: perfume.gender === 'men' ? 'للرجال' : perfume.gender === 'women' ? 'للنساء' : 'مناسب للجنسين'
                                     }, void 0, false, {
                                         fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                        lineNumber: 131,
+                                        lineNumber: 120,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Title$2f$Title$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Title"], {
@@ -894,7 +881,7 @@ async function PerfumePage({ params }) {
                                         children: perfume.title
                                     }, void 0, false, {
                                         fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                        lineNumber: 137,
+                                        lineNumber: 126,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$core$2f$Box$2f$Box$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Box"], {
@@ -912,7 +899,7 @@ async function PerfumePage({ params }) {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                                    lineNumber: 143,
+                                                    lineNumber: 132,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Text"], {
@@ -925,7 +912,7 @@ async function PerfumePage({ params }) {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                                    lineNumber: 146,
+                                                    lineNumber: 135,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Badge$2f$Badge$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Badge"], {
@@ -938,13 +925,13 @@ async function PerfumePage({ params }) {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                                    lineNumber: 149,
+                                                    lineNumber: 138,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                            lineNumber: 142,
+                                            lineNumber: 131,
                                             columnNumber: 19
                                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Text"], {
                                             fw: 700,
@@ -956,17 +943,17 @@ async function PerfumePage({ params }) {
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                            lineNumber: 154,
+                                            lineNumber: 143,
                                             columnNumber: 19
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                        lineNumber: 140,
+                                        lineNumber: 129,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Divider$2f$Divider$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Divider"], {}, void 0, false, {
                                         fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                        lineNumber: 160,
+                                        lineNumber: 149,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$core$2f$Box$2f$Box$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Box"], {
@@ -977,7 +964,7 @@ async function PerfumePage({ params }) {
                                                 children: "الوصف"
                                             }, void 0, false, {
                                                 fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                                lineNumber: 164,
+                                                lineNumber: 153,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Text"], {
@@ -988,18 +975,18 @@ async function PerfumePage({ params }) {
                                                 children: perfume.description
                                             }, void 0, false, {
                                                 fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                                lineNumber: 167,
+                                                lineNumber: 156,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                        lineNumber: 163,
+                                        lineNumber: 152,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Divider$2f$Divider$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Divider"], {}, void 0, false, {
                                         fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                        lineNumber: 172,
+                                        lineNumber: 161,
                                         columnNumber: 15
                                     }, this),
                                     perfume.notes && perfume.notes.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$core$2f$Box$2f$Box$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Box"], {
@@ -1010,7 +997,7 @@ async function PerfumePage({ params }) {
                                                 children: "نوع العطر"
                                             }, void 0, false, {
                                                 fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                                lineNumber: 177,
+                                                lineNumber: 166,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Group$2f$Group$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Group"], {
@@ -1022,23 +1009,23 @@ async function PerfumePage({ params }) {
                                                         children: note
                                                     }, index, false, {
                                                         fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                                        lineNumber: 182,
+                                                        lineNumber: 171,
                                                         columnNumber: 23
                                                     }, this))
                                             }, void 0, false, {
                                                 fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                                lineNumber: 180,
+                                                lineNumber: 169,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                        lineNumber: 176,
+                                        lineNumber: 165,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Divider$2f$Divider$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Divider"], {}, void 0, false, {
                                         fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                        lineNumber: 190,
+                                        lineNumber: 179,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Group$2f$Group$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Group"], {
@@ -1051,7 +1038,7 @@ async function PerfumePage({ params }) {
                                                     color: "var(--mantine-color-brand-6)"
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                                    lineNumber: 195,
+                                                    lineNumber: 184,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Text"], {
@@ -1059,40 +1046,40 @@ async function PerfumePage({ params }) {
                                                     children: perfume.outOfStock ? 'غير متوفر حالياً' : 'متوفر في المخزون'
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                                    lineNumber: 196,
+                                                    lineNumber: 185,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                            lineNumber: 194,
+                                            lineNumber: 183,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                        lineNumber: 193,
+                                        lineNumber: 182,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                                lineNumber: 116,
+                                lineNumber: 105,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                            lineNumber: 115,
+                            lineNumber: 104,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                    lineNumber: 94,
+                    lineNumber: 83,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                lineNumber: 93,
+                lineNumber: 82,
                 columnNumber: 7
             }, this),
             relatedPerfumes.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$core$2f$Box$2f$Box$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Box"], {
@@ -1103,7 +1090,7 @@ async function PerfumePage({ params }) {
                         viewAllLink: category ? `/category/${category.slug}` : undefined
                     }, void 0, false, {
                         fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                        lineNumber: 209,
+                        lineNumber: 198,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$components$2f$perfume$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["PerfumeGrid"], {
@@ -1117,19 +1104,19 @@ async function PerfumePage({ params }) {
                         }
                     }, void 0, false, {
                         fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                        lineNumber: 214,
+                        lineNumber: 203,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-                lineNumber: 208,
+                lineNumber: 197,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/apps/web/src/app/(public)/perfume/[id]/page.tsx",
-        lineNumber: 91,
+        lineNumber: 80,
         columnNumber: 5
     }, this);
 }

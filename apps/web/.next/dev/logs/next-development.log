@@ -1,11 +1,24 @@
-[00:00:00.433] Server  LOG     ✓ Ready in 314ms
-[00:00:01.638] Server  LOG     ✅ Database initialized successfully
-[00:00:02.003] Server  LOG     All cookies: [{...},{...}]
-[00:00:02.003] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
-[00:00:02.009] Server  LOG     All cookies: [{...},{...}]
-[00:00:02.009] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
-[00:00:02.028] Server  LOG     All cookies: [{...},{...}]
-[00:00:02.028] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
-[00:00:02.073] Server  LOG     ✅ Database initialized successfully
-[00:01:09.919] Server  LOG     ✓ Compiled in 63ms
-[00:04:16.704] Server  LOG     ✅ Database initialized successfully
+[00:00:00.933] Server  LOG     ✓ Ready in 738ms
+[00:00:03.941] Server  LOG     ✅ Database initialized successfully
+[00:00:04.419] Server  LOG     All cookies: []
+[00:00:04.419] Server  LOG     Auth token: undefined
+[00:00:08.034] Server  LOG     All cookies: [{...},{...}]
+[00:00:08.034] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
+[00:00:34.992] Server  LOG     All cookies: [{...},{...}]
+[00:00:34.992] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
+[00:00:34.995] Server  LOG     All cookies: [{...},{...}]
+[00:00:34.995] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
+[00:00:35.064] Server  LOG     ✅ Database initialized successfully
+[00:00:37.443] Server  LOG     All cookies: [{...},{...}]
+[00:00:37.443] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
+[00:00:42.539] Server  LOG     All cookies: [{...},{...}]
+[00:00:42.539] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
+[00:00:51.445] Browser ERROR   Error saving category: الرابط موجود مسبقاً
+[00:01:18.066] Server  LOG     All cookies: [{...},{...}]
+[00:01:18.066] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
+[00:01:18.068] Server  LOG     All cookies: [{...},{...}]
+[00:01:18.068] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
+[00:01:34.274] Server  LOG     All cookies: [{...},{...}]
+[00:01:34.275] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
+[00:01:34.288] Server  LOG     All cookies: [{...},{...}]
+[00:01:34.288] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
