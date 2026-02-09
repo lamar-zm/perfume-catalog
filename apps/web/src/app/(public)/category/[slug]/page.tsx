@@ -20,7 +20,8 @@ export async function generateMetadata({
   params,
 }: CategoryPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const category = categoryService.getBySlug(slug);
+  const decodedSlug = decodeURIComponent(slug);
+  const category = categoryService.getBySlug(decodedSlug);
 
   if (!category) {
     return {
@@ -47,9 +48,10 @@ export default async function CategoryPage({
 }: CategoryPageProps) {
   const { slug } = await params;
   const { page: pageParam, brand: brandParam } = await searchParams;
+  const decodedSlug = decodeURIComponent(slug);
   
   // Using direct database access for static generation
-  const category = categoryService.getBySlug(slug);
+  const category = categoryService.getBySlug(decodedSlug);
 
   if (!category) {
     notFound();

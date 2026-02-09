@@ -710,9 +710,7 @@ __turbopack_context__.s([
     "dynamic",
     ()=>dynamic,
     "generateMetadata",
-    ()=>generateMetadata,
-    "generateStaticParams",
-    ()=>generateStaticParams
+    ()=>generateMetadata
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.js [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$api$2f$navigation$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/next/dist/api/navigation.react-server.js [app-rsc] (ecmascript) <locals>");
@@ -738,20 +736,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$
 ;
 ;
 const dynamic = 'force-dynamic';
-async function generateStaticParams() {
-    try {
-        const brands = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$services$2f$brandService$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["brandService"].getAll();
-        return brands.map((brand)=>({
-                slug: brand.slug
-            }));
-    } catch (error) {
-        console.error('Error generating brand params:', error);
-        return [];
-    }
-}
 async function generateMetadata({ params }) {
     const { slug } = await params;
-    const brand = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$services$2f$brandService$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["brandService"].getBySlug(slug);
+    const decodedSlug = decodeURIComponent(slug);
+    const brand = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$services$2f$brandService$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["brandService"].getBySlug(decodedSlug);
     if (!brand) {
         return {
             title: 'الماركة غير موجودة'
@@ -775,8 +763,9 @@ const PAGE_SIZE = 12;
 async function BrandPage({ params, searchParams }) {
     const { slug } = await params;
     const { page: pageParam } = await searchParams;
+    const decodedSlug = decodeURIComponent(slug);
     // Using direct database access for static generation
-    const brand = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$services$2f$brandService$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["brandService"].getBySlug(slug);
+    const brand = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$services$2f$brandService$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["brandService"].getBySlug(decodedSlug);
     if (!brand) {
         (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$components$2f$navigation$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["notFound"])();
     }
@@ -829,12 +818,12 @@ async function BrandPage({ params, searchParams }) {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/apps/web/src/app/(public)/brand/[slug]/page.tsx",
-                                lineNumber: 109,
+                                lineNumber: 97,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/apps/web/src/app/(public)/brand/[slug]/page.tsx",
-                            lineNumber: 96,
+                            lineNumber: 84,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Stack$2f$Stack$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Stack"], {
@@ -848,7 +837,7 @@ async function BrandPage({ params, searchParams }) {
                                     children: brand.name
                                 }, void 0, false, {
                                     fileName: "[project]/apps/web/src/app/(public)/brand/[slug]/page.tsx",
-                                    lineNumber: 118,
+                                    lineNumber: 106,
                                     columnNumber: 13
                                 }, this),
                                 brand.description && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Text"], {
@@ -859,7 +848,7 @@ async function BrandPage({ params, searchParams }) {
                                     children: brand.description
                                 }, void 0, false, {
                                     fileName: "[project]/apps/web/src/app/(public)/brand/[slug]/page.tsx",
-                                    lineNumber: 122,
+                                    lineNumber: 110,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Badge$2f$Badge$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Badge"], {
@@ -872,24 +861,24 @@ async function BrandPage({ params, searchParams }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/apps/web/src/app/(public)/brand/[slug]/page.tsx",
-                                    lineNumber: 126,
+                                    lineNumber: 114,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/apps/web/src/app/(public)/brand/[slug]/page.tsx",
-                            lineNumber: 117,
+                            lineNumber: 105,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/apps/web/src/app/(public)/brand/[slug]/page.tsx",
-                    lineNumber: 94,
+                    lineNumber: 82,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/apps/web/src/app/(public)/brand/[slug]/page.tsx",
-                lineNumber: 85,
+                lineNumber: 73,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$core$2f$Box$2f$Box$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Box"], {
@@ -899,7 +888,7 @@ async function BrandPage({ params, searchParams }) {
                         subtitle: `اكتشف مجموعتنا من عطور ${brand.name} الفاخرة`
                     }, void 0, false, {
                         fileName: "[project]/apps/web/src/app/(public)/brand/[slug]/page.tsx",
-                        lineNumber: 135,
+                        lineNumber: 123,
                         columnNumber: 9
                     }, this),
                     result.data.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$components$2f$ui$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["EmptyState"], {
@@ -907,7 +896,7 @@ async function BrandPage({ params, searchParams }) {
                         message: `لا توجد عطور متاحة من ماركة ${brand.name} حالياً`
                     }, void 0, false, {
                         fileName: "[project]/apps/web/src/app/(public)/brand/[slug]/page.tsx",
-                        lineNumber: 141,
+                        lineNumber: 129,
                         columnNumber: 11
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Fragment"], {
                         children: [
@@ -917,7 +906,7 @@ async function BrandPage({ params, searchParams }) {
                                 showCategory: true
                             }, void 0, false, {
                                 fileName: "[project]/apps/web/src/app/(public)/brand/[slug]/page.tsx",
-                                lineNumber: 147,
+                                lineNumber: 135,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$app$2f28$public$292f$brand$2f5b$slug$5d2f$BrandPagination$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["BrandPagination"], {
@@ -926,7 +915,7 @@ async function BrandPage({ params, searchParams }) {
                                 slug: slug
                             }, void 0, false, {
                                 fileName: "[project]/apps/web/src/app/(public)/brand/[slug]/page.tsx",
-                                lineNumber: 152,
+                                lineNumber: 140,
                                 columnNumber: 13
                             }, this)
                         ]
@@ -934,13 +923,13 @@ async function BrandPage({ params, searchParams }) {
                 ]
             }, void 0, true, {
                 fileName: "[project]/apps/web/src/app/(public)/brand/[slug]/page.tsx",
-                lineNumber: 134,
+                lineNumber: 122,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/apps/web/src/app/(public)/brand/[slug]/page.tsx",
-        lineNumber: 83,
+        lineNumber: 71,
         columnNumber: 5
     }, this);
 }

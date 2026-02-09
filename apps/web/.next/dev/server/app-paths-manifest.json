@@ -1,9 +1,9 @@
 {
-  "/(public)/categories/page": "app/(public)/categories/page.js",
-  "/(public)/category/[slug]/page": "app/(public)/category/[slug]/page.js",
+  "/(public)/brand/[slug]/page": "app/(public)/brand/[slug]/page.js",
   "/(public)/page": "app/(public)/page.js",
-  "/(public)/perfume/[id]/page": "app/(public)/perfume/[id]/page.js",
+  "/admin/brands/page": "app/admin/brands/page.js",
   "/admin/categories/page": "app/admin/categories/page.js",
+  "/admin/login/page": "app/admin/login/page.js",
   "/admin/page": "app/admin/page.js",
   "/admin/perfumes/page": "app/admin/perfumes/page.js",
   "/api/auth/route": "app/api/auth/route.js",
