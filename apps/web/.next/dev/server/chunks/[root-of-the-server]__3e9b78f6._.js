@@ -196,6 +196,28 @@ function initializeDatabase() {
     } catch (e) {
     // Column already exists, ignore
     }
+    // Migration: Convert non-English slugs to English-safe slugs
+    try {
+        const nonEnglishSlugRegex = /[^a-z0-9-]/;
+        const brands = db.prepare('SELECT id, name, slug FROM brands').all();
+        for (const brand of brands){
+            if (nonEnglishSlugRegex.test(brand.slug)) {
+                const newSlug = `brand-${brand.id.split('-').pop() || Date.now()}`;
+                db.prepare('UPDATE brands SET slug = ? WHERE id = ?').run(newSlug, brand.id);
+                console.log(`✅ Migrated brand slug: "${brand.slug}" → "${newSlug}"`);
+            }
+        }
+        const categories = db.prepare('SELECT id, name, slug FROM categories').all();
+        for (const cat of categories){
+            if (nonEnglishSlugRegex.test(cat.slug)) {
+                const newSlug = `category-${cat.id.split('-').pop() || Date.now()}`;
+                db.prepare('UPDATE categories SET slug = ? WHERE id = ?').run(newSlug, cat.id);
+                console.log(`✅ Migrated category slug: "${cat.slug}" → "${newSlug}"`);
+            }
+        }
+    } catch (e) {
+        console.error('⚠️ Error migrating slugs:', e);
+    }
     console.log('✅ Database initialized successfully');
 }
 const __TURBOPACK__default__export__ = db;
@@ -701,31 +723,39 @@ async function GET(request) {
         });
     }
 }
+// Helper: generate a unique English slug from name
+function generateSlug(name) {
+    let slug = name.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '').replace(/-+/g, '-').replace(/^-|-$/g, '');
+    // If the name was entirely non-English (e.g. Arabic), use a random slug
+    if (!slug) {
+        slug = `brand-${Date.now().toString(36)}`;
+    }
+    // Ensure uniqueness by appending a suffix if slug already exists
+    let finalSlug = slug;
+    let counter = 1;
+    while(__TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$services$2f$brandService$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["brandService"].getBySlug(finalSlug)){
+        finalSlug = `${slug}-${counter}`;
+        counter++;
+    }
+    return finalSlug;
+}
 async function POST(request) {
     try {
         const body = await request.json();
         // Validate required fields
-        if (!body.name || !body.slug) {
+        if (!body.name) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 success: false,
-                error: 'الاسم والرابط مطلوبان'
+                error: 'الاسم مطلوب'
             }, {
                 status: 400
             });
         }
-        // Check if slug already exists
-        const existing = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$services$2f$brandService$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["brandService"].getBySlug(body.slug);
-        if (existing) {
-            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                success: false,
-                error: 'الرابط موجود مسبقاً'
-            }, {
-                status: 400
-            });
-        }
+        // Auto-generate slug from name
+        const slug = generateSlug(body.name);
         const brand = __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$2f$services$2f$brandService$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["brandService"].create({
             name: body.name,
-            slug: body.slug,
+            slug,
             description: body.description || '',
             image: body.image || ''
         });

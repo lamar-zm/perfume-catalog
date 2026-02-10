@@ -19,8 +19,7 @@ export async function generateMetadata({
   params,
 }: BrandPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const decodedSlug = decodeURIComponent(slug);
-  const brand = brandService.getBySlug(decodedSlug);
+  const brand = brandService.getBySlug(slug);
 
   if (!brand) {
     return {
@@ -47,10 +46,9 @@ export default async function BrandPage({
 }: BrandPageProps) {
   const { slug } = await params;
   const { page: pageParam } = await searchParams;
-  const decodedSlug = decodeURIComponent(slug);
   
   // Using direct database access for static generation
-  const brand = brandService.getBySlug(decodedSlug);
+  const brand = brandService.getBySlug(slug);
 
   if (!brand) {
     notFound();

@@ -21,7 +21,6 @@ import { brandApi, imageHelper, uploadApi } from '@/services';
 
 interface BrandFormData {
   name: string;
-  slug: string;
   description: string;
   image: string;
 }
@@ -31,48 +30,6 @@ interface BrandFormModalProps {
   onClose: () => void;
   brand: Brand | null;
   onSuccess: () => void;
-}
-
-// Helper function to generate slug from text
-function generateSlug(text: string): string {
-  // Common Arabic brand name translations
-  const arabicToEnglish: Record<string, string> = {
-    'شانيل': 'chanel',
-    'ديور': 'dior',
-    'قوتشي': 'gucci',
-    'برادا': 'prada',
-    'فيرساتشي': 'versace',
-    'أرماني': 'armani',
-    'جيفنشي': 'givenchy',
-    'بولغاري': 'bvlgari',
-    'هيرميس': 'hermes',
-    'توم فورد': 'tom-ford',
-    'كريستيان ديور': 'christian-dior',
-    'ايف سان لوران': 'yves-saint-laurent',
-    'كارولينا هيريرا': 'carolina-herrera',
-    'جورجيو أرماني': 'giorgio-armani',
-    'دولتشي آند غابانا': 'dolce-gabbana',
-    'كالفن كلاين': 'calvin-klein',
-    'هوغو بوس': 'hugo-boss',
-    'عجمل': 'ajmal',
-    'العربية للعود': 'arabian-oud',
-    'رسايس': 'rasasi',
-    'سويس أريبيان': 'swiss-arabian',
-    'لطافة': 'lattafa',
-  };
-
-  // Check if we have a predefined translation
-  if (arabicToEnglish[text]) {
-    return arabicToEnglish[text];
-  }
-
-  // Otherwise, create a simple slug from the text
-  return text
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[^\u0600-\u06FFa-z0-9-]/g, '')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
 }
 
 export function BrandFormModal({
@@ -88,15 +45,12 @@ export function BrandFormModal({
   const form = useForm<BrandFormData>({
     initialValues: {
       name: '',
-      slug: '',
       description: '',
       image: '',
     },
     validate: {
       name: (value) =>
         value.trim().length < 2 ? 'الاسم يجب أن يكون 2 أحرف على الأقل' : null,
-      slug: (value) =>
-        value.trim().length < 2 ? 'الرابط يجب أن يكون 2 أحرف على الأقل' : null,
     },
   });
 
@@ -106,7 +60,6 @@ export function BrandFormModal({
       if (brand) {
         form.setValues({
           name: brand.name,
-          slug: brand.slug,
           description: brand.description || '',
           image: brand.image || '',
         });
@@ -117,14 +70,6 @@ export function BrandFormModal({
       }
     }
   }, [opened, brand]);
-
-  // Auto-generate slug when name changes (only for new brands)
-  const handleNameChange = (value: string) => {
-    form.setFieldValue('name', value);
-    if (!brand) {
-      form.setFieldValue('slug', generateSlug(value));
-    }
-  };
 
   const handleImageDrop = async (files: FileWithPath[]) => {
     if (files.length > 0) {
@@ -166,7 +111,6 @@ export function BrandFormModal({
     try {
       const brandData = {
         name: values.name,
-        slug: values.slug,
         description: values.description || undefined,
         image: values.image || '',
       };
@@ -268,18 +212,7 @@ export function BrandFormModal({
               label="اسم الماركة"
               placeholder="أدخل اسم الماركة"
               required
-              value={form.values.name}
-              onChange={(e) => handleNameChange(e.target.value)}
-              error={form.errors.name}
-            />
-
-            <TextInput
-              label="الرابط (Slug)"
-              placeholder="brand-slug"
-              description="يستخدم في الروابط - سيتم إنشاؤه تلقائياً"
-              required
-              dir="ltr"
-              {...form.getInputProps('slug')}
+              {...form.getInputProps('name')}
             />
 
             <Textarea

@@ -3,10 +3,10 @@ import { readFile } from 'fs/promises';
 import { existsSync } from 'fs';
 import path from 'path';
 
-// Serve uploaded files dynamically — works in production even after build.
-// Next.js only serves files that exist in public/ at BUILD time, so
-// runtime-uploaded files need this dynamic route.
-const uploadDir = path.join(process.cwd(), 'public', 'uploads');
+// Primary location: data/uploads/ (new)
+// Fallback location: public/uploads/ (old, for backward compatibility)
+const uploadDir = path.join(process.cwd(), 'data', 'uploads');
+const legacyUploadDir = path.join(process.cwd(), 'public', 'uploads');
 
 const MIME_TYPES: Record<string, string> = {
   '.jpg': 'image/jpeg',
@@ -27,7 +27,12 @@ export async function GET(
     const { path: pathSegments } = await params;
     // Only use the basename to prevent directory traversal
     const filename = path.basename(pathSegments.join('/'));
-    const filePath = path.join(uploadDir, filename);
+
+    // Try the new location first, then fall back to the legacy location
+    let filePath = path.join(uploadDir, filename);
+    if (!existsSync(filePath)) {
+      filePath = path.join(legacyUploadDir, filename);
+    }
 
     if (!existsSync(filePath)) {
       return new NextResponse('Not found', { status: 404 });

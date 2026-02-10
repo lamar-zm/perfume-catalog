@@ -1730,23 +1730,6 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-// Helper function to generate slug from Arabic text
-function generateSlug(text) {
-    const arabicToEnglish = {
-        'عطور رجالية': 'mens-perfumes',
-        'عطور نسائية': 'womens-perfumes',
-        'عطور للجنسين': 'unisex-perfumes',
-        'عطور عربية': 'arabic-perfumes',
-        'عطور فرنسية': 'french-perfumes',
-        'مجموعات هدايا': 'gift-sets'
-    };
-    // Check if we have a predefined translation
-    if (arabicToEnglish[text]) {
-        return arabicToEnglish[text];
-    }
-    // Otherwise, create a simple slug from the text
-    return text.toLowerCase().replace(/\s+/g, '-').replace(/[^\u0600-\u06FFa-z0-9-]/g, '').replace(/-+/g, '-').replace(/^-|-$/g, '');
-}
 function CategoryFormModal({ opened, onClose, category, onSuccess }) {
     _s();
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
@@ -1755,16 +1738,12 @@ function CategoryFormModal({ opened, onClose, category, onSuccess }) {
     const form = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$form$2f$esm$2f$use$2d$form$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"])({
         initialValues: {
             name: '',
-            slug: '',
             description: '',
             image: ''
         },
         validate: {
             name: {
                 "CategoryFormModal.useForm[form]": (value)=>value.trim().length < 2 ? 'الاسم يجب أن يكون 2 أحرف على الأقل' : null
-            }["CategoryFormModal.useForm[form]"],
-            slug: {
-                "CategoryFormModal.useForm[form]": (value)=>value.trim().length < 2 ? 'الرابط يجب أن يكون 2 أحرف على الأقل' : null
             }["CategoryFormModal.useForm[form]"]
         }
     });
@@ -1775,7 +1754,6 @@ function CategoryFormModal({ opened, onClose, category, onSuccess }) {
                 if (category) {
                     form.setValues({
                         name: category.name,
-                        slug: category.slug,
                         description: category.description || '',
                         image: category.image
                     });
@@ -1790,13 +1768,6 @@ function CategoryFormModal({ opened, onClose, category, onSuccess }) {
         opened,
         category
     ]);
-    // Auto-generate slug when name changes (only for new categories)
-    const handleNameChange = (value)=>{
-        form.setFieldValue('name', value);
-        if (!category) {
-            form.setFieldValue('slug', generateSlug(value));
-        }
-    };
     const handleImageDrop = async (files)=>{
         if (files.length > 0) {
             const file = files[0];
@@ -1833,7 +1804,6 @@ function CategoryFormModal({ opened, onClose, category, onSuccess }) {
         try {
             const categoryData = {
                 name: values.name,
-                slug: values.slug,
                 description: values.description || undefined,
                 image: values.image || ''
             };
@@ -1870,7 +1840,7 @@ function CategoryFormModal({ opened, onClose, category, onSuccess }) {
                     }
                 }, void 0, false, {
                     fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                    lineNumber: 175,
+                    lineNumber: 137,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -1887,7 +1857,7 @@ function CategoryFormModal({ opened, onClose, category, onSuccess }) {
                                         children: "صورة التصنيف"
                                     }, void 0, false, {
                                         fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                        lineNumber: 181,
+                                        lineNumber: 143,
                                         columnNumber: 15
                                     }, this),
                                     imagePreview ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$core$2f$Box$2f$Box$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Box"], {
@@ -1901,7 +1871,7 @@ function CategoryFormModal({ opened, onClose, category, onSuccess }) {
                                                 fallbackSrc: __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["imageHelper"].getPlaceholder(400, 150)
                                             }, void 0, false, {
                                                 fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                                lineNumber: 186,
+                                                lineNumber: 148,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Button$2f$Button$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -1916,18 +1886,18 @@ function CategoryFormModal({ opened, onClose, category, onSuccess }) {
                                                     size: 16
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                                    lineNumber: 202,
+                                                    lineNumber: 164,
                                                     columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                                lineNumber: 193,
+                                                lineNumber: 155,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                        lineNumber: 185,
+                                        lineNumber: 147,
                                         columnNumber: 17
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$dropzone$2f$esm$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["Dropzone"], {
                                         onDrop: handleImageDrop,
@@ -1949,12 +1919,12 @@ function CategoryFormModal({ opened, onClose, category, onSuccess }) {
                                                         stroke: 1.5
                                                     }, void 0, false, {
                                                         fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                                        lineNumber: 220,
+                                                        lineNumber: 182,
                                                         columnNumber: 23
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                                    lineNumber: 219,
+                                                    lineNumber: 181,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$dropzone$2f$esm$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["Dropzone"].Reject, {
@@ -1963,12 +1933,12 @@ function CategoryFormModal({ opened, onClose, category, onSuccess }) {
                                                         stroke: 1.5
                                                     }, void 0, false, {
                                                         fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                                        lineNumber: 223,
+                                                        lineNumber: 185,
                                                         columnNumber: 23
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                                    lineNumber: 222,
+                                                    lineNumber: 184,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$dropzone$2f$esm$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["Dropzone"].Idle, {
@@ -1977,12 +1947,12 @@ function CategoryFormModal({ opened, onClose, category, onSuccess }) {
                                                         stroke: 1.5
                                                     }, void 0, false, {
                                                         fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                                        lineNumber: 226,
+                                                        lineNumber: 188,
                                                         columnNumber: 23
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                                    lineNumber: 225,
+                                                    lineNumber: 187,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1993,7 +1963,7 @@ function CategoryFormModal({ opened, onClose, category, onSuccess }) {
                                                             children: "اسحب الصورة هنا أو اضغط للاختيار"
                                                         }, void 0, false, {
                                                             fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                                            lineNumber: 229,
+                                                            lineNumber: 191,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
@@ -2004,54 +1974,40 @@ function CategoryFormModal({ opened, onClose, category, onSuccess }) {
                                                             children: "الحد الأقصى للحجم 5MB"
                                                         }, void 0, false, {
                                                             fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                                            lineNumber: 232,
+                                                            lineNumber: 194,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                                    lineNumber: 228,
+                                                    lineNumber: 190,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                            lineNumber: 213,
+                                            lineNumber: 175,
                                             columnNumber: 19
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                        lineNumber: 206,
+                                        lineNumber: 168,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                lineNumber: 180,
+                                lineNumber: 142,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$TextInput$2f$TextInput$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TextInput"], {
                                 label: "اسم التصنيف",
                                 placeholder: "أدخل اسم التصنيف",
                                 required: true,
-                                value: form.values.name,
-                                onChange: (e)=>handleNameChange(e.target.value),
-                                error: form.errors.name
+                                ...form.getInputProps('name')
                             }, void 0, false, {
                                 fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                lineNumber: 241,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$TextInput$2f$TextInput$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TextInput"], {
-                                label: "الرابط (Slug)",
-                                placeholder: "category-slug",
-                                description: "يستخدم في الروابط - سيتم إنشاؤه تلقائياً",
-                                required: true,
-                                dir: "ltr",
-                                ...form.getInputProps('slug')
-                            }, void 0, false, {
-                                fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                lineNumber: 250,
+                                lineNumber: 203,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Textarea$2f$Textarea$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Textarea"], {
@@ -2061,7 +2017,7 @@ function CategoryFormModal({ opened, onClose, category, onSuccess }) {
                                 ...form.getInputProps('description')
                             }, void 0, false, {
                                 fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                lineNumber: 259,
+                                lineNumber: 210,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Group$2f$Group$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Group"], {
@@ -2074,7 +2030,7 @@ function CategoryFormModal({ opened, onClose, category, onSuccess }) {
                                         children: "إلغاء"
                                     }, void 0, false, {
                                         fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                        lineNumber: 267,
+                                        lineNumber: 218,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Button$2f$Button$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -2083,35 +2039,35 @@ function CategoryFormModal({ opened, onClose, category, onSuccess }) {
                                         children: category ? 'تحديث' : 'إضافة'
                                     }, void 0, false, {
                                         fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                        lineNumber: 270,
+                                        lineNumber: 221,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                                lineNumber: 266,
+                                lineNumber: 217,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                        lineNumber: 178,
+                        lineNumber: 140,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-                    lineNumber: 177,
+                    lineNumber: 139,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-            lineNumber: 174,
+            lineNumber: 136,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/apps/web/src/app/admin/categories/CategoryFormModal.tsx",
-        lineNumber: 168,
+        lineNumber: 130,
         columnNumber: 5
     }, this);
 }

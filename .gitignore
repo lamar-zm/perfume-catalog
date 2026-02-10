@@ -43,3 +43,10 @@ next-env.d.ts
 # database
 *.db
 packages/database/data/
+*.db
+packages/database/data/*.db
+
+
+# uploaded images
+apps/web/data/uploads/
+apps/web/public/uploads/

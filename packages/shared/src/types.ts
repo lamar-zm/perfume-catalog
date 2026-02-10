@@ -106,14 +106,12 @@ export interface PerfumeFormData {
 
 export interface CategoryFormData {
   name: string;
-  slug: string;
   description?: string;
   image: string;
 }
 
 export interface BrandFormData {
   name: string;
-  slug: string;
   description?: string;
   image: string;
 }

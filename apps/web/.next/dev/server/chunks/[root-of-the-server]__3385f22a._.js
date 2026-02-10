@@ -196,6 +196,28 @@ function initializeDatabase() {
     } catch (e) {
     // Column already exists, ignore
     }
+    // Migration: Convert non-English slugs to English-safe slugs
+    try {
+        const nonEnglishSlugRegex = /[^a-z0-9-]/;
+        const brands = db.prepare('SELECT id, name, slug FROM brands').all();
+        for (const brand of brands){
+            if (nonEnglishSlugRegex.test(brand.slug)) {
+                const newSlug = `brand-${brand.id.split('-').pop() || Date.now()}`;
+                db.prepare('UPDATE brands SET slug = ? WHERE id = ?').run(newSlug, brand.id);
+                console.log(`✅ Migrated brand slug: "${brand.slug}" → "${newSlug}"`);
+            }
+        }
+        const categories = db.prepare('SELECT id, name, slug FROM categories').all();
+        for (const cat of categories){
+            if (nonEnglishSlugRegex.test(cat.slug)) {
+                const newSlug = `category-${cat.id.split('-').pop() || Date.now()}`;
+                db.prepare('UPDATE categories SET slug = ? WHERE id = ?').run(newSlug, cat.id);
+                console.log(`✅ Migrated category slug: "${cat.slug}" → "${newSlug}"`);
+            }
+        }
+    } catch (e) {
+        console.error('⚠️ Error migrating slugs:', e);
+    }
     console.log('✅ Database initialized successfully');
 }
 const __TURBOPACK__default__export__ = db;

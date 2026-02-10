@@ -64,15 +64,33 @@ export async function PUT(
       );
     }
 
-    // Check if new slug already exists (for different category)
-    if (body.slug && body.slug !== existing.slug) {
-      const slugExists = categoryService.getBySlug(body.slug);
-      if (slugExists) {
-        return NextResponse.json<ApiResponse<never>>(
-          { success: false, error: 'الرابط موجود مسبقاً' },
-          { status: 400 }
-        );
+    // Auto-regenerate slug when name changes
+    if (body.name && body.name !== existing.name) {
+      let slug = body.name
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+
+      if (!slug) {
+        slug = `category-${Date.now().toString(36)}`;
       }
+
+      // Ensure uniqueness
+      let finalSlug = slug;
+      let counter = 1;
+      while (true) {
+        const slugOwner = categoryService.getBySlug(finalSlug);
+        if (!slugOwner || slugOwner.id === id) break;
+        finalSlug = `${slug}-${counter}`;
+        counter++;
+      }
+      body.slug = finalSlug;
+    } else {
+      // Don't allow client to override slug directly
+      delete body.slug;
     }
 
     const updated = categoryService.update(id, body);

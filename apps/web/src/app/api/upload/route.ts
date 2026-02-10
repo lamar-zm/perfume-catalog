@@ -4,22 +4,14 @@ import { existsSync } from 'fs';
 import path from 'path';
 import type { ApiResponse } from '@perfume-catalog/shared';
 
-// Create uploads directory if it doesn't exist
-const uploadDir = path.join(process.cwd(), 'public', 'uploads');
+// Store uploads in data/uploads/ (NOT public/) so they are always
+// served through the API route, which works reliably both in dev and production.
+const uploadDir = path.join(process.cwd(), 'data', 'uploads');
 
 async function ensureUploadDir() {
   if (!existsSync(uploadDir)) {
     await mkdir(uploadDir, { recursive: true });
   }
-}
-
-// Simple image compression by reducing quality
-async function compressImage(buffer: Buffer, mimeType: string): Promise<Buffer> {
-  // For now, return the original buffer
-  // In production, you could use sharp:
-  // const sharp = (await import('sharp')).default;
-  // return sharp(buffer).resize(800, 800, { fit: 'inside', withoutEnlargement: true }).jpeg({ quality: 80 }).toBuffer();
-  return buffer;
 }
 
 // POST /api/upload - Upload an image
@@ -47,7 +39,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate file size (max 10MB)
-    const maxSize = 10 * 1024 * 1024; // 10MB
+    const maxSize = 10 * 1024 * 1024;
     if (file.size > maxSize) {
       return NextResponse.json<ApiResponse<never>>(
         { success: false, error: 'حجم الملف كبير جداً. الحد الأقصى 10 ميجابايت' },
@@ -59,20 +51,17 @@ export async function POST(request: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Compress image
-    const compressedBuffer = await compressImage(buffer, file.type);
-
-    // Generate unique filename
+    // Generate unique filename with normalized extension
     const timestamp = Date.now();
     const randomStr = Math.random().toString(36).substring(2, 8);
-    const extension = file.name.split('.').pop() || 'jpg';
-    const filename = `${timestamp}-${randomStr}.${extension}`;
+    const ext = file.type.split('/')[1] === 'jpeg' ? 'jpg' : file.type.split('/')[1];
+    const filename = `${timestamp}-${randomStr}.${ext}`;
 
-    // Save file
+    // Save file to data/uploads/
     const filePath = path.join(uploadDir, filename);
-    await writeFile(filePath, compressedBuffer);
+    await writeFile(filePath, buffer);
 
-    // Return URL
+    // Return URL — the rewrite in next.config.ts maps /uploads/* -> /api/uploads/*
     const url = `/uploads/${filename}`;
 
     return NextResponse.json<ApiResponse<{ url: string; filename: string }>>({
@@ -106,16 +95,25 @@ export async function DELETE(request: NextRequest) {
     const safeFilename = path.basename(filename);
     const filePath = path.join(uploadDir, safeFilename);
 
-    // Check if file exists
-    if (!existsSync(filePath)) {
+    // Also check old location (public/uploads) for backward compat
+    const oldFilePath = path.join(process.cwd(), 'public', 'uploads', safeFilename);
+
+    let deleted = false;
+    if (existsSync(filePath)) {
+      await unlink(filePath);
+      deleted = true;
+    }
+    if (existsSync(oldFilePath)) {
+      await unlink(oldFilePath);
+      deleted = true;
+    }
+
+    if (!deleted) {
       return NextResponse.json<ApiResponse<never>>(
         { success: false, error: 'الملف غير موجود' },
         { status: 404 }
       );
     }
-
-    // Delete file
-    await unlink(filePath);
 
     return NextResponse.json<ApiResponse<{ filename: string }>>({
       success: true,

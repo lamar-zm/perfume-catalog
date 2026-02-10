@@ -1,37 +1,21 @@
-[00:00:00.737] Server  LOG     ✓ Ready in 516ms
-[00:00:02.101] Server  LOG     ✅ Database initialized successfully
-[00:00:02.720] Server  LOG     All cookies: [{...},{...},{...}]
-[00:00:02.720] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
-[00:00:02.727] Server  LOG     All cookies: []
-[00:00:02.727] Server  LOG     Auth token: undefined
-[00:00:06.712] Server  LOG     All cookies: []
-[00:00:06.712] Server  LOG     Auth token: undefined
-[00:00:07.607] Server  LOG     All cookies: []
-[00:00:07.607] Server  LOG     Auth token: undefined
-[00:00:07.611] Server  LOG     All cookies: []
-[00:00:07.611] Server  LOG     Auth token: undefined
-[00:00:07.686] Server  LOG     All cookies: []
-[00:00:07.686] Server  LOG     Auth token: undefined
-[00:00:16.400] Server  LOG     All cookies: [{...}]
-[00:00:16.400] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNjQ0ODEyMjc1"
-[00:00:16.438] Server  LOG     ✅ Database initialized successfully
-[00:00:19.163] Server  LOG     All cookies: [{...}]
-[00:00:19.163] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNjQ0ODEyMjc1"
-[00:00:20.003] Server  LOG     All cookies: [{...}]
-[00:00:20.003] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNjQ0ODEyMjc1"
-[00:00:21.167] Server  LOG     All cookies: [{...}]
-[00:00:21.167] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNjQ0ODEyMjc1"
-[00:00:21.976] Server  LOG     All cookies: [{...}]
-[00:00:21.976] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNjQ0ODEyMjc1"
-[00:00:24.454] Server  LOG     All cookies: [{...}]
-[00:00:24.454] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNjQ0ODEyMjc1"
-[00:00:43.077] Server  LOG     All cookies: [{...}]
-[00:00:43.077] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNjQ0ODEyMjc1"
-[00:00:43.080] Server  LOG     All cookies: [{...}]
-[00:00:43.080] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNjQ0ODEyMjc1"
-[00:00:44.486] Server  LOG     All cookies: [{...}]
-[00:00:44.486] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNjQ0ODEyMjc1"
-[00:00:44.488] Server  LOG     All cookies: [{...}]
-[00:00:44.489] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNjQ0ODEyMjc1"
-[00:00:44.816] Server  LOG     All cookies: [{...}]
-[00:00:44.816] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNjQ0ODEyMjc1"
+[00:00:00.903] Server  LOG     ✓ Ready in 683ms
+[00:00:05.288] Server  LOG     ✅ Database initialized successfully
+[00:00:05.562] Server  ERROR   ⨯ TypeError: Cannot convert argument to a ByteString because the character at index 856 has a value of 1593 which is greater than 255.
+[00:00:05.850] Server  LOG     All cookies: [{...}]
+[00:00:05.851] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
+[00:00:18.448] Server  ERROR   ⨯ TypeError: Cannot convert argument to a ByteString because the character at index 856 has a value of 1593 which is greater than 255.
+[00:00:18.647] Server  LOG     All cookies: [{...}]
+[00:00:18.647] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
+[00:00:21.559] Server  LOG     All cookies: [{...}]
+[00:00:21.560] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
+[00:00:21.562] Server  LOG     All cookies: [{...}]
+[00:00:21.562] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
+[00:00:21.638] Server  LOG     ✅ Database initialized successfully
+[00:00:24.451] Server  LOG     All cookies: [{...}]
+[00:00:24.451] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
+[00:00:32.776] Server  LOG     All cookies: [{...}]
+[00:00:32.777] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
+[00:00:41.360] Server  LOG     All cookies: [{...}]
+[00:00:41.360] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"
+[00:00:43.447] Server  LOG     All cookies: [{...}]
+[00:00:43.447] Server  LOG     Auth token: "YWRtaW4tMToxNzcwNDEwNTE4MDg0"

@@ -26,31 +26,6 @@ interface CategoryFormModalProps {
   onSuccess: () => void;
 }
 
-// Helper function to generate slug from Arabic text
-function generateSlug(text: string): string {
-  const arabicToEnglish: Record<string, string> = {
-    'عطور رجالية': 'mens-perfumes',
-    'عطور نسائية': 'womens-perfumes',
-    'عطور للجنسين': 'unisex-perfumes',
-    'عطور عربية': 'arabic-perfumes',
-    'عطور فرنسية': 'french-perfumes',
-    'مجموعات هدايا': 'gift-sets',
-  };
-
-  // Check if we have a predefined translation
-  if (arabicToEnglish[text]) {
-    return arabicToEnglish[text];
-  }
-
-  // Otherwise, create a simple slug from the text
-  return text
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[^\u0600-\u06FFa-z0-9-]/g, '')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
-}
-
 export function CategoryFormModal({
   opened,
   onClose,
@@ -64,15 +39,12 @@ export function CategoryFormModal({
   const form = useForm<CategoryFormData>({
     initialValues: {
       name: '',
-      slug: '',
       description: '',
       image: '',
     },
     validate: {
       name: (value) =>
         value.trim().length < 2 ? 'الاسم يجب أن يكون 2 أحرف على الأقل' : null,
-      slug: (value) =>
-        value.trim().length < 2 ? 'الرابط يجب أن يكون 2 أحرف على الأقل' : null,
     },
   });
 
@@ -82,7 +54,6 @@ export function CategoryFormModal({
       if (category) {
         form.setValues({
           name: category.name,
-          slug: category.slug,
           description: category.description || '',
           image: category.image,
         });
@@ -93,14 +64,6 @@ export function CategoryFormModal({
       }
     }
   }, [opened, category]);
-
-  // Auto-generate slug when name changes (only for new categories)
-  const handleNameChange = (value: string) => {
-    form.setFieldValue('name', value);
-    if (!category) {
-      form.setFieldValue('slug', generateSlug(value));
-    }
-  };
 
   const handleImageDrop = async (files: FileWithPath[]) => {
     if (files.length > 0) {
@@ -140,7 +103,6 @@ export function CategoryFormModal({
     try {
       const categoryData = {
         name: values.name,
-        slug: values.slug,
         description: values.description || undefined,
         image: values.image || '',
       };
@@ -242,18 +204,7 @@ export function CategoryFormModal({
               label="اسم التصنيف"
               placeholder="أدخل اسم التصنيف"
               required
-              value={form.values.name}
-              onChange={(e) => handleNameChange(e.target.value)}
-              error={form.errors.name}
-            />
-
-            <TextInput
-              label="الرابط (Slug)"
-              placeholder="category-slug"
-              description="يستخدم في الروابط - سيتم إنشاؤه تلقائياً"
-              required
-              dir="ltr"
-              {...form.getInputProps('slug')}
+              {...form.getInputProps('name')}
             />
 
             <Textarea

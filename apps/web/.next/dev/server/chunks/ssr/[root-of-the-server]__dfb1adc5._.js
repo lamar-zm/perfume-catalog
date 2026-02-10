@@ -205,6 +205,28 @@ function initializeDatabase() {
     } catch (e) {
     // Column already exists, ignore
     }
+    // Migration: Convert non-English slugs to English-safe slugs
+    try {
+        const nonEnglishSlugRegex = /[^a-z0-9-]/;
+        const brands = db.prepare('SELECT id, name, slug FROM brands').all();
+        for (const brand of brands){
+            if (nonEnglishSlugRegex.test(brand.slug)) {
+                const newSlug = `brand-${brand.id.split('-').pop() || Date.now()}`;
+                db.prepare('UPDATE brands SET slug = ? WHERE id = ?').run(newSlug, brand.id);
+                console.log(`✅ Migrated brand slug: "${brand.slug}" → "${newSlug}"`);
+            }
+        }
+        const categories = db.prepare('SELECT id, name, slug FROM categories').all();
+        for (const cat of categories){
+            if (nonEnglishSlugRegex.test(cat.slug)) {
+                const newSlug = `category-${cat.id.split('-').pop() || Date.now()}`;
+                db.prepare('UPDATE categories SET slug = ? WHERE id = ?').run(newSlug, cat.id);
+                console.log(`✅ Migrated category slug: "${cat.slug}" → "${newSlug}"`);
+            }
+        }
+    } catch (e) {
+        console.error('⚠️ Error migrating slugs:', e);
+    }
     console.log('✅ Database initialized successfully');
 }
 const __TURBOPACK__default__export__ = db;
@@ -671,6 +693,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$
 __turbopack_context__.s([
     "default",
     ()=>BrandsPage,
+    "dynamic",
+    ()=>dynamic,
     "metadata",
     ()=>metadata
 ]);
@@ -685,6 +709,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$packages$2f$database$2f$src$
 ;
 ;
 ;
+const dynamic = 'force-dynamic';
 const metadata = {
     title: 'الماركات',
     description: 'تصفح جميع ماركات العطور العالمية - ديور، شانيل، توم فورد، والمزيد من أفخم الماركات',
@@ -704,7 +729,7 @@ async function BrandsPage() {
                 subtitle: "تصفح عطورنا حسب الماركة"
             }, void 0, false, {
                 fileName: "[project]/apps/web/src/app/(public)/brands/page.tsx",
-                lineNumber: 21,
+                lineNumber: 24,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$components$2f$brand$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["BrandGrid"], {
@@ -712,13 +737,13 @@ async function BrandsPage() {
                 emptyMessage: "لا توجد ماركات متاحة حالياً"
             }, void 0, false, {
                 fileName: "[project]/apps/web/src/app/(public)/brands/page.tsx",
-                lineNumber: 25,
+                lineNumber: 28,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/apps/web/src/app/(public)/brands/page.tsx",
-        lineNumber: 20,
+        lineNumber: 23,
         columnNumber: 5
     }, this);
 }

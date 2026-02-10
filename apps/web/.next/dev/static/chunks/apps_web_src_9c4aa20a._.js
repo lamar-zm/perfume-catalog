@@ -1730,40 +1730,6 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-// Helper function to generate slug from text
-function generateSlug(text) {
-    // Common Arabic brand name translations
-    const arabicToEnglish = {
-        'شانيل': 'chanel',
-        'ديور': 'dior',
-        'قوتشي': 'gucci',
-        'برادا': 'prada',
-        'فيرساتشي': 'versace',
-        'أرماني': 'armani',
-        'جيفنشي': 'givenchy',
-        'بولغاري': 'bvlgari',
-        'هيرميس': 'hermes',
-        'توم فورد': 'tom-ford',
-        'كريستيان ديور': 'christian-dior',
-        'ايف سان لوران': 'yves-saint-laurent',
-        'كارولينا هيريرا': 'carolina-herrera',
-        'جورجيو أرماني': 'giorgio-armani',
-        'دولتشي آند غابانا': 'dolce-gabbana',
-        'كالفن كلاين': 'calvin-klein',
-        'هوغو بوس': 'hugo-boss',
-        'عجمل': 'ajmal',
-        'العربية للعود': 'arabian-oud',
-        'رسايس': 'rasasi',
-        'سويس أريبيان': 'swiss-arabian',
-        'لطافة': 'lattafa'
-    };
-    // Check if we have a predefined translation
-    if (arabicToEnglish[text]) {
-        return arabicToEnglish[text];
-    }
-    // Otherwise, create a simple slug from the text
-    return text.toLowerCase().replace(/\s+/g, '-').replace(/[^\u0600-\u06FFa-z0-9-]/g, '').replace(/-+/g, '-').replace(/^-|-$/g, '');
-}
 function BrandFormModal({ opened, onClose, brand, onSuccess }) {
     _s();
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
@@ -1772,16 +1738,12 @@ function BrandFormModal({ opened, onClose, brand, onSuccess }) {
     const form = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$form$2f$esm$2f$use$2d$form$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"])({
         initialValues: {
             name: '',
-            slug: '',
             description: '',
             image: ''
         },
         validate: {
             name: {
                 "BrandFormModal.useForm[form]": (value)=>value.trim().length < 2 ? 'الاسم يجب أن يكون 2 أحرف على الأقل' : null
-            }["BrandFormModal.useForm[form]"],
-            slug: {
-                "BrandFormModal.useForm[form]": (value)=>value.trim().length < 2 ? 'الرابط يجب أن يكون 2 أحرف على الأقل' : null
             }["BrandFormModal.useForm[form]"]
         }
     });
@@ -1792,7 +1754,6 @@ function BrandFormModal({ opened, onClose, brand, onSuccess }) {
                 if (brand) {
                     form.setValues({
                         name: brand.name,
-                        slug: brand.slug,
                         description: brand.description || '',
                         image: brand.image || ''
                     });
@@ -1807,13 +1768,6 @@ function BrandFormModal({ opened, onClose, brand, onSuccess }) {
         opened,
         brand
     ]);
-    // Auto-generate slug when name changes (only for new brands)
-    const handleNameChange = (value)=>{
-        form.setFieldValue('name', value);
-        if (!brand) {
-            form.setFieldValue('slug', generateSlug(value));
-        }
-    };
     const handleImageDrop = async (files)=>{
         if (files.length > 0) {
             const file = files[0];
@@ -1851,7 +1805,6 @@ function BrandFormModal({ opened, onClose, brand, onSuccess }) {
         try {
             const brandData = {
                 name: values.name,
-                slug: values.slug,
                 description: values.description || undefined,
                 image: values.image || ''
             };
@@ -1888,7 +1841,7 @@ function BrandFormModal({ opened, onClose, brand, onSuccess }) {
                     }
                 }, void 0, false, {
                     fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                    lineNumber: 201,
+                    lineNumber: 145,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -1905,7 +1858,7 @@ function BrandFormModal({ opened, onClose, brand, onSuccess }) {
                                         children: "صورة الماركة"
                                     }, void 0, false, {
                                         fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                        lineNumber: 207,
+                                        lineNumber: 151,
                                         columnNumber: 15
                                     }, this),
                                     imagePreview ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$core$2f$Box$2f$Box$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Box"], {
@@ -1919,7 +1872,7 @@ function BrandFormModal({ opened, onClose, brand, onSuccess }) {
                                                 fallbackSrc: __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["imageHelper"].getPlaceholder(400, 150)
                                             }, void 0, false, {
                                                 fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                                lineNumber: 212,
+                                                lineNumber: 156,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Button$2f$Button$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -1934,18 +1887,18 @@ function BrandFormModal({ opened, onClose, brand, onSuccess }) {
                                                     size: 16
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                                    lineNumber: 228,
+                                                    lineNumber: 172,
                                                     columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                                lineNumber: 219,
+                                                lineNumber: 163,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                        lineNumber: 211,
+                                        lineNumber: 155,
                                         columnNumber: 17
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$dropzone$2f$esm$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["Dropzone"], {
                                         onDrop: handleImageDrop,
@@ -1967,12 +1920,12 @@ function BrandFormModal({ opened, onClose, brand, onSuccess }) {
                                                         stroke: 1.5
                                                     }, void 0, false, {
                                                         fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                                        lineNumber: 246,
+                                                        lineNumber: 190,
                                                         columnNumber: 23
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                                    lineNumber: 245,
+                                                    lineNumber: 189,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$dropzone$2f$esm$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["Dropzone"].Reject, {
@@ -1981,12 +1934,12 @@ function BrandFormModal({ opened, onClose, brand, onSuccess }) {
                                                         stroke: 1.5
                                                     }, void 0, false, {
                                                         fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                                        lineNumber: 249,
+                                                        lineNumber: 193,
                                                         columnNumber: 23
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                                    lineNumber: 248,
+                                                    lineNumber: 192,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$dropzone$2f$esm$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["Dropzone"].Idle, {
@@ -1995,12 +1948,12 @@ function BrandFormModal({ opened, onClose, brand, onSuccess }) {
                                                         stroke: 1.5
                                                     }, void 0, false, {
                                                         fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                                        lineNumber: 252,
+                                                        lineNumber: 196,
                                                         columnNumber: 23
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                                    lineNumber: 251,
+                                                    lineNumber: 195,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2011,7 +1964,7 @@ function BrandFormModal({ opened, onClose, brand, onSuccess }) {
                                                             children: "اسحب الصورة هنا أو اضغط للاختيار"
                                                         }, void 0, false, {
                                                             fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                                            lineNumber: 255,
+                                                            lineNumber: 199,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Text$2f$Text$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Text"], {
@@ -2022,54 +1975,40 @@ function BrandFormModal({ opened, onClose, brand, onSuccess }) {
                                                             children: "الحد الأقصى للحجم 10MB"
                                                         }, void 0, false, {
                                                             fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                                            lineNumber: 258,
+                                                            lineNumber: 202,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                                    lineNumber: 254,
+                                                    lineNumber: 198,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                            lineNumber: 239,
+                                            lineNumber: 183,
                                             columnNumber: 19
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                        lineNumber: 232,
+                                        lineNumber: 176,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                lineNumber: 206,
+                                lineNumber: 150,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$TextInput$2f$TextInput$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TextInput"], {
                                 label: "اسم الماركة",
                                 placeholder: "أدخل اسم الماركة",
                                 required: true,
-                                value: form.values.name,
-                                onChange: (e)=>handleNameChange(e.target.value),
-                                error: form.errors.name
+                                ...form.getInputProps('name')
                             }, void 0, false, {
                                 fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                lineNumber: 267,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$TextInput$2f$TextInput$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TextInput"], {
-                                label: "الرابط (Slug)",
-                                placeholder: "brand-slug",
-                                description: "يستخدم في الروابط - سيتم إنشاؤه تلقائياً",
-                                required: true,
-                                dir: "ltr",
-                                ...form.getInputProps('slug')
-                            }, void 0, false, {
-                                fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                lineNumber: 276,
+                                lineNumber: 211,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Textarea$2f$Textarea$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Textarea"], {
@@ -2079,7 +2018,7 @@ function BrandFormModal({ opened, onClose, brand, onSuccess }) {
                                 ...form.getInputProps('description')
                             }, void 0, false, {
                                 fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                lineNumber: 285,
+                                lineNumber: 218,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Group$2f$Group$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Group"], {
@@ -2092,7 +2031,7 @@ function BrandFormModal({ opened, onClose, brand, onSuccess }) {
                                         children: "إلغاء"
                                     }, void 0, false, {
                                         fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                        lineNumber: 293,
+                                        lineNumber: 226,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mantine$2f$core$2f$esm$2f$components$2f$Button$2f$Button$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -2101,35 +2040,35 @@ function BrandFormModal({ opened, onClose, brand, onSuccess }) {
                                         children: brand ? 'تحديث' : 'إضافة'
                                     }, void 0, false, {
                                         fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                        lineNumber: 296,
+                                        lineNumber: 229,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                                lineNumber: 292,
+                                lineNumber: 225,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                        lineNumber: 204,
+                        lineNumber: 148,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-                    lineNumber: 203,
+                    lineNumber: 147,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-            lineNumber: 200,
+            lineNumber: 144,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/apps/web/src/app/admin/brands/BrandFormModal.tsx",
-        lineNumber: 194,
+        lineNumber: 138,
         columnNumber: 5
     }, this);
 }

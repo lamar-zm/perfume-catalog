@@ -76,22 +76,15 @@ var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$2
 ;
 ;
 ;
-// Create uploads directory if it doesn't exist
-const uploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads');
+// Store uploads in data/uploads/ (NOT public/) so they are always
+// served through the API route, which works reliably both in dev and production.
+const uploadDir = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'data', 'uploads');
 async function ensureUploadDir() {
     if (!(0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__["existsSync"])(uploadDir)) {
         await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["mkdir"])(uploadDir, {
             recursive: true
         });
     }
-}
-// Simple image compression by reducing quality
-async function compressImage(buffer, mimeType) {
-    // For now, return the original buffer
-    // In production, you could use sharp:
-    // const sharp = (await import('sharp')).default;
-    // return sharp(buffer).resize(800, 800, { fit: 'inside', withoutEnlargement: true }).jpeg({ quality: 80 }).toBuffer();
-    return buffer;
 }
 async function POST(request) {
     try {
@@ -123,7 +116,7 @@ async function POST(request) {
             });
         }
         // Validate file size (max 10MB)
-        const maxSize = 10 * 1024 * 1024; // 10MB
+        const maxSize = 10 * 1024 * 1024;
         if (file.size > maxSize) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 success: false,
@@ -135,17 +128,15 @@ async function POST(request) {
         // Read file buffer
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        // Compress image
-        const compressedBuffer = await compressImage(buffer, file.type);
-        // Generate unique filename
+        // Generate unique filename with normalized extension
         const timestamp = Date.now();
         const randomStr = Math.random().toString(36).substring(2, 8);
-        const extension = file.name.split('.').pop() || 'jpg';
-        const filename = `${timestamp}-${randomStr}.${extension}`;
-        // Save file
+        const ext = file.type.split('/')[1] === 'jpeg' ? 'jpg' : file.type.split('/')[1];
+        const filename = `${timestamp}-${randomStr}.${ext}`;
+        // Save file to data/uploads/
         const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(uploadDir, filename);
-        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["writeFile"])(filePath, compressedBuffer);
-        // Return URL
+        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["writeFile"])(filePath, buffer);
+        // Return URL — the rewrite in next.config.ts maps /uploads/* -> /api/uploads/*
         const url = `/uploads/${filename}`;
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             success: true,
@@ -180,8 +171,18 @@ async function DELETE(request) {
         // Security: only allow deleting files from uploads directory
         const safeFilename = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].basename(filename);
         const filePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(uploadDir, safeFilename);
-        // Check if file exists
-        if (!(0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__["existsSync"])(filePath)) {
+        // Also check old location (public/uploads) for backward compat
+        const oldFilePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), 'public', 'uploads', safeFilename);
+        let deleted = false;
+        if ((0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__["existsSync"])(filePath)) {
+            await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["unlink"])(filePath);
+            deleted = true;
+        }
+        if ((0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs__$5b$external$5d$__$28$fs$2c$__cjs$29$__["existsSync"])(oldFilePath)) {
+            await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["unlink"])(oldFilePath);
+            deleted = true;
+        }
+        if (!deleted) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 success: false,
                 error: 'الملف غير موجود'
@@ -189,8 +190,6 @@ async function DELETE(request) {
                 status: 404
             });
         }
-        // Delete file
-        await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["unlink"])(filePath);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             success: true,
             data: {
